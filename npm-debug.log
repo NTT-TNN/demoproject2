@@ -1,0 +1,352 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/home/ubuntu/.nvm/versions/node/v4.6.1/bin/node',
+1 verbose cli   '/home/ubuntu/.nvm/versions/node/v4.6.1/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'ejs',
+1 verbose cli   '--save' ]
+2 info using npm@2.15.9
+3 info using node@v4.6.1
+4 verbose install initial load of /home/ubuntu/workspace/package.json
+5 verbose installManyTop reading scoped package data from /home/ubuntu/workspace/node_modules/angular/package.json
+6 verbose installManyTop reading scoped package data from /home/ubuntu/workspace/node_modules/angular-animate/package.json
+7 verbose installManyTop reading scoped package data from /home/ubuntu/workspace/node_modules/angular-aria/package.json
+8 verbose installManyTop reading scoped package data from /home/ubuntu/workspace/node_modules/angular-material/package.json
+9 verbose installManyTop reading scoped package data from /home/ubuntu/workspace/node_modules/bcrypt-nodejs/package.json
+10 verbose installManyTop reading scoped package data from /home/ubuntu/workspace/node_modules/body-parser/package.json
+11 verbose installManyTop reading scoped package data from /home/ubuntu/workspace/node_modules/connect-flash/package.json
+12 verbose installManyTop reading scoped package data from /home/ubuntu/workspace/node_modules/cookie-parser/package.json
+13 verbose installManyTop reading scoped package data from /home/ubuntu/workspace/node_modules/debug/package.json
+14 verbose installManyTop reading scoped package data from /home/ubuntu/workspace/node_modules/ejs/package.json
+15 verbose installManyTop reading scoped package data from /home/ubuntu/workspace/node_modules/express/package.json
+16 verbose installManyTop reading scoped package data from /home/ubuntu/workspace/node_modules/express-session/package.json
+17 verbose installManyTop reading scoped package data from /home/ubuntu/workspace/node_modules/jade/package.json
+18 verbose installManyTop reading scoped package data from /home/ubuntu/workspace/node_modules/merge/package.json
+19 verbose installManyTop reading scoped package data from /home/ubuntu/workspace/node_modules/mongoose/package.json
+20 verbose installManyTop reading scoped package data from /home/ubuntu/workspace/node_modules/morgan/package.json
+21 verbose installManyTop reading scoped package data from /home/ubuntu/workspace/node_modules/node-yelp-api/package.json
+22 verbose installManyTop reading scoped package data from /home/ubuntu/workspace/node_modules/nodemon/package.json
+23 verbose installManyTop reading scoped package data from /home/ubuntu/workspace/node_modules/passport/package.json
+24 verbose installManyTop reading scoped package data from /home/ubuntu/workspace/node_modules/passport-facebook/package.json
+25 verbose installManyTop reading scoped package data from /home/ubuntu/workspace/node_modules/passport-local/package.json
+26 verbose installManyTop reading scoped package data from /home/ubuntu/workspace/node_modules/passport-twitter/package.json
+27 verbose installManyTop reading scoped package data from /home/ubuntu/workspace/node_modules/request/package.json
+28 verbose installManyTop reading scoped package data from /home/ubuntu/workspace/node_modules/serve-favicon/package.json
+29 verbose installManyTop reading scoped package data from /home/ubuntu/workspace/node_modules/socket.io/package.json
+30 verbose installManyTop reading scoped package data from /home/ubuntu/workspace/node_modules/yelp/package.json
+31 info package.json angular-material@1.1.3 No license field.
+32 info package.json passport@0.3.2 No README data
+33 info package.json bcrypt-nodejs@0.0.3 No license field.
+34 info package.json connect-flash@0.1.1 No license field.
+35 info package.json passport-local@1.0.0 No license field.
+36 verbose readDependencies loading dependencies from /home/ubuntu/workspace/package.json
+37 verbose install ejs is installed as 2.5.6
+38 silly cache add args [ 'ejs@^2.5.6', null ]
+39 verbose cache add spec ejs@^2.5.6
+40 silly cache add parsed spec Result {
+40 silly cache add   raw: 'ejs@^2.5.6',
+40 silly cache add   scope: null,
+40 silly cache add   name: 'ejs',
+40 silly cache add   rawSpec: '^2.5.6',
+40 silly cache add   spec: '>=2.5.6 <3.0.0',
+40 silly cache add   type: 'range' }
+41 silly addNamed ejs@>=2.5.6 <3.0.0
+42 verbose addNamed ">=2.5.6 <3.0.0" is a valid semver range for ejs
+43 silly addNameRange { name: 'ejs', range: '>=2.5.6 <3.0.0', hasData: false }
+44 silly mapToRegistry name ejs
+45 silly mapToRegistry using default registry
+46 silly mapToRegistry registry https://registry.npmjs.org/
+47 silly mapToRegistry data Result {
+47 silly mapToRegistry   raw: 'ejs',
+47 silly mapToRegistry   scope: null,
+47 silly mapToRegistry   name: 'ejs',
+47 silly mapToRegistry   rawSpec: '',
+47 silly mapToRegistry   spec: 'latest',
+47 silly mapToRegistry   type: 'tag' }
+48 silly mapToRegistry uri https://registry.npmjs.org/ejs
+49 verbose addNameRange registry:https://registry.npmjs.org/ejs not in flight; fetching
+50 verbose request uri https://registry.npmjs.org/ejs
+51 verbose request no auth needed
+52 info attempt registry request try #1 at 2:08:51 PM
+53 verbose request id d2500d7a01a695b9
+54 verbose etag W/"58ada82d-10906"
+55 verbose lastModified Wed, 22 Feb 2017 15:03:09 GMT
+56 http request GET https://registry.npmjs.org/ejs
+57 http 304 https://registry.npmjs.org/ejs
+58 verbose headers { date: 'Thu, 23 Feb 2017 14:08:51 GMT',
+58 verbose headers   via: '1.1 varnish',
+58 verbose headers   'cache-control': 'max-age=300',
+58 verbose headers   etag: 'W/"58ada82d-10906"',
+58 verbose headers   age: '150',
+58 verbose headers   connection: 'keep-alive',
+58 verbose headers   'x-served-by': 'cache-hkg6822-HKG',
+58 verbose headers   'x-cache': 'HIT',
+58 verbose headers   'x-cache-hits': '3',
+58 verbose headers   'x-timer': 'S1487858931.915628,VS0,VE0',
+58 verbose headers   vary: 'Accept-Encoding' }
+59 silly get cb [ 304,
+59 silly get   { date: 'Thu, 23 Feb 2017 14:08:51 GMT',
+59 silly get     via: '1.1 varnish',
+59 silly get     'cache-control': 'max-age=300',
+59 silly get     etag: 'W/"58ada82d-10906"',
+59 silly get     age: '150',
+59 silly get     connection: 'keep-alive',
+59 silly get     'x-served-by': 'cache-hkg6822-HKG',
+59 silly get     'x-cache': 'HIT',
+59 silly get     'x-cache-hits': '3',
+59 silly get     'x-timer': 'S1487858931.915628,VS0,VE0',
+59 silly get     vary: 'Accept-Encoding' } ]
+60 verbose etag https://registry.npmjs.org/ejs from cache
+61 verbose get saving ejs to /home/ubuntu/.npm/registry.npmjs.org/ejs/.cache.json
+62 verbose correctMkdir /home/ubuntu/.npm correctMkdir not in flight; initializing
+63 silly addNameRange number 2 { name: 'ejs', range: '>=2.5.6 <3.0.0', hasData: true }
+64 silly addNameRange versions [ 'ejs',
+64 silly addNameRange   [ '0.0.1',
+64 silly addNameRange     '0.0.2',
+64 silly addNameRange     '0.0.3',
+64 silly addNameRange     '0.0.4',
+64 silly addNameRange     '0.1.0',
+64 silly addNameRange     '0.2.0',
+64 silly addNameRange     '0.2.1',
+64 silly addNameRange     '0.3.0',
+64 silly addNameRange     '0.3.1',
+64 silly addNameRange     '0.4.0',
+64 silly addNameRange     '0.4.1',
+64 silly addNameRange     '0.4.2',
+64 silly addNameRange     '0.4.3',
+64 silly addNameRange     '0.5.0',
+64 silly addNameRange     '0.6.0',
+64 silly addNameRange     '0.6.1',
+64 silly addNameRange     '0.7.0',
+64 silly addNameRange     '0.7.1',
+64 silly addNameRange     '0.7.2',
+64 silly addNameRange     '0.8.0',
+64 silly addNameRange     '0.8.1',
+64 silly addNameRange     '0.8.2',
+64 silly addNameRange     '0.8.3',
+64 silly addNameRange     '0.8.4',
+64 silly addNameRange     '0.8.5',
+64 silly addNameRange     '0.8.6',
+64 silly addNameRange     '0.8.8',
+64 silly addNameRange     '1.0.0',
+64 silly addNameRange     '2.0.2',
+64 silly addNameRange     '2.0.3',
+64 silly addNameRange     '2.0.4',
+64 silly addNameRange     '2.0.5',
+64 silly addNameRange     '2.0.6',
+64 silly addNameRange     '2.0.7',
+64 silly addNameRange     '2.0.8',
+64 silly addNameRange     '2.1.1',
+64 silly addNameRange     '2.1.2',
+64 silly addNameRange     '2.1.3',
+64 silly addNameRange     '2.1.4',
+64 silly addNameRange     '2.2.1',
+64 silly addNameRange     '2.2.2',
+64 silly addNameRange     '2.2.3',
+64 silly addNameRange     '2.2.4',
+64 silly addNameRange     '2.3.1',
+64 silly addNameRange     '2.3.2',
+64 silly addNameRange     '2.3.3',
+64 silly addNameRange     '2.3.4',
+64 silly addNameRange     '2.4.1',
+64 silly addNameRange     '2.4.2',
+64 silly addNameRange     '2.5.1',
+64 silly addNameRange     '2.5.2',
+64 silly addNameRange     '2.5.3',
+64 silly addNameRange     '2.5.4',
+64 silly addNameRange     '2.5.5',
+64 silly addNameRange     '2.5.6' ] ]
+65 silly addNamed ejs@2.5.6
+66 verbose addNamed "2.5.6" is a plain semver version for ejs
+67 silly cache afterAdd ejs@2.5.6
+68 verbose afterAdd /home/ubuntu/.npm/ejs/2.5.6/package/package.json not in flight; writing
+69 verbose correctMkdir /home/ubuntu/.npm correctMkdir not in flight; initializing
+70 verbose afterAdd /home/ubuntu/.npm/ejs/2.5.6/package/package.json written
+71 silly install resolved [ { name: 'ejs',
+71 silly install resolved     description: 'Embedded JavaScript templates',
+71 silly install resolved     keywords: [ 'template', 'engine', 'ejs' ],
+71 silly install resolved     version: '2.5.6',
+71 silly install resolved     author:
+71 silly install resolved      { name: 'Matthew Eernisse',
+71 silly install resolved        email: 'mde@fleegix.org',
+71 silly install resolved        url: 'http://fleegix.org' },
+71 silly install resolved     contributors: [ [Object] ],
+71 silly install resolved     license: 'Apache-2.0',
+71 silly install resolved     main: './lib/ejs.js',
+71 silly install resolved     repository: { type: 'git', url: 'git://github.com/mde/ejs.git' },
+71 silly install resolved     bugs: { url: 'https://github.com/mde/ejs/issues' },
+71 silly install resolved     homepage: 'https://github.com/mde/ejs',
+71 silly install resolved     dependencies: {},
+71 silly install resolved     devDependencies:
+71 silly install resolved      { browserify: '^13.0.1',
+71 silly install resolved        eslint: '^3.0.0',
+71 silly install resolved        'git-directory-deploy': '^1.5.1',
+71 silly install resolved        istanbul: '~0.4.3',
+71 silly install resolved        jake: '^8.0.0',
+71 silly install resolved        jsdoc: '^3.4.0',
+71 silly install resolved        'lru-cache': '^4.0.1',
+71 silly install resolved        mocha: '^3.0.2',
+71 silly install resolved        'uglify-js': '^2.6.2' },
+71 silly install resolved     engines: { node: '>=0.10.0' },
+71 silly install resolved     scripts:
+71 silly install resolved      { test: 'mocha',
+71 silly install resolved        lint: 'eslint "**/*.js" Jakefile',
+71 silly install resolved        coverage: 'istanbul cover node_modules/mocha/bin/_mocha',
+71 silly install resolved        doc: 'jake doc',
+71 silly install resolved        devdoc: 'jake doc[dev]' },
+71 silly install resolved     _id: 'ejs@2.5.6',
+71 silly install resolved     _shasum: '479636bfa3fe3b1debd52087f0acb204b4f19c88',
+71 silly install resolved     _resolved: 'https://registry.npmjs.org/ejs/-/ejs-2.5.6.tgz',
+71 silly install resolved     _from: 'ejs@>=2.5.6 <3.0.0',
+71 silly install resolved     _npmVersion: '3.10.8',
+71 silly install resolved     _nodeVersion: '6.9.1',
+71 silly install resolved     _npmUser: { name: 'mde', email: 'mde@fleegix.org' },
+71 silly install resolved     dist:
+71 silly install resolved      { shasum: '479636bfa3fe3b1debd52087f0acb204b4f19c88',
+71 silly install resolved        tarball: 'https://registry.npmjs.org/ejs/-/ejs-2.5.6.tgz' },
+71 silly install resolved     maintainers: [ [Object] ],
+71 silly install resolved     _npmOperationalInternal:
+71 silly install resolved      { host: 'packages-12-west.internal.npmjs.com',
+71 silly install resolved        tmp: 'tmp/ejs-2.5.6.tgz_1487277787176_0.4875628533773124' },
+71 silly install resolved     directories: {},
+71 silly install resolved     readme: 'ERROR: No README data found!' } ]
+72 info install ejs@2.5.6 into /home/ubuntu/workspace
+73 info installOne ejs@2.5.6
+74 verbose installOne of ejs to /home/ubuntu/workspace not in flight; installing
+75 verbose correctMkdir /home/ubuntu/.npm/_locks correctMkdir not in flight; initializing
+76 verbose lock using /home/ubuntu/.npm/_locks/ejs-df8a1e8d0583c77e.lock for /home/ubuntu/workspace/node_modules/ejs
+77 silly install write writing ejs 2.5.6 to /home/ubuntu/workspace/node_modules/ejs
+78 verbose unbuild node_modules/ejs
+79 info preuninstall ejs@2.5.6
+80 info uninstall ejs@2.5.6
+81 verbose unbuild rmStuff ejs@2.5.6 from /home/ubuntu/workspace/node_modules
+82 info postuninstall ejs@2.5.6
+83 silly gentlyRm /home/ubuntu/workspace/node_modules/ejs is being purged from base /home/ubuntu/workspace
+84 verbose gentlyRm don't care about contents; nuking /home/ubuntu/workspace/node_modules/ejs
+85 silly vacuum-fs purging /home/ubuntu/workspace/node_modules/ejs
+86 silly vacuum-fs quitting because other entries in /home/ubuntu/workspace/node_modules
+87 verbose tar unpack /home/ubuntu/.npm/ejs/2.5.6/package.tgz
+88 verbose tar unpacking to /home/ubuntu/workspace/node_modules/ejs
+89 silly gentlyRm /home/ubuntu/workspace/node_modules/ejs is being purged
+90 verbose gentlyRm don't care about contents; nuking /home/ubuntu/workspace/node_modules/ejs
+91 silly gunzTarPerm modes [ '755', '644' ]
+92 silly gunzTarPerm extractEntry
+93 silly gunzTarPerm extractEntry ejs.js
+94 silly gunzTarPerm extractEntry ejs.min.js
+95 silly gunzTarPerm extractEntry Jakefile
+96 silly gunzTarPerm extractEntry lib/
+97 silly gunzTarPerm extractEntry LICENSE
+98 silly gunzTarPerm extractEntry package.json
+99 silly gunzTarPerm extractEntry README.md
+100 silly gunzTarPerm extractEntry test/
+101 silly gunzTarPerm extractEntry test/ejs.js
+102 silly gunzTarPerm extractEntry test/fixtures/
+103 silly gunzTarPerm extractEntry test/mocha.opts
+104 silly gunzTarPerm extractEntry test/tmp/
+105 silly gunzTarPerm extractEntry test/tmp/include.ejs
+106 silly gunzTarPerm extractEntry test/tmp/include_preprocessor.ejs
+107 silly gunzTarPerm extractEntry test/tmp/renderFile.ejs
+108 silly gunzTarPerm extractEntry test/fixtures/backslash.ejs
+109 silly gunzTarPerm extractEntry test/fixtures/backslash.html
+110 silly gunzTarPerm extractEntry test/fixtures/comments.ejs
+111 silly gunzTarPerm extractEntry test/fixtures/comments.html
+112 silly gunzTarPerm extractEntry test/fixtures/consecutive-tags.ejs
+113 silly gunzTarPerm extractEntry test/fixtures/consecutive-tags.html
+114 silly gunzTarPerm extractEntry test/fixtures/double-quote.ejs
+115 silly gunzTarPerm extractEntry test/fixtures/double-quote.html
+116 silly gunzTarPerm extractEntry test/fixtures/error.ejs
+117 silly gunzTarPerm extractEntry test/fixtures/error.out
+118 silly gunzTarPerm extractEntry test/fixtures/fail.ejs
+119 silly gunzTarPerm extractEntry test/fixtures/hello-world.ejs
+120 silly gunzTarPerm extractEntry test/fixtures/include-abspath.ejs
+121 silly gunzTarPerm extractEntry test/fixtures/include-root.ejs
+122 silly gunzTarPerm extractEntry test/fixtures/include-simple.ejs
+123 silly gunzTarPerm extractEntry test/fixtures/include-simple.html
+124 silly gunzTarPerm extractEntry test/fixtures/include.css.ejs
+125 silly gunzTarPerm extractEntry test/fixtures/include.css.html
+126 silly gunzTarPerm extractEntry test/fixtures/include.ejs
+127 silly gunzTarPerm extractEntry test/fixtures/include.html
+128 silly gunzTarPerm extractEntry test/fixtures/include_cache.ejs
+129 silly gunzTarPerm extractEntry test/fixtures/include_cache.html
+130 silly gunzTarPerm extractEntry test/fixtures/include_preprocessor.css.ejs
+131 silly gunzTarPerm extractEntry test/fixtures/include_preprocessor.css.html
+132 silly gunzTarPerm extractEntry test/fixtures/include_preprocessor.ejs
+133 silly gunzTarPerm extractEntry test/fixtures/include_preprocessor.html
+134 silly gunzTarPerm extractEntry test/fixtures/include_preprocessor_cache.ejs
+135 silly gunzTarPerm extractEntry test/fixtures/include_preprocessor_cache.html
+136 silly gunzTarPerm extractEntry test/fixtures/include_preprocessor_line_slurp.ejs
+137 silly gunzTarPerm extractEntry test/fixtures/include_preprocessor_line_slurp.html
+138 silly gunzTarPerm extractEntry test/fixtures/include_preprocessor_line_slurp_child.ejs
+139 silly gunzTarPerm extractEntry test/fixtures/includes/
+140 silly gunzTarPerm extractEntry test/fixtures/literal.ejs
+141 silly gunzTarPerm extractEntry test/fixtures/literal.html
+142 silly gunzTarPerm extractEntry test/fixtures/menu.ejs
+143 silly gunzTarPerm extractEntry test/fixtures/menu.html
+144 silly gunzTarPerm extractEntry test/fixtures/menu_preprocessor.ejs
+145 silly gunzTarPerm extractEntry test/fixtures/menu_preprocessor.html
+146 silly gunzTarPerm extractEntry test/fixtures/menu_var.ejs
+147 silly gunzTarPerm extractEntry test/fixtures/messed.ejs
+148 silly gunzTarPerm extractEntry test/fixtures/messed.html
+149 silly gunzTarPerm extractEntry test/fixtures/newlines.ejs
+150 silly gunzTarPerm extractEntry test/fixtures/newlines.html
+151 silly gunzTarPerm extractEntry test/fixtures/newlines.mixed.ejs
+152 silly gunzTarPerm extractEntry test/fixtures/newlines.mixed.html
+153 silly gunzTarPerm extractEntry test/fixtures/no.newlines.ejs
+154 silly gunzTarPerm extractEntry test/fixtures/no.newlines.error.ejs
+155 silly gunzTarPerm extractEntry test/fixtures/no.newlines.html
+156 silly gunzTarPerm extractEntry test/fixtures/no.semicolons.ejs
+157 silly gunzTarPerm extractEntry test/fixtures/no.semicolons.html
+158 silly gunzTarPerm extractEntry test/fixtures/para.ejs
+159 silly gunzTarPerm extractEntry test/fixtures/pet.ejs
+160 silly gunzTarPerm extractEntry test/fixtures/rmWhitespace.ejs
+161 silly gunzTarPerm extractEntry test/fixtures/rmWhitespace.html
+162 silly gunzTarPerm extractEntry test/fixtures/single-quote.ejs
+163 silly gunzTarPerm extractEntry test/fixtures/single-quote.html
+164 silly gunzTarPerm extractEntry test/fixtures/space-and-tab-slurp.ejs
+165 silly gunzTarPerm extractEntry test/fixtures/space-and-tab-slurp.html
+166 silly gunzTarPerm extractEntry test/fixtures/strict.ejs
+167 silly gunzTarPerm extractEntry test/fixtures/style.css
+168 silly gunzTarPerm extractEntry test/fixtures/user-no-with.ejs
+169 silly gunzTarPerm extractEntry test/fixtures/user.ejs
+170 silly gunzTarPerm extractEntry test/fixtures/with-context.ejs
+171 silly gunzTarPerm extractEntry test/fixtures/includes/bom.ejs
+172 silly gunzTarPerm extractEntry test/fixtures/includes/menu/
+173 silly gunzTarPerm extractEntry test/fixtures/includes/menu-item.ejs
+174 silly gunzTarPerm extractEntry test/fixtures/includes/menu/item.ejs
+175 silly gunzTarPerm extractEntry lib/ejs.js
+176 silly gunzTarPerm extractEntry lib/utils.js
+177 verbose write writing to /home/ubuntu/workspace/node_modules/ejs/package.json
+178 info preinstall ejs@2.5.6
+179 verbose readDependencies loading dependencies from /home/ubuntu/workspace/node_modules/ejs/package.json
+180 verbose readDependencies loading dependencies from /home/ubuntu/workspace/node_modules/ejs/package.json
+181 silly install resolved []
+182 verbose about to build /home/ubuntu/workspace/node_modules/ejs
+183 info build /home/ubuntu/workspace/node_modules/ejs
+184 info linkStuff ejs@2.5.6
+185 silly linkStuff ejs@2.5.6 has /home/ubuntu/workspace/node_modules as its parent node_modules
+186 verbose linkBins ejs@2.5.6
+187 verbose linkMans ejs@2.5.6
+188 verbose rebuildBundles ejs@2.5.6
+189 info install ejs@2.5.6
+190 info postinstall ejs@2.5.6
+191 verbose unlock done using /home/ubuntu/.npm/_locks/ejs-df8a1e8d0583c77e.lock for /home/ubuntu/workspace/node_modules/ejs
+192 verbose validateInstall loading /home/ubuntu/workspace/package.json for validation
+193 verbose stack Error: The package angular@1.6.2 does not satisfy its siblings' peerDependencies requirements!
+193 verbose stack     at /home/ubuntu/.nvm/versions/node/v4.6.1/lib/node_modules/npm/lib/install.js:125:32
+193 verbose stack     at /home/ubuntu/.nvm/versions/node/v4.6.1/lib/node_modules/npm/lib/install.js:268:7
+193 verbose stack     at /home/ubuntu/.nvm/versions/node/v4.6.1/lib/node_modules/npm/node_modules/read-installed/read-installed.js:142:5
+193 verbose stack     at /home/ubuntu/.nvm/versions/node/v4.6.1/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
+193 verbose stack     at cb (/home/ubuntu/.nvm/versions/node/v4.6.1/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
+193 verbose stack     at /home/ubuntu/.nvm/versions/node/v4.6.1/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
+193 verbose stack     at cb (/home/ubuntu/.nvm/versions/node/v4.6.1/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
+193 verbose stack     at /home/ubuntu/.nvm/versions/node/v4.6.1/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
+193 verbose stack     at cb (/home/ubuntu/.nvm/versions/node/v4.6.1/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
+193 verbose stack     at /home/ubuntu/.nvm/versions/node/v4.6.1/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
+194 verbose cwd /home/ubuntu/workspace
+195 error Linux 4.8.8-c9
+196 error argv "/home/ubuntu/.nvm/versions/node/v4.6.1/bin/node" "/home/ubuntu/.nvm/versions/node/v4.6.1/bin/npm" "install" "ejs" "--save"
+197 error node v4.6.1
+198 error npm  v2.15.9
+199 error code EPEERINVALID
+200 error peerinvalid The package angular@1.6.2 does not satisfy its siblings' peerDependencies requirements!
+200 error peerinvalid Peer angular-material@1.1.3 wants angular@>=1.3 <1.6
+201 verbose exit [ 1, true ]

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>RTC </title>
+
+    <link rel="stylesheet" href="https://project2-nguyentienthao96.c9users.io/stylesheet/home.css">
+
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+
+    <script src="https://use.fontawesome.com/fd85e357aa.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <style>
+      .md-button {
+        text-transform: none;
+      }
+    </style>
+  </head>
+  <body ng-app="myApp" ng-controller="AppCtrl" ng-cloak>
+    <!--<img src="https://project2-nguyentienthao96.c9users.io/images/tulips-2048324.jpg" alt="">-->
+    <div class="row">
+      <div class=" col-md-offset-10">
+        <% if(message1!='Login success'){ %>
+          <section layout="row" layout-sm="column" layout-align="center center" layout-wrap class="login-signup" >
+            <md-button class="md-raised md-primary" ng-click="showLogin($event)">Sign in</md-button>
+            <md-button class="md-raised md-primary" ng-click="showSignup($event)">Sign Up</md-button>
+          </section>
+        <% } else {%>
+          <section layout="row" layout-sm="column" layout-align="center center" layout-wrap class="login-signup" >
+            <md-button class="md-raised md-warn" href="/users/logout">Sign Out</md-button>
+          </section>
+        <% } %>
+      </div>
+    </div>
+
+    <% if (message1.length > 0 && message1!='Login success') { %>
+        <div class="alert alert-danger"><%= message1 %></div>
+    <% } %>
+        <% if (message2.length > 0) { %>
+        <div class="alert alert-danger"><%= message2 %></div>
+    <% } %>
+    <!--<h1>status=<%= message1 %></h1>-->
+    <h1 style="color:white">Trò chuyện với bạn bè và gia đình bạn</h1>
+    <h2 style="color:white">
+      App cho phép bạn gọi điện video, gọi điện thoại hoặc nhắn tin cho những người bạn yêu mến.
+    </h2>
+    <div id="content" layout="row">
+      <div flex="20" >
+      </div>
+      <div>
+        <a href="#">
+          <div class="cycles">
+            <md-icon class="icon" md-svg-src="https://project2-nguyentienthao96.c9users.io/icons/videocam-filled-tool.svg"></md-icon>
+          </div>
+        </a>
+        <br>
+        Video Call
+      </div>
+
+      <div flex="20" >
+      </div>
+      <div>
+        <a href="#">
+          <div class="cycles">
+            <md-icon class="icon" md-svg-src="https://project2-nguyentienthao96.c9users.io/icons/phone-call-button.svg"></md-icon>
+          </div>
+        </a>
+        <br>
+        Call
+      </div>
+      <div flex="20" >
+      </div>
+      <div>
+        <a href="#">
+          <div class="cycles">
+            <md-icon class="icon" md-svg-src="https://project2-nguyentienthao96.c9users.io/icons/chat.svg"></md-icon>
+          </div>
+        </a>
+        <br>
+        Messenger
+      </div>
+    </div>
+
+    <script type="text/ng-template" id="login.html">
+      <div ng-app="MyApp" ng-controller="AppCtrl" layout="column" layout-align="center center" layout-fill="layout-fill">
+        <form action="/users/login" method="post">
+          <div layout="column" class="loginBox md-whiteframe-z1">
+            <md-toolbar>
+              <h2 class="md-toolbar-tools"><span>Sign in</span></h2>
+            </md-toolbar>
+            <md-content layout="column" class="md-padding">
+              <md-input-container>
+                <label>EmailAddress</label>
+                <input type="email" name="email"/>
+              </md-input-container>
+              <md-input-container>
+                <label>Password</label>
+                <input type="password" name="password"/>
+              </md-input-container>
+              <div layout="row" layout-align="center center" style="padding-top:20px;">
+                <md-button class="md-raised md-primary" type="submit">Sign in</md-button>
+                <div flex="flex"></div>
+
+              </div>
+            </md-content>
+          </div>
+        </form>
+      </div>
+    </script>
+
+    <script type="text/ng-template" id="signup.html">
+<div ng-app="MyApp" ng-controller="AppCtrl" layout="column" layout-align="center center" layout-fill="layout-fill">
+        <form action="/users/signup" method="post">
+          <div layout="column" class="loginBox md-whiteframe-z1">
+            <md-toolbar>
+              <h2 class="md-toolbar-tools"><span>Sign up</span></h2>
+            </md-toolbar>
+            <md-content layout="column" class="md-padding">
+              <md-input-container>
+                <label>EmailAddress</label>
+                <input type="email" name="email"/>
+              </md-input-container>
+              <md-input-container>
+                <label>Password</label>
+                <input type="password" name="password"/>
+              </md-input-container>
+              <div layout="row" layout-align="center center" style="padding-top:20px;">
+                <md-button class="md-raised md-primary" type="submit">Sign up</md-button>
+                <div flex="flex"></div>
+              </div>
+            </md-content>
+          </div>
+        </form>
+      </div>
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+    <script>
+      angular
+        .module('myApp',['ngMaterial'])
+        .config(function($mdThemingProvider) {
+
+          // Configure a dark theme with primary foreground yellow
+
+          $mdThemingProvider.theme('docs-dark', 'default')
+            .primaryPalette('blue')
+            // .dark();
+            .accentPalette('green');
+
+        })
+        .run(function(){
+          console.log("My app is active");
+        })
+        .controller('AppCtrl', AppCtrl);
+        function AppCtrl($scope,$mdDialog) {
+          $scope.showlogin=false;
+          $scope.currentNavItem = 'page1';
+          $scope.showLogin = function(ev) {
+              $mdDialog.show({
+                controller: DialogController,
+                templateUrl: 'login.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose:true,
+                fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+              })
+              .then(function(answer) {
+                $scope.status = 'You said the information was "' + answer + '".';
+              }, function() {
+                $scope.status = 'You cancelled the dialog.';
+              });
+            };
+            $scope.showSignup = function(ev) {
+              $mdDialog.show({
+                controller: DialogController,
+                templateUrl: 'signup.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose:true,
+                fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+              })
+              .then(function(answer) {
+                $scope.status = 'You said the information was "' + answer + '".';
+              }, function() {
+                $scope.status = 'You cancelled the dialog.';
+              });
+            };
+        function DialogController($scope, $mdDialog) {
+            $scope.hide = function() {
+              $mdDialog.hide();
+            };
+
+            $scope.cancel = function() {
+              $mdDialog.cancel();
+            };
+
+            $scope.answer = function(answer) {
+              $mdDialog.hide(answer);
+            };
+          }
+        }
+
+    </script>
+  </body>
+
+
+</html>
