@@ -32,7 +32,10 @@
   <body ng-app="myApp" ng-controller="AppCtrl" ng-cloak>
     <div class="row">
       <div class=" col-md-offset-10">
-        <% if(message1!='Login success'){ %>
+        <section layout="row" layout-sm="column" layout-align="center center" layout-wrap class="login-signup" >
+          <md-button class="md-raised md-primary" ng-click="showSignup($event)">Sign up</md-button>
+        </section>
+        <% if(login==false){ %>
           <section layout="row" layout-sm="column" layout-align="center center" layout-wrap class="login-signup" >
             <md-button class="md-raised md-primary" ng-click="showLogin($event)">Sign in</md-button>
           </section>
@@ -44,6 +47,25 @@
       </div>
     </div>
 
+    <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
+      <md-nav-item md-nav-click="goto('page1')" name="page1">
+        Trang Chủ
+      </md-nav-item>
+      <md-nav-item md-nav-click="goto('page2')" name="page2">
+        Tin Tức
+      </md-nav-item>
+      <md-nav-item md-nav-click="goto('page3')" name="page3">
+        Xem Lịch Giảng Dạy
+      </md-nav-item>
+
+      <md-nav-item md-nav-href="#page4" name="page5">
+        Đăng Ký Giảng Dạy
+      </md-nav-item>
+
+
+    </md-nav-bar>
+
+
     <% if (message1.length > 0 && message1!='Login success') { %>
         <div class="alert alert-danger"><%= message1 %></div>
     <% } %>
@@ -51,10 +73,12 @@
         <div class="alert alert-danger"><%= message2 %></div>
     <% } %>
 
-    <h1>Home Page</h1>    
+    <h1>Home Page</h1>
+
+    <!-- Đoạn script show ra khi nhấn nút login -->
     <script type="text/ng-template" id="login.html">
       <div ng-app="MyApp" ng-controller="AppCtrl" layout="column" layout-align="center center" layout-fill="layout-fill">
-        <form action="/users/lecturer/login" method="post">
+        <form action="/users/login" method="post">
           <div layout="column" class="loginBox md-whiteframe-z1">
             <md-toolbar>
               <h2 class="md-toolbar-tools"><span>Sign in</span></h2>
@@ -72,6 +96,33 @@
                 <md-button class="md-raised md-primary" type="submit">Sign in</md-button>
                 <div flex="flex"></div>
 
+              </div>
+            </md-content>
+          </div>
+        </form>
+      </div>
+    </script>
+
+    <!-- Đoạn script show ra khi nhấn nút signup -->
+    <script type="text/ng-template" id="signup.html">
+      <div ng-app="MyApp" ng-controller="AppCtrl" layout="column" layout-align="center center" layout-fill="layout-fill">
+        <form action="/users/signup" method="post">
+          <div layout="column" class="loginBox md-whiteframe-z1">
+            <md-toolbar>
+              <h2 class="md-toolbar-tools"><span>Sign up</span></h2>
+            </md-toolbar>
+            <md-content layout="column" class="md-padding">
+              <md-input-container>
+                <label>EmailAddress</label>
+                <input type="email" name="email"/>
+              </md-input-container>
+              <md-input-container>
+                <label>Password</label>
+                <input type="password" name="password"/>
+              </md-input-container>
+              <div layout="row" layout-align="center center" style="padding-top:20px;">
+                <md-button class="md-raised md-primary" type="submit">Sign up</md-button>
+                <div flex="flex"></div>
               </div>
             </md-content>
           </div>
