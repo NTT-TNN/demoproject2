@@ -9,6 +9,10 @@ router.get('/',isLoggedIn, function(req, res, next) {
   res.render('home',{message1:req.flash('loginMessage'),message2:req.flash('signupMessage'),login:login});
 });
 
+router.get('/nhapdulieu',isLoggedIn, function(req, res, next) {
+  res.render('nhapdulieu',{message1:req.flash('loginMessage'),message2:req.flash('signupMessage'),login:login});
+});
+
 // router.get('/lecturer',isLoggedIn, function(req, res, next) {
 //   res.render('lecturer',{message1:req.flash('loginMessage'),message2:req.flash('signupMessage')});
 //   // console.log(req.flash());
