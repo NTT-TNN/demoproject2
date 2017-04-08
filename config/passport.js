@@ -53,7 +53,7 @@ passport.use('local-login', new LocalStrategy({
          return done(null, false, req.flash('loginMessage', 'No user found.'));
      if (!user.validPassword(password))
          return done(null, false, req.flash('loginMessage', 'Wrong password.'));
-      // if(!user.type.admin===true) 
+      // if(!user.type.admin===true)
       //   return done(null,false,req.flash('loginMessage','Not Admin'))
      return done(null, user,req.flash('loginMessage', 'Login success'));
    });
@@ -74,7 +74,7 @@ passport.use('local-login-admin', new LocalStrategy({
          return done(null, false, req.flash('loginMessage', 'No user found.'));
      if (!user.validPassword(password))
          return done(null, false, req.flash('loginMessage', 'Wrong password.'));
-      if(!user.type.admin===true) 
+      if(!user.type.admin===true)
         return done(null,false,req.flash('loginMessage','Not Admin'))
      return done(null, user,req.flash('loginMessage', 'Login success'));
    });

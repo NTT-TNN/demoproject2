@@ -25,7 +25,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var mongoose = require('mongoose');
 var flash = require('connect-flash');
 var session = require('express-session');
-var Dt = require('./models/dt');
+var Dt = require('./models/giangvien');
 
 
 require('./config/passport')(passport);

@@ -1,5 +1,6 @@
 var express = require('express');
 var passport=require('passport');
+var gv = require('../models/giangvien');
 
 var router = express.Router();
 
@@ -7,10 +8,6 @@ login=false;
 
 router.get('/',isLoggedIn, function(req, res, next) {
   res.render('home',{message1:req.flash('loginMessage'),message2:req.flash('signupMessage'),login:login});
-});
-
-router.get('/nhapdulieu',isLoggedIn, function(req, res, next) {
-  res.render('nhapdulieu',{message1:req.flash('loginMessage'),message2:req.flash('signupMessage'),login:login});
 });
 
 // router.get('/lecturer',isLoggedIn, function(req, res, next) {
@@ -59,6 +56,64 @@ router.post('/signup',passport.authenticate('local-signup',{
 //   failureFlash:true,
 // }));
 
+router.get('/nhapdulieu',isLoggedIn, function(req, res, next) {
+  res.render('nhapdulieu',{message1:req.flash('loginMessage'),message2:req.flash('signupMessage'),login:login});
+});
+
+router.post('/nhapdulieu',isLoggedIn, function(req, res, next) {
+  gv.findOne({'email':req.body.email},function(err,giangVien){
+    if(err) return done(err);
+    if(giangVien){
+      var temp={
+        tenlop:req.body.ten_lop,
+        malop:req.body.ma_lop,
+        soLuongSV:req.body.so_luong_sv,
+        maHP:req.body.maHP,
+        khoa:req.body.khoa,
+        soTinChi:req.body.so_tin_chi,
+        thu:null,
+        tiet:null,
+        thoiGianBatDau:null,
+        thoiGianKetThuc:null,
+        ghiChu:req.body.ghi_chu
+      };
+      console.log('temp',temp);
+      giangVien.day.push(temp);
+      giangVien.save(function(err) {
+        if (err)
+          throw err;
+        console.log("đã tồn tại giảng viên đã thêm lớp mới cho giảng viên ",giangVien.tenGv);
+      });
+    }else{
+      var newGv= new gv();
+      newGv.tenGv=req.body.giang_vien;
+      newGv.email=req.body.email;
+      newGv.dienthoai=req.body.dien_thoai;
+      var temp={
+        tenlop:req.body.ten_lop,
+        malop:req.body.ma_lop,
+        soLuongSV:req.body.so_luong_sv,
+        maHP:req.body.maHP,
+        khoa:req.body.khoa,
+        soTinChi:req.body.so_tin_chi,
+        thu:null,
+        tiet:null,
+        thoiGianBatDau:null,
+        thoiGianKetThuc:null,
+        ghiChu:req.body.ghi_chu
+      };
+      newGv.day.push(temp);
+      newGv.save(function(err) {
+        if (err)
+          throw err;
+        console.log('đã thêm giảng viên mới',newGv.tenGv);
+      });
+
+    }
+
+  })
+  res.render('home',{message1:req.flash('loginMessage'),message2:req.flash('signupMessage'),login:login});
+});
 module.exports = router;
 
 function isLoggedIn(req,res,next){

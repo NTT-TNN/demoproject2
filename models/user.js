@@ -8,20 +8,7 @@ var userSchema=mongoose.Schema({
   },
   type:{
     admin:Boolean
-  },
-  facebook: {
-    id: String,
-    token: String,
-    email: String,
-    name: String,
-    username: String,
-  },
-  twitter: {
-    id: String,
-    token: String,
-    displayName: String,
-    username: String,
-  },
+  }
 });
 
 userSchema.methods.generateHash=function(password){

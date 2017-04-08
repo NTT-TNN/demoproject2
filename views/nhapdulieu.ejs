@@ -58,12 +58,15 @@
         Xem Lịch Giảng Dạy
       </md-nav-item>
 
-      <md-nav-item md-nav-href="#page4" name="page5">
+      <md-nav-item md-nav-href="#page4" name="page4">
         Đăng Ký Giảng Dạy
       </md-nav-item>
-      <md-nav-item md-nav-href="/users/nhapdulieu" name="page5">
-        Nhập Dữ liệu
-      </md-nav-item>
+      <% if(login==true){ %>
+        <md-nav-item md-nav-href="/users/nhapdulieu" name="page5">
+          Nhập Dữ liệu
+        </md-nav-item>
+      <% } %>
+
 
     </md-nav-bar>
 
@@ -75,7 +78,68 @@
         <div class="alert alert-danger"><%= message2 %></div>
     <% } %>
 
-    <h1>Form nhap du lieeuj cho giao vu</h1>
+    <div id="content">
+        <h1>Form nhập dữ liệu</h1>
+        <form action="/users/nhapdulieu" method="post">
+            <table >
+             <!-- 5 hang 2 cot -->
+                <tr>
+                  <td>
+                    <label>Email: </label><br>
+                    <input type="text" name="email" >
+                  </td>
+                  <td colspan="" rowspan="" headers="">
+                    <label>Giảng viên: </label><br>
+                    <input type="text" name="giang_vien" >
+                  </td>
+                </tr>
+                <tr>
+
+                  <td colspan="" rowspan="" headers="">
+                    <label>Điện thoại</label><br>
+                    <input type="text" name="dien_thoai" >
+                  </td>
+                  <td>
+                    <label>Tên lớp: </label><br>
+                    <input type="text" name="ten_lop" >
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="" rowspan="" headers="">
+                    <label>Mã lớp: </label><br>
+                    <input type="text" name="ma_lop" >
+                  </td>
+                  <td>
+                    <label>Số lượng sinh viên </label><br>
+                    <input type="text" name="so_luong_sv" >
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label>Mã học phần: </label><br>
+                    <input type="text" name="ma_HP" >
+                  </td>
+                  <td colspan="" rowspan="" headers="">
+                    <label>Khóa: </label><br>
+                    <input type="text" name="khoa" >
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label>Số tín chỉ: </label><br>
+                    <input type="text" name="so_tin_chi" ><br>
+                    <label>Phòng: </label><br>
+                    <input type="text" name="phong" >
+                  </td>
+                  <td colspan="" rowspan="" headers="">
+                    <label>Ghi chú: </label><br>
+                    <textarea name="ghi_chu"></textarea>
+                  </td>
+                </tr>
+            </table>
+           <button type="submit" value="Submit">Submit</button>
+        </form>
+      </div>
 
     <!-- Đoạn script show ra khi nhấn nút login -->
     <script type="text/ng-template" id="login.html">
