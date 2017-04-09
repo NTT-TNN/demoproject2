@@ -13,7 +13,7 @@ module.exports = function(passport) {
     });
   });
 
-  passport.use('local-signup', new LocalStrategy({
+passport.use('local-signup', new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password',
   passReqToCallback: true,
@@ -29,7 +29,7 @@ function(req, email, password, done) {
         var newUser = new User();
         newUser.local.email = email;
         newUser.local.password = newUser.generateHash(password);
-        newUser.type.admin=false;
+        // newUser.type.admin=false;
         newUser.save(function(err) {
           if (err)
             throw err;
@@ -55,7 +55,7 @@ passport.use('local-login', new LocalStrategy({
          return done(null, false, req.flash('loginMessage', 'Wrong password.'));
       // if(!user.type.admin===true)
       //   return done(null,false,req.flash('loginMessage','Not Admin'))
-     return done(null, user,req.flash('loginMessage', 'Login success'));
+     return done(null, user,req.flash('loginMessage', 'Login success',email));
    });
  }));
 

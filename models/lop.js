@@ -1,12 +1,9 @@
 var mongoose=require('mongoose');
 
-var gianvienSchema=mongoose.Schema({
-  tenGv:String,
-  email:String,
-  dienThoai:String,
-  day:[{
-    tenlop:String,
-    malop:String,
+var lopSchema=mongoose.Schema({
+  tenlop:String,
+  malop:String,
+  hoc:[{
     malopHoc:String,
     soLuongSV:Number,
     maHP:String,
@@ -21,4 +18,4 @@ var gianvienSchema=mongoose.Schema({
   }]
 });
 
-module.exports = mongoose.model('gianvien',gianvienSchema);
+module.exports = mongoose.model('lop',lopSchema);
