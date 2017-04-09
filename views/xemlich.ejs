@@ -45,27 +45,27 @@
     </div>
 
     <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
-      <md-nav-item md-nav-href="/" name="page1">
+      <md-nav-item md-nav-href="/" name="trangchu">
         Trang Chủ
       </md-nav-item>
-      <md-nav-item md-nav-href="/tintuc" name="page2">
+      <md-nav-item md-nav-href="/tintuc" name="tintuc">
         Tin Tức
       </md-nav-item>
       <% if(user){ %>
-        <md-nav-item md-nav-href="/users/xemlich" name="page3">
+        <md-nav-item md-nav-href="/users/xemlich" name="xemlich">
           Xem Lịch Giảng Dạy
         </md-nav-item>
 
-        <md-nav-item md-nav-href="/users/dangkylich" name="page4">
+        <md-nav-item md-nav-href="users/dangkylich" name="dangkylich">
           Đăng Ký Lịch Dạy
         </md-nav-item>
       <% } %>
       <% if(user){ %>
         <% if(user.local.email=='nguyentienthao96@gmail.com'){ %>
-          <md-nav-item md-nav-href="/users/nhapdulieu" name="page5">
+          <md-nav-item md-nav-href="/users/nhapdulieu" name="nhapdulieu">
             Nhập Dữ liệu
           </md-nav-item>
-          <md-nav-item md-nav-href="#" ng-click="showSignup($event)" name="page5">
+          <md-nav-item md-nav-href="#" ng-click="showSignup($event)" name="taotaikhoan">
             Tạo tài khoản giảng viên
           </md-nav-item>
         <% } %>
@@ -227,7 +227,7 @@
         .controller('AppCtrl', AppCtrl);
         function AppCtrl($scope,$mdDialog) {
           $scope.showlogin=false;
-          $scope.currentNavItem = 'page1';
+          $scope.currentNavItem = 'xemlich';
           $scope.showLogin = function(ev) {
               $mdDialog.show({
                 controller: DialogController,
