@@ -63,7 +63,7 @@
       <% if(user){ %>
         <% if(user.local.email=='nguyentienthao96@gmail.com'){ %>
           <md-nav-item md-nav-href="/users/nhapdulieu" name="page5">
-            Nhập Dữ liệu
+            Nhập Dữliệu
           </md-nav-item>
           <md-nav-item md-nav-href="#" ng-click="showSignup($event)" name="page5">
             Tạo tài khoản giảng viên
@@ -71,6 +71,7 @@
         <% } %>
       <% } %>
     </md-nav-bar>
+
 
     <% if (message1.length > 0 && message1!='Login success') { %>
         <div class="alert alert-danger"><%= message1 %></div>
@@ -80,7 +81,7 @@
         <div class="alert alert-danger"><%= message2 %></div>
     <% } %>
 
-    <h1>Home Page</h1>
+    <h1>Đăng ký lịch dạy cho giáo viên có email <%= user.local.email %></h1>
     <!-- Đoạn script show ra khi nhấn nút login -->
     <script type="text/ng-template" id="login.html">
       <div ng-app="MyApp" ng-controller="AppCtrl" layout="column" layout-align="center center" layout-fill="layout-fill">

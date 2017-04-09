@@ -84,36 +84,37 @@
       img{
         width: 80%;
       }
-     
+
     </style>
   </head>
   <body ng-app="myApp" ng-controller="AppCtrl" ng-cloak>
     <!-- header -->
     <header>
+
+
+    </header>
+    <div class="container">
       <div class="row">
-        <div class="col-md-6 logo">
+        <div class="col-md-10 logo">
+
           <a href="#">
             <img src="https://ctt-daotao.hust.edu.vn/Images/logo-cttdt.png" alt="logo">
           </a>
         </div>
-        
-        <div class="col-md-4 col-md-offset-1">
-          <section layout="row" layout-sm="column" layout-align="center center" layout-wrap class="login-signup" >
-          <md-button class="md-raised md-primary" ng-click="showSignup($event)">Sign up</md-button>
-        </section>
-        <!-- <% if(login==false){ %>
-          <section layout="row" layout-sm="column" layout-align="center center" layout-wrap class="login-signup" >
+
+        <div class="col-md-offset-10">
+
+        <% if(login==false){ %>
             <md-button class="md-raised md-primary" ng-click="showLogin($event)">Sign in</md-button>
-          </section>
+
         <% } else {%>
-          <section layout="row" layout-sm="column" layout-align="center center" layout-wrap class="login-signup" >
             <md-button class="md-raised md-warn" href="/users/logout">Sign Out</md-button>
-          </section>
-        <% } %> -->
+
+        <% } %>
         </div>
       </div>
-      
-    </header>
+    </div>
+
     <!-- end header -->
 
     <!-- <div class="row">
@@ -134,26 +135,31 @@
     </div> -->
 
     <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
-      <md-nav-item md-nav-click="goto('page1')" name="page1">
+      <md-nav-item md-nav-href="/" name="page1">
         Trang Chủ
       </md-nav-item>
-      <md-nav-item md-nav-click="goto('page2')" name="page2">
+      <md-nav-item md-nav-href="/tintuc" name="page2">
         Tin Tức
       </md-nav-item>
-      <md-nav-item md-nav-click="goto('page3')" name="page3">
-        Xem Lịch Giảng Dạy
-      </md-nav-item>
+      <% if(user){ %>
+        <md-nav-item md-nav-href="/users/xemlich" name="page3">
+          Xem Lịch Giảng Dạy
+        </md-nav-item>
 
-      <md-nav-item md-nav-href="#page4" name="page4">
-        Đăng Ký Giảng Dạy
-      </md-nav-item>
-      <% if(login==true){ %>
-        <md-nav-item md-nav-href="/users/nhapdulieu" name="page5">
-          Nhập Dữ liệu
+        <md-nav-item md-nav-href="/users/dangkylich" name="page4">
+          Đăng Ký Lịch Dạy
         </md-nav-item>
       <% } %>
-
-
+      <% if(user){ %>
+        <% if(user.local.email=='nguyentienthao96@gmail.com'){ %>
+          <md-nav-item md-nav-href="/users/nhapdulieu" name="page5">
+            Nhập Dữ liệu
+          </md-nav-item>
+          <md-nav-item md-nav-href="#" ng-click="showSignup($event)" name="page5">
+            Tạo tài khoản giảng viên
+          </md-nav-item>
+        <% } %>
+      <% } %>
     </md-nav-bar>
 
 
@@ -275,6 +281,7 @@
             <br>
             <br>
             <br>
+
         </form>
     </div>
 
