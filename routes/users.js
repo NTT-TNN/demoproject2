@@ -7,8 +7,16 @@ var lop = require('../models/lop');
 var router = express.Router();
 
 login=false;
+var email,data;
 
+gv.find({},function(err,result){
+  if(err) throw err;
+  if(result){
+    data=result;
+  }
+})
 router.get('/',isLoggedIn, function(req, res, next) {
+  email=req.user;
   res.render('home',{
     user:req.user,
     message1:req.flash('loginMessage'),
@@ -24,12 +32,17 @@ router.get('/',isLoggedIn, function(req, res, next) {
 
 router.get('/login',isLoggedIn,function(req,res,next){
   res.render('login.ejs',{
+    user:email,
     message1:req.flash('loginMessage'),
     message2:req.flash('signupMessage')
   });
 });
 router.get('/signup',isLoggedIn,function(req,res){
-  res.render('signup.ejs',{message1:req.flash('loginMessage'),message2:req.flash('signupMessage')});
+  res.render('signup.ejs',{
+    user:email,
+    message1:req.flash('loginMessage'),
+    message2:req.flash('signupMessage')
+  });
 });
 // router.get('/profile',isLoggedIn,function(req,res){
 //   res.render('profile.ejs',{user:req.user});
@@ -66,7 +79,18 @@ router.post('/signup',passport.authenticate('local-signup',{
 // }));
 
 router.get('/nhapdulieu',isLoggedIn, function(req, res, next) {
-  res.render('nhapdulieu',{message1:req.flash('loginMessage'),message2:req.flash('signupMessage'),login:login});
+  gv.find({},function(err,result){
+    if(err) throw err;
+    if(result){
+      data=result;
+    }
+  })
+  res.render('nhapdulieu',{
+    gv:data,
+    user:email,
+    message1:req.flash('loginMessage'),
+    message2:req.flash('signupMessage'),
+    login:login});
 });
 
 router.post('/nhapdulieu',isLoggedIn, function(req, res, next) {
@@ -74,6 +98,9 @@ router.post('/nhapdulieu',isLoggedIn, function(req, res, next) {
     if(err) return done(err);
     if(giangVien){
       var temp={
+        tenGv:req.body.giang_vien,
+        email:req.body.email,
+        dienthoai:req.body.dien_thoai,
         tenlop:req.body.ten_lop,
         malop:req.body.ma_lop,
         malopHoc:req.body.ma_lop_hoc,
@@ -101,6 +128,9 @@ router.post('/nhapdulieu',isLoggedIn, function(req, res, next) {
       newGv.dienthoai=req.body.dien_thoai;
 
       var temp={
+        tenGv:req.body.giang_vien,
+        email:req.body.email,
+        dienthoai:req.body.dien_thoai,
         tenlop:req.body.ten_lop,
         malop:req.body.ma_lop,
         malopHoc:req.body.ma_lop_hoc,
@@ -169,8 +199,39 @@ router.post('/nhapdulieu',isLoggedIn, function(req, res, next) {
       });
     }
   })
-  res.render('home',{message1:req.flash('loginMessage'),message2:req.flash('signupMessage'),login:login});
+  gv.find({},function(err,result){
+    if(err) throw err;
+    if(result){
+      data=result;
+    }
+  })
+  res.render('nhapdulieu',{
+    gv:data,
+    user:email,
+    message1:req.flash('loginMessage'),
+    message2:req.flash('signupMessage'),
+    login:login
+  });
 });
+
+router.get('/xemlich',isLoggedIn, function(req, res, next) {
+  res.render('xemlich',{
+    user:email,
+    message1:req.flash('loginMessage'),
+    message2:req.flash('signupMessage'),
+    login:login
+  });
+});
+
+router.get('/dangkylich',isLoggedIn, function(req, res, next) {
+  res.render('dangkylich',{
+    user:email,
+    message1:req.flash('loginMessage'),
+    message2:req.flash('signupMessage'),
+    login:login
+  });
+});
+
 module.exports = router;
 
 function isLoggedIn(req,res,next){

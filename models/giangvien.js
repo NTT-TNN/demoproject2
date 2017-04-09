@@ -5,6 +5,9 @@ var gianvienSchema=mongoose.Schema({
   email:String,
   dienThoai:String,
   day:[{
+    tenGv:String,
+    email:String,
+    dienThoai:String,
     tenlop:String,
     malop:String,
     malopHoc:String,

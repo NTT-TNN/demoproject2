@@ -40,7 +40,7 @@
         background: #958e8e
         border-radius: 10px 10px 0px 0px;
         color: white;
-        font-size: 330%; 
+        font-size: 330%;
         text-align: center;
         padding: 15px;
       }
@@ -70,8 +70,8 @@
         padding: 10px;
       }
 
-     
-     
+
+
       /*h1{
         text-align: center;
         padding-bottom: 15px;
@@ -169,10 +169,6 @@
         <% if (message2.length > 0) { %>
         <div class="alert alert-danger"><%= message2 %></div>
     <% } %>
-
-
-
-
 <!-- form nhap du lieu -->
     <div id="content">
         <form action="/users/nhapdulieu" method="post" class="form">
@@ -183,35 +179,35 @@
                     <div class="form-group row">
                         <label for="example-email-input" class="col-form-label">Email</label>
                         <div>
-                            <input class="form-control" type="email" name="email">
+                            <input class="form-control" type="email" name="email" required >
                         </div>
                     </div>
                     <!-- giang vien -->
                     <div class="form-group row">
                         <label for="example-text-input" class="col-form-label">Giảng viên</label>
                         <div>
-                            <input class="form-control" type="text" name="giang_vien">
+                            <input class="form-control" type="text" name="giang_vien" required>
                         </div>
                     </div>
                     <!-- dien thoai -->
                     <div class="form-group row">
                         <label for="example-text-input" class="col-form-label">Điện thoại</label>
                         <div>
-                            <input class="form-control" type="text" name="dien_thoai">
+                            <input class="form-control" type="text" name="dien_thoai" required>
                         </div>
                     </div>
                     <!-- ten lop -->
                     <div class="form-group row">
                         <label for="example-text-input" class="col-form-label">Tên lớp</label>
                         <div>
-                            <input class="form-control" type="text" name="ten_lop">
+                            <input class="form-control" type="text" name="ten_lop" required>
                         </div>
                     </div>
                     <!-- ma lop -->
                     <div class="form-group row">
                         <label for="example-text-input" class="col-form-label">Mã lớp</label>
                         <div>
-                            <input class="form-control" type="text" name="ma_lop">
+                            <input class="form-control" type="text" name="ma_lop" required>
                         </div>
                     </div>
                 </div>
@@ -220,35 +216,35 @@
                     <div class="form-group row">
                         <label for="example-text-input" class="col-form-label">Mã lớp học</label>
                         <div>
-                            <input class="form-control" type="text" name="ma_lop_hoc">
+                            <input class="form-control" type="text" name="ma_lop_hoc" required>
                         </div>
                     </div>
                     <!-- so luong sinh vien -->
                     <div class="form-group row">
                         <label for="example-number-input" class="col-form-label">Số lượng sinh viên</label>
                         <div>
-                            <input class="form-control" type="number" value="42" name="so_luong_sv">
+                            <input class="form-control" type="number" value="42" name="so_luong_sv" required>
                         </div>
                     </div>
                     <!-- ma hoc phan -->
                     <div class="form-group row">
                         <label for="example-text-input" class="col-form-label">Mã học phần</label>
                         <div>
-                            <input class="form-control" type="text" name="ma_HP">
+                            <input class="form-control" type="text" name="ma_HP" required>
                         </div>
                     </div>
                     <!-- khoa -->
                     <div class="form-group row">
                         <label for="example-text-input" class="col-form-label">Khoa</label>
                         <div>
-                            <input class="form-control" type="text" name="khoa">
+                            <input class="form-control" type="text" name="khoa" required>
                         </div>
                     </div>
                     <!-- so tin chi -->
                     <div class="form-group row">
                         <label for="example-number-input" class="col-form-label">Số tín chỉ</label>
                         <div>
-                            <input class="form-control" type="number" value="42" name="so_tin_chi">
+                            <input class="form-control" type="number" value="2" name="so_tin_chi" required>
                         </div>
                     </div>
                 </div>
@@ -258,7 +254,7 @@
                 <div class="form-group row">
                     <label for="example-text-input" class="col-form-label">Phòng</label>
                     <div>
-                        <input class="form-control" type="text" name="phong">
+                        <input class="form-control" type="text" name="phong" required>
                     </div>
                 </div>
             </div>
@@ -275,7 +271,6 @@
             <div class="form-group">
                 <div class="controls col-md-8 ">
                     <input type="submit" name="submit" value="Submit" class="btn btn-primary btn btn-info submit" />
-                    <input type="button" name="reset" value="Reset" class="btn btn-primary reset" />
                 </div>
             </div>
             <br>
@@ -284,13 +279,71 @@
 
         </form>
     </div>
+    <h2>Danh sách các lớp đã tồn tại là</h2>
 
+    <div class="row">
+      <div class="col-md-2">
+        Tên giáo viên
+      </div>
+      <div class="col-md-2">
+        Email
+      </div>
+      <div class="col-md-1">
+        Tên lớp
+      </div>
+      <div class="col-md-1">
+        Mã lớp
+      </div>
+      <div class="col-md-1">
+        Mã lớp học
+      </div>
+      <div class="col-md-1">
+        Số lượng SV
+      </div>
+      <div class="col-md-1">
+        Khóa
+      </div>
+      <div class="col-md-1">
+        Số tín chỉ
+      </div>
+      <div class="col-md-1">
+        Ghi chú
+      </div>
 
-
-
-
-
-
+    </div>
+    <% for(i=0;i<gv.length;i++){ %>
+      <% for(j=0;j<gv[i].day.length;++j) {%>
+        <div class="row">
+          <div class="col-md-2">
+            <%= gv[i].day[j].tenGv %>
+          </div>
+          <div class="col-md-2">
+            <%= gv[i].day[j].email %>
+          </div>
+          <div class="col-md-1">
+            <%= gv[i].day[j].tenlop %>
+          </div>
+          <div class="col-md-1">
+            <%= gv[i].day[j].malop %>
+          </div>
+          <div class="col-md-1">
+            <%= gv[i].day[j].malopHoc %>
+          </div>
+          <div class="col-md-1">
+            <%= gv[i].day[j].soLuongSV %>
+          </div>
+          <div class="col-md-1">
+            <%= gv[i].day[j].khoa %>
+          </div>
+          <div class="col-md-1">
+            <%= gv[i].day[j].soTinChi %>
+          </div>
+          <div class="col-md-1">
+            <%= gv[i].day[j].ghiChu %>
+          </div>
+        </div>
+      <% } %>
+    <% } %>
 
     <!-- Đoạn script show ra khi nhấn nút login -->
     <script type="text/ng-template" id="login.html">

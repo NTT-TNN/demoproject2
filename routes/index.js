@@ -11,4 +11,12 @@ router.get('/', function(req, res, next) {
   });
 });
 
+router.get('/tintuc', function(req, res, next) {
+  res.render('tintuc',{
+    user:req.user,
+    message1:req.flash('loginMessage'),
+    message2:req.flash('signupMessage'),login:login
+  });
+});
+
 module.exports = router;
