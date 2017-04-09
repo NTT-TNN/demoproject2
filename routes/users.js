@@ -7,7 +7,7 @@ var lop = require('../models/lop');
 var router = express.Router();
 
 login=false;
-var email,data;
+var emailGlobal,data;
 
 gv.find({},function(err,result){
   if(err) throw err;
@@ -16,7 +16,7 @@ gv.find({},function(err,result){
   }
 })
 router.get('/',isLoggedIn, function(req, res, next) {
-  email=req.user;
+  emailGlobal=req.user;
   res.render('home',{
     user:req.user,
     message1:req.flash('loginMessage'),
@@ -32,14 +32,14 @@ router.get('/',isLoggedIn, function(req, res, next) {
 
 router.get('/login',isLoggedIn,function(req,res,next){
   res.render('login.ejs',{
-    user:email,
+    user:emailGlobal,
     message1:req.flash('loginMessage'),
     message2:req.flash('signupMessage')
   });
 });
 router.get('/signup',isLoggedIn,function(req,res){
   res.render('signup.ejs',{
-    user:email,
+    user:emailGlobal,
     message1:req.flash('loginMessage'),
     message2:req.flash('signupMessage')
   });
@@ -87,7 +87,7 @@ router.get('/nhapdulieu',isLoggedIn, function(req, res, next) {
   })
   res.render('nhapdulieu',{
     gv:data,
-    user:email,
+    user:emailGlobal,
     message1:req.flash('loginMessage'),
     message2:req.flash('signupMessage'),
     login:login});
@@ -203,33 +203,48 @@ router.post('/nhapdulieu',isLoggedIn, function(req, res, next) {
     if(err) throw err;
     if(result){
       data=result;
+      res.render('nhapdulieu',{
+        gv:data,
+        user:emailGlobal,
+        message1:req.flash('loginMessage'),
+        message2:req.flash('signupMessage'),
+        login:login
+      });
     }
   })
-  res.render('nhapdulieu',{
-    gv:data,
-    user:email,
-    message1:req.flash('loginMessage'),
-    message2:req.flash('signupMessage'),
-    login:login
-  });
+
 });
 
 router.get('/xemlich',isLoggedIn, function(req, res, next) {
-  res.render('xemlich',{
-    user:email,
-    message1:req.flash('loginMessage'),
-    message2:req.flash('signupMessage'),
-    login:login
+  gv.findOne({'email':emailGlobal.local.email},function(err,result){
+    if(err) throw err;
+    if(result){
+      var temp=result;
+      res.render('xemlich',{
+        data:temp,
+        user:emailGlobal,
+        message1:req.flash('loginMessage'),
+        message2:req.flash('signupMessage'),
+        login:login
+      });
+    }
   });
 });
-
 router.get('/dangkylich',isLoggedIn, function(req, res, next) {
-  res.render('dangkylich',{
-    user:email,
-    message1:req.flash('loginMessage'),
-    message2:req.flash('signupMessage'),
-    login:login
-  });
+  gv.findOne({'email':emailGlobal.local.email},function(err,result){
+    if(err) throw err;
+    if(result){
+      var temp=result;
+      res.render('dangkylich',{
+        data:temp,
+        user:emailGlobal,
+        message1:req.flash('loginMessage'),
+        message2:req.flash('signupMessage'),
+        login:login
+      });
+    }
+  })
+
 });
 
 module.exports = router;

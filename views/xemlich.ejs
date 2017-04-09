@@ -70,18 +70,82 @@
           </md-nav-item>
         <% } %>
       <% } %>
-    </md-nav-bar>s
+    </md-nav-bar>
 
 
     <% if (message1.length > 0 && message1!='Login success') { %>
         <div class="alert alert-danger"><%= message1 %></div>
-
     <% } %>
         <% if (message2.length > 0) { %>
         <div class="alert alert-danger"><%= message2 %></div>
     <% } %>
 
-    <h1>Xem lịch dạy cho giáo viên có email <%= user.local.email %></h1>
+    <h1>Lịch dạy cho giáo viên có email <%= user.local.email %> trong kỳ này là</h1>
+    <div class="row">
+      <div class="col-md-2">
+        Tên giáo viên
+      </div>
+      <div class="col-md-2">
+        Email
+      </div>
+      <div class="col-md-1">
+        Tên lớp
+      </div>
+      <div class="col-md-1">
+        Mã lớp
+      </div>
+      <div class="col-md-1">
+        Mã lớp học
+      </div>
+      <div class="col-md-1">
+        Số lượng SV
+      </div>
+      <div class="col-md-1">
+        Khóa
+      </div>
+      <div class="col-md-1">
+        Số tín chỉ
+      </div>
+      <div class="col-md-1">
+        Ghi chú
+      </div>
+
+    </div>
+    <% for(i=0;i<data.day.length;i++){ %>
+        <div class="row">
+          <div class="col-md-2">
+            <%= data.day[i].tenGv %>
+          </div>
+          <div class="col-md-2">
+            <%= data.day[i].email %>
+          </div>
+          <div class="col-md-1">
+            <%= data.day[i].tenlop %>
+          </div>
+          <div class="col-md-1">
+            <%= data.day[i].malop %>
+          </div>
+          <div class="col-md-1">
+            <%= data.day[i].malopHoc %>
+          </div>
+          <div class="col-md-1">
+            <%= data.day[i].soLuongSV %>
+          </div>
+          <div class="col-md-1">
+            <%= data.day[i].khoa %>
+          </div>
+          <div class="col-md-1">
+            <%= data.day[i].soTinChi %>
+          </div>
+          <div class="col-md-1">
+            <%= data.day[i].ghiChu %>
+          </div>
+          <div class="col-md-1">
+            thời gian
+          </div>
+        </div>
+    <% } %>
+
     <!-- Đoạn script show ra khi nhấn nút login -->
     <script type="text/ng-template" id="login.html">
       <div ng-app="MyApp" ng-controller="AppCtrl" layout="column" layout-align="center center" layout-fill="layout-fill">
