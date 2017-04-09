@@ -55,7 +55,7 @@ passport.use('local-login', new LocalStrategy({
          return done(null, false, req.flash('loginMessage', 'Wrong password.'));
       // if(!user.type.admin===true)
       //   return done(null,false,req.flash('loginMessage','Not Admin'))
-     return done(null, user,req.flash('loginMessage', 'Login success',email));
+     return done(null, user,req.flash('loginMessage', 'Login success'));
    });
  }));
 

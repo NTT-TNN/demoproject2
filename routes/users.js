@@ -9,8 +9,12 @@ var router = express.Router();
 login=false;
 
 router.get('/',isLoggedIn, function(req, res, next) {
-  res.render('home',{message1:req.flash('loginMessage'),message2:req.flash('signupMessage'),login:login});
-  console.log('email',req.flash('loginMessage'));
+  res.render('home',{
+    user:req.user,
+    message1:req.flash('loginMessage'),
+    message2:req.flash('signupMessage'),
+    login:login
+  });
 });
 
 // router.get('/lecturer',isLoggedIn, function(req, res, next) {
@@ -19,7 +23,10 @@ router.get('/',isLoggedIn, function(req, res, next) {
 // });
 
 router.get('/login',isLoggedIn,function(req,res,next){
-  res.render('login.ejs',{message1:req.flash('loginMessage'),message2:req.flash('signupMessage')});
+  res.render('login.ejs',{
+    message1:req.flash('loginMessage'),
+    message2:req.flash('signupMessage')
+  });
 });
 router.get('/signup',isLoggedIn,function(req,res){
   res.render('signup.ejs',{message1:req.flash('loginMessage'),message2:req.flash('signupMessage')});
