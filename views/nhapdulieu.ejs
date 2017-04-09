@@ -49,38 +49,34 @@
       img{
         width: 60%;
       }
-     
+
     </style>
   </head>
   <body ng-app="myApp" ng-controller="AppCtrl" ng-cloak>
     <!-- header -->
     <header>
+
+
+    </header>
+    <div class="container">
       <div class="row">
-        <div class="col-md-5 logo">
+        <div class="col-md-10 logo">
           <a href="#">
             <img src="https://ctt-daotao.hust.edu.vn/Images/logo-cttdt.png" alt="logo">
           </a>
         </div>
-        <div class="col-md-3">
-          Quản lý đào tạo
-        </div>
-        <div class="col-md-4">
-          <section layout="row" layout-sm="column" layout-align="center center" layout-wrap class="login-signup" >
-          <md-button class="md-raised md-primary" ng-click="showSignup($event)">Sign up</md-button>
-        </section>
+        <div class="col-md-offset-10">
+
         <% if(login==false){ %>
-          <section layout="row" layout-sm="column" layout-align="center center" layout-wrap class="login-signup" >
             <md-button class="md-raised md-primary" ng-click="showLogin($event)">Sign in</md-button>
-          </section>
+
         <% } else {%>
-          <section layout="row" layout-sm="column" layout-align="center center" layout-wrap class="login-signup" >
             <md-button class="md-raised md-warn" href="/users/logout">Sign Out</md-button>
-          </section>
         <% } %>
         </div>
       </div>
-      
-    </header>
+    </div>
+
     <!-- end header -->
 
     <!-- <div class="row">
@@ -101,26 +97,31 @@
     </div> -->
 
     <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
-      <md-nav-item md-nav-click="goto('page1')" name="page1">
+      <md-nav-item md-nav-href="/" name="page1">
         Trang Chủ
       </md-nav-item>
-      <md-nav-item md-nav-click="goto('page2')" name="page2">
+      <md-nav-item md-nav-href="/tintuc" name="page2">
         Tin Tức
       </md-nav-item>
-      <md-nav-item md-nav-click="goto('page3')" name="page3">
-        Xem Lịch Giảng Dạy
-      </md-nav-item>
+      <% if(user){ %>
+        <md-nav-item md-nav-href="/users/xemlich" name="page3">
+          Xem Lịch Giảng Dạy
+        </md-nav-item>
 
-      <md-nav-item md-nav-href="#page4" name="page4">
-        Đăng Ký Giảng Dạy
-      </md-nav-item>
-      <% if(login==true){ %>
-        <md-nav-item md-nav-href="/users/nhapdulieu" name="page5">
-          Nhập Dữ liệu
+        <md-nav-item md-nav-href="/users/dangkylich" name="page4">
+          Đăng Ký Lịch Dạy
         </md-nav-item>
       <% } %>
-
-
+      <% if(user){ %>
+        <% if(user.local.email=='nguyentienthao96@gmail.com'){ %>
+          <md-nav-item md-nav-href="/users/nhapdulieu" name="page5">
+            Nhập Dữ liệu
+          </md-nav-item>
+          <md-nav-item md-nav-href="#" ng-click="showSignup($event)" name="page5">
+            Tạo tài khoản giảng viên
+          </md-nav-item>
+        <% } %>
+      <% } %>
     </md-nav-bar>
 
 
@@ -185,7 +186,7 @@
         <div class="col-10">
           <input class="form-control" type="number" value="42" name="so_luong_sinh_vien">
         </div>
-      </div> 
+      </div>
       <!-- ma hoc phan -->
       <div class="form-group row">
         <label for="example-text-input" class="col-2 col-form-label">Mã học phần</label>
@@ -204,9 +205,9 @@
       <div class="form-group row">
         <label for="example-number-input" class="col-2 col-form-label">Số tín chỉ</label>
         <div class="col-10">
-          <input class="form-control" type="number" value="42" name="so_tin_chi">
+          <input class="form-control" type="number" value="3" name="so_tin_chi">
         </div>
-      </div> 
+      </div>
       <!-- phong -->
       <div class="form-group row">
         <label for="example-text-input" class="col-2 col-form-label">Phòng</label>
@@ -222,16 +223,15 @@
         </div>
       </div>
       <!-- submit - reset -->
-      <div class="form-group"> 
+      <div class="form-group">
         <div class="controls col-md-8 ">
           <input type="submit" name="submit" value="Submit" class="btn btn-primary btn btn-info submit" />
-          <input type="button" name="reset" value="Reset" class="btn btn-primary" />
         </div>
-      </div> 
+      </div>
       <br><br><br>
-      
-      
-      
+
+
+
     </form>
 
 

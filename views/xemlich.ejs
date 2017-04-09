@@ -70,7 +70,8 @@
           </md-nav-item>
         <% } %>
       <% } %>
-    </md-nav-bar>
+    </md-nav-bar>s
+
 
     <% if (message1.length > 0 && message1!='Login success') { %>
         <div class="alert alert-danger"><%= message1 %></div>
@@ -80,7 +81,7 @@
         <div class="alert alert-danger"><%= message2 %></div>
     <% } %>
 
-    <h1>Home Page</h1>
+    <h1>Xem lịch dạy cho giáo viên có email <%= user.local.email %></h1>
     <!-- Đoạn script show ra khi nhấn nút login -->
     <script type="text/ng-template" id="login.html">
       <div ng-app="MyApp" ng-controller="AppCtrl" layout="column" layout-align="center center" layout-fill="layout-fill">
