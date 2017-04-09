@@ -22,15 +22,68 @@
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
+     <link rel="stylesheet" type="text/css" href="http://localhost:8000/stylesheet/nhap_du_lieu.css">
+     <link rel="stylesheet" type="text/css" href="../public/stylesheet/nhapdulieu.css">
     <style>
       .md-button {
         text-transform: none;
       }
+
+      .form{
+        width: 40%;
+        margin: 0 auto;
+      }
+      .submit{
+        margin-left: 156px;
+        margin-right: 22px;
+      }
+      h1{
+        text-align: center;
+        padding-bottom: 15px;
+        padding-top: 20px;
+      }
+      .logo{
+        margin-left: 30px;
+        margin-top: 20px;
+      }
+      img{
+        width: 60%;
+      }
+     
     </style>
   </head>
   <body ng-app="myApp" ng-controller="AppCtrl" ng-cloak>
-    <div class="row">
+    <!-- header -->
+    <header>
+      <div class="row">
+        <div class="col-md-5 logo">
+          <a href="#">
+            <img src="https://ctt-daotao.hust.edu.vn/Images/logo-cttdt.png" alt="logo">
+          </a>
+        </div>
+        <div class="col-md-3">
+          Quản lý đào tạo
+        </div>
+        <div class="col-md-4">
+          <section layout="row" layout-sm="column" layout-align="center center" layout-wrap class="login-signup" >
+          <md-button class="md-raised md-primary" ng-click="showSignup($event)">Sign up</md-button>
+        </section>
+        <% if(login==false){ %>
+          <section layout="row" layout-sm="column" layout-align="center center" layout-wrap class="login-signup" >
+            <md-button class="md-raised md-primary" ng-click="showLogin($event)">Sign in</md-button>
+          </section>
+        <% } else {%>
+          <section layout="row" layout-sm="column" layout-align="center center" layout-wrap class="login-signup" >
+            <md-button class="md-raised md-warn" href="/users/logout">Sign Out</md-button>
+          </section>
+        <% } %>
+        </div>
+      </div>
+      
+    </header>
+    <!-- end header -->
+
+    <!-- <div class="row">
       <div class=" col-md-offset-10">
         <section layout="row" layout-sm="column" layout-align="center center" layout-wrap class="login-signup" >
           <md-button class="md-raised md-primary" ng-click="showSignup($event)">Sign up</md-button>
@@ -45,7 +98,7 @@
           </section>
         <% } %>
       </div>
-    </div>
+    </div> -->
 
     <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
       <md-nav-item md-nav-click="goto('page1')" name="page1">
@@ -78,11 +131,116 @@
         <div class="alert alert-danger"><%= message2 %></div>
     <% } %>
 
-    <div id="content">
+
+
+
+<!-- form nhap du lieu -->
+    <form action="/users/nhapdulieu" method="post" class="form">
+      <h1 class="col-offset-4">Nhập dữ liệu</h1>
+      <!-- email -->
+      <div class="form-group row">
+        <label for="example-email-input" class="col-2 col-form-label">Email</label>
+        <div class="col-offset-4 col-10">
+          <input class="form-control" type="email" name="email">
+        </div>
+      </div>
+      <!-- giang vien -->
+      <div class="form-group row">
+        <label for="example-text-input" class="col-2 col-form-label">Giảng viên</label>
+        <div class="col-10">
+          <input class="form-control" type="text" name="giang_vien" >
+        </div>
+      </div>
+      <!-- dien thoai -->
+      <div class="form-group row">
+        <label for="example-text-input" class="col-2 col-form-label">Điện thoại</label>
+        <div class="col-10">
+          <input class="form-control" type="text" name="dien_thoai">
+        </div>
+      </div>
+      <!-- ten lop -->
+      <div class="form-group row">
+        <label for="example-text-input" class="col-2 col-form-label">Tên lớp</label>
+        <div class="col-10">
+          <input class="form-control" type="text" name="ten_lop" >
+        </div>
+      </div>
+      <!-- ma lop -->
+      <div class="form-group row">
+        <label for="example-text-input" class="col-2 col-form-label">Mã lớp</label>
+        <div class="col-10">
+          <input class="form-control" type="text" name="ma_lop">
+        </div>
+      </div>
+      <!-- ma lop hoc -->
+      <div class="form-group row">
+        <label for="example-text-input" class="col-2 col-form-label">Mã lớp học</label>
+        <div class="col-10">
+          <input class="form-control" type="text" name="ma_lop_hoc">
+        </div>
+      </div>
+      <!-- so luong sinh vien -->
+      <div class="form-group row">
+        <label for="example-number-input" class="col-2 col-form-label">Số lượng sinh viên</label>
+        <div class="col-10">
+          <input class="form-control" type="number" value="42" name="so_luong_sinh_vien">
+        </div>
+      </div> 
+      <!-- ma hoc phan -->
+      <div class="form-group row">
+        <label for="example-text-input" class="col-2 col-form-label">Mã học phần</label>
+        <div class="col-10">
+          <input class="form-control" type="text" name="ma_hoc_phan">
+        </div>
+      </div>
+      <!-- khoa -->
+      <div class="form-group row">
+        <label for="example-text-input" class="col-2 col-form-label">Khoa</label>
+        <div class="col-10">
+          <input class="form-control" type="text" name="khoa">
+        </div>
+      </div>
+      <!-- so tin chi -->
+      <div class="form-group row">
+        <label for="example-number-input" class="col-2 col-form-label">Số tín chỉ</label>
+        <div class="col-10">
+          <input class="form-control" type="number" value="42" name="so_tin_chi">
+        </div>
+      </div> 
+      <!-- phong -->
+      <div class="form-group row">
+        <label for="example-text-input" class="col-2 col-form-label">Phòng</label>
+        <div class="col-10">
+          <input class="form-control" type="text" name="phong">
+        </div>
+      </div>
+      <!-- ghi chu -->
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Ghi chú</label>
+        <div class="col-10">
+          <textarea class="form-control" placeholder="Nhap ghi chu ... "  name="ghi_chu"></textarea>
+        </div>
+      </div>
+      <!-- submit - reset -->
+      <div class="form-group"> 
+        <div class="controls col-md-8 ">
+          <input type="submit" name="submit" value="Submit" class="btn btn-primary btn btn-info submit" />
+          <input type="button" name="reset" value="Reset" class="btn btn-primary" />
+        </div>
+      </div> 
+      <br><br><br>
+      
+      
+      
+    </form>
+
+
+<!-- end form nhap du lieu -->
+    <!-- <div id="content">
         <h1>Form nhập dữ liệu</h1>
         <form action="/users/nhapdulieu" method="post">
             <table >
-             <!-- 5 hang 2 cot -->
+             5 hang 2 cot
                 <tr>
                   <td>
                     <label>Email: </label><br>
@@ -143,7 +301,7 @@
             </table>
            <button type="submit" value="Submit">Submit</button>
         </form>
-      </div>
+      </div> -->
 
     <!-- Đoạn script show ra khi nhấn nút login -->
     <script type="text/ng-template" id="login.html">
