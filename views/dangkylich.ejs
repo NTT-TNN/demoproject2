@@ -27,20 +27,31 @@
       .md-button {
         text-transform: none;
       }
+      .logo{
+        margin-left: 30px;
+        margin-top: 15px;
+      }
+      img{
+        width: 80%;
+      }
+
     </style>
   </head>
   <body ng-app="myApp" ng-controller="AppCtrl" ng-cloak>
-    <div class="row">
-      <div class="col-md-offset-10">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 logo">
+          <a href="#">
+            <img src="https://ctt-daotao.hust.edu.vn/Images/logo-cttdt.png" alt="logo">
+          </a>
+        </div>
+        <div class="col-md-offset-10">
         <% if(login==false){ %>
-          <section layout="row" layout-sm="column" layout-align="center center" layout-wrap class="login-signup" >
             <md-button class="md-raised md-primary" ng-click="showLogin($event)">Sign in</md-button>
-          </section>
         <% } else {%>
-          <section layout="row" layout-sm="column" layout-align="center center" layout-wrap class="login-signup" >
             <md-button class="md-raised md-warn" href="/users/logout">Sign Out</md-button>
-          </section>
         <% } %>
+        </div>
       </div>
     </div>
 
@@ -80,71 +91,75 @@
     <% } %>
 
     <h2>Danh sách các lớp trong kỳ này của giáo viên <%= user.local.email %> là </h2>
-
-    <div class="row">
-      <div class="col-md-2">
-        Tên giáo viên
-      </div>
-      <div class="col-md-2">
-        Email
-      </div>
-      <div class="col-md-1">
-        Tên lớp
-      </div>
-      <div class="col-md-1">
-        Mã lớp
-      </div>
-      <div class="col-md-1">
-        Mã lớp học
-      </div>
-      <div class="col-md-1">
-        Số lượng SV
-      </div>
-      <div class="col-md-1">
-        Khóa
-      </div>
-      <div class="col-md-1">
-        Số tín chỉ
-      </div>
-      <div class="col-md-1">
-        Ghi chú
-      </div>
-
-    </div>
+    <table class="table table-bordered table-striped">
+      <tr class="">
+        <td class="">
+          Tên giáo viên
+        </td>
+        <td class="">
+          Email
+        </td>
+        <td class="">
+          Tên lớp
+        </td>
+        <td class="">
+          Mã lớp
+        </td>
+        <td class="">
+          Mã lớp học
+        </td>
+        <td class="">
+          Số lượng SV
+        </td>
+        <td class="">
+          Khóa
+        </td>
+        <td class="">
+          Số tín chỉ
+        </td>
+        <td class="">
+          Ghi chú
+        </td>
+        <td class="">
+          Thời gian
+        </td>
+      </tr>
     <% for(i=0;i<data.day.length;i++){ %>
-        <div class="row">
-          <div class="col-md-2">
-            <%= data.day[i].tenGv %>
-          </div>
-          <div class="col-md-2">
-            <%= data.day[i].email %>
-          </div>
-          <div class="col-md-1">
-            <%= data.day[i].tenlop %>
-          </div>
-          <div class="col-md-1">
-            <%= data.day[i].malop %>
-          </div>
-          <div class="col-md-1">
-            <%= data.day[i].malopHoc %>
-          </div>
-          <div class="col-md-1">
-            <%= data.day[i].soLuongSV %>
-          </div>
-          <div class="col-md-1">
-            <%= data.day[i].khoa %>
-          </div>
-          <div class="col-md-1">
-            <%= data.day[i].soTinChi %>
-          </div>
-          <div class="col-md-1">
-            <%= data.day[i].ghiChu %>
-          </div>
-          <div class="col-md-1">
-            Chọn thời gian
-          </div>
-        </div>
+      <tr class="">
+        <td class="">
+          <%= data.day[i].tenGv %>
+        </td>
+        <td class="">
+          <%= data.day[i].email %>
+        </td>
+        <td class="">
+          <%= data.day[i].tenlop %>
+        </td>
+        <td class="">
+          <%= data.day[i].malop %>
+        </td>
+        <td class="">
+          <%= data.day[i].malopHoc %>
+        </td>
+        <td class="">
+          <%= data.day[i].soLuongSV %>
+        </td>
+        <td class="">
+          <%= data.day[i].khoa %>
+        </td>
+        <td class="">
+          <%= data.day[i].soTinChi %>
+        </td>
+        <td class="">
+          <%= data.day[i].ghiChu %>
+        </td>
+        <td class="">
+          Chọn thời gian
+        </td>
+      </tr>
     <% } %>
+    </table>
+
     <!-- Đoạn script show ra khi nhấn nút login -->
     <script type="text/ng-template" id="login.html">
       <div ng-app="MyApp" ng-controller="AppCtrl" layout="column" layout-align="center center" layout-fill="layout-fill">

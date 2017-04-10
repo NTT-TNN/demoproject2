@@ -39,7 +39,6 @@
       h1{
         background: #958e8e
         border-radius: 10px 10px 0px 0px;
-        color: white;
         font-size: 330%;
         text-align: center;
         padding: 15px;
@@ -69,9 +68,6 @@
         width: 90px;
         padding: 10px;
       }
-
-
-
       /*h1{
         text-align: center;
         padding-bottom: 15px;
@@ -279,71 +275,74 @@
 
         </form>
     </div>
-    <h2>Danh sách các lớp đã tồn tại là</h2>
+    <h2>Danh sách các lớp trong kỳ này là là</h2>
 
-    <div class="row">
-      <div class="col-md-2">
-        Tên giáo viên
-      </div>
-      <div class="col-md-2">
-        Email
-      </div>
-      <div class="col-md-1">
-        Tên lớp
-      </div>
-      <div class="col-md-1">
-        Mã lớp
-      </div>
-      <div class="col-md-1">
-        Mã lớp học
-      </div>
-      <div class="col-md-1">
-        Số lượng SV
-      </div>
-      <div class="col-md-1">
-        Khóa
-      </div>
-      <div class="col-md-1">
-        Số tín chỉ
-      </div>
-      <div class="col-md-1">
-        Ghi chú
-      </div>
+    <table class="table table-condensed table-striped">
+      <tr class="">
+        <td class="">
+          Tên giáo viên
+        </td>
+        <td class="">
+          Email
+        </td>
+        <td class="">
+          Tên lớp
+        </td>
+        <td class="">
+          Mã lớp
+        </td>
+        <td class="">
+          Mã lớp học
+        </td>
+        <td class="">
+          Số lượng SV
+        </td>
+        <td class="">
+          Khóa
+        </td>
+        <td class="">
+          Số tín chỉ
+        </td>
+        <td class="">
+          Ghi chú
+        </td>
 
-    </div>
-    <% for(i=0;i<gv.length;i++){ %>
-      <% for(j=0;j<gv[i].day.length;++j) {%>
-        <div class="row">
-          <div class="col-md-2">
-            <%= gv[i].day[j].tenGv %>
-          </div>
-          <div class="col-md-2">
-            <%= gv[i].day[j].email %>
-          </div>
-          <div class="col-md-1">
-            <%= gv[i].day[j].tenlop %>
-          </div>
-          <div class="col-md-1">
-            <%= gv[i].day[j].malop %>
-          </div>
-          <div class="col-md-1">
-            <%= gv[i].day[j].malopHoc %>
-          </div>
-          <div class="col-md-1">
-            <%= gv[i].day[j].soLuongSV %>
-          </div>
-          <div class="col-md-1">
-            <%= gv[i].day[j].khoa %>
-          </div>
-          <div class="col-md-1">
-            <%= gv[i].day[j].soTinChi %>
-          </div>
-          <div class="col-md-1">
-            <%= gv[i].day[j].ghiChu %>
-          </div>
-        </div>
+      </tr>
+      <% for(i=0;i<gv.length;i++){ %>
+        <% for(j=0;j<gv[i].day.length;++j) {%>
+          <tr class="">
+            <td class="">
+              <%= gv[i].day[j].tenGv %>
+            </td>
+            <td class="">
+              <%= gv[i].day[j].email %>
+            </td>
+            <td class="">
+              <%= gv[i].day[j].tenlop %>
+            </td>
+            <td class="">
+              <%= gv[i].day[j].malop %>
+            </td>
+            <td class="">
+              <%= gv[i].day[j].malopHoc %>
+            </td>
+            <td class="">
+              <%= gv[i].day[j].soLuongSV %>
+            </td>
+            <td class="">
+              <%= gv[i].day[j].khoa %>
+            </td>
+            <td class="">
+              <%= gv[i].day[j].soTinChi %>
+            </td>
+            <td class="">
+              <%= gv[i].day[j].ghiChu %>
+            </td>
+          </tr>
+        <% } %>
       <% } %>
-    <% } %>
+    </table>
+
 
     <!-- Đoạn script show ra khi nhấn nút login -->
     <script type="text/ng-template" id="login.html">

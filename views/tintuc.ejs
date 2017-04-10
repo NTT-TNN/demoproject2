@@ -27,20 +27,36 @@
       .md-button {
         text-transform: none;
       }
+      .logo{
+        margin-left: 30px;
+        margin-top: 15px;
+      }
+      img{
+        width: 80%;
+      }
+
     </style>
   </head>
   <body ng-app="myApp" ng-controller="AppCtrl" ng-cloak>
-    <div class="row">
-      <div class="col-md-offset-10">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 logo">
+
+          <a href="#">
+            <img src="https://ctt-daotao.hust.edu.vn/Images/logo-cttdt.png" alt="logo">
+          </a>
+        </div>
+
+        <div class="col-md-offset-10">
+
         <% if(login==false){ %>
-          <section layout="row" layout-sm="column" layout-align="center center" layout-wrap class="login-signup" >
             <md-button class="md-raised md-primary" ng-click="showLogin($event)">Sign in</md-button>
-          </section>
+
         <% } else {%>
-          <section layout="row" layout-sm="column" layout-align="center center" layout-wrap class="login-signup" >
             <md-button class="md-raised md-warn" href="/users/logout">Sign Out</md-button>
-          </section>
+
         <% } %>
+        </div>
       </div>
     </div>
 
