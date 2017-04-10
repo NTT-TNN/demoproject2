@@ -154,7 +154,7 @@
           <%= data.day[i].ghiChu %>
         </td>
         <td class="">
-          Chọn thời gian
+          <md-button class="md-raised md-primary" ng-click="showChonThoiGian($event)">Chọn thời gian</md-button>
         </td>
       </tr>
     <% } %>
@@ -194,7 +194,7 @@
         <form action="/users/signup" method="post">
           <div layout="column" class="loginBox md-whiteframe-z1">
             <md-toolbar>
-              <h2 class="md-toolbar-tools"><span>Sign up</span></h2>
+              <h2 class="md-toolbar-tools"><span>Tạo tài khoản cho giáo viên</span></h2>
             </md-toolbar>
             <md-content layout="column" class="md-padding">
               <md-input-container>
@@ -215,6 +215,15 @@
       </div>
     </script>
 
+    <!-- Đoạn script show ra khi nhấn chọn thời gian để giáo viên chọn thời gian -->
+    <script type="text/ng-template" id="ChonThoiGian.html">
+      <div ng-app="MyApp" ng-controller="AppCtrl" layout="column" layout-align="center center" layout-fill="layout-fill">
+        <form action="/users/login" method="post">
+          Chọn Thời gian giảng dạy
+        </form>
+      </div>
+    </script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
@@ -226,14 +235,11 @@
       angular
         .module('myApp',['ngMaterial'])
         .config(function($mdThemingProvider) {
-
           // Configure a dark theme with primary foreground yellow
-
           $mdThemingProvider.theme('docs-dark', 'default')
             .primaryPalette('blue')
             // .dark();
             .accentPalette('green');
-
         })
         .run(function(){
           console.log("My app is active");
@@ -272,6 +278,21 @@
                 $scope.status = 'You cancelled the dialog.';
               });
             };
+            $scope.showChonThoiGian = function(ev) {
+                $mdDialog.show({
+                  controller: DialogController,
+                  templateUrl: 'ChonThoiGian.html',
+                  parent: angular.element(document.body),
+                  targetEvent: ev,
+                  clickOutsideToClose:true,
+                  fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+                })
+                .then(function(answer) {
+                  $scope.status = 'You said the information was "' + answer + '".';
+                }, function() {
+                  $scope.status = 'You cancelled the dialog.';
+                });
+              };
         function DialogController($scope, $mdDialog) {
             $scope.hide = function() {
               $mdDialog.hide();
