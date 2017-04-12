@@ -2,19 +2,46 @@ var express = require('express');
 var passport=require('passport');
 var gv = require('../models/giangvien');
 var lop = require('../models/lop');
-
+var bodyParser = require('body-parser');
+var multer = require('multer');
+var XLSX = require('xlsx');
 
 var router = express.Router();
 
 login=false;
 var emailGlobal,data;
 
+// tìm tất cả các giáo viên có trong database
 gv.find({},function(err,result){
   if(err) throw err;
   if(result){
     data=result;
   }
 })
+
+router.use(bodyParser.json());
+
+var storage = multer.diskStorage({ //multers disk storage settings
+    destination: function (req, file, cb) {
+        cb(null, './uploads/')
+    },
+    filename: function (req, file, cb) {
+        var datetimestamp = Date.now();
+        cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1])
+    }
+});
+
+var upload = multer({ //multer settings
+    storage: storage,
+    fileFilter : function(req, file, callback) { //file filter
+        if (['xls', 'xlsx'].indexOf(file.originalname.split('.')[file.originalname.split('.').length-1]) === -1) {
+            return callback(new Error('Wrong extension type'));
+        }
+        callback(null, true);
+    }
+}).single('file');
+
+
 router.get('/',isLoggedIn, function(req, res, next) {
   emailGlobal=req.user;
   res.render('home',{
@@ -25,11 +52,6 @@ router.get('/',isLoggedIn, function(req, res, next) {
   });
 });
 
-// router.get('/lecturer',isLoggedIn, function(req, res, next) {
-//   res.render('lecturer',{message1:req.flash('loginMessage'),message2:req.flash('signupMessage')});
-//   // console.log(req.flash());
-// });
-
 router.get('/login',isLoggedIn,function(req,res,next){
   res.render('login.ejs',{
     user:emailGlobal,
@@ -37,6 +59,7 @@ router.get('/login',isLoggedIn,function(req,res,next){
     message2:req.flash('signupMessage')
   });
 });
+
 router.get('/signup',isLoggedIn,function(req,res){
   res.render('signup.ejs',{
     user:emailGlobal,
@@ -44,9 +67,6 @@ router.get('/signup',isLoggedIn,function(req,res){
     message2:req.flash('signupMessage')
   });
 });
-// router.get('/profile',isLoggedIn,function(req,res){
-//   res.render('profile.ejs',{user:req.user});
-// });
 
 router.get('/logout',isLoggedIn,function(req,res){
   req.logout();
@@ -66,18 +86,6 @@ router.post('/signup',passport.authenticate('local-signup',{
   failureFlash:true,
 }));
 
-// router.get('/admin', function(req, res, next) {
-//   res.render('loginAdmin',{message1:req.flash('loginMessage'),message2:req.flash('signupMessage')});
-// });
-// router.get('/adminHome',isLoggedInAdmin, function(req, res, next) {
-//   res.render('homeAdmin',{message1:req.flash('loginMessage'),message2:req.flash('signupMessage')});
-// });
-// router.post('/admin/login',passport.authenticate('local-login-admin',{
-//   successRedirect:'/users/adminHome',
-//   failureRedirect:'/users/admin',
-//   failureFlash:true,
-// }));
-
 router.get('/nhapdulieu',isLoggedIn, function(req, res, next) {
   gv.find({},function(err,result){
     if(err) throw err;
@@ -94,6 +102,7 @@ router.get('/nhapdulieu',isLoggedIn, function(req, res, next) {
 });
 
 router.post('/nhapdulieu',isLoggedIn, function(req, res, next) {
+
   gv.findOne({'email':req.body.email},function(err,giangVien){
     if(err) return done(err);
     if(giangVien){
@@ -215,6 +224,71 @@ router.post('/nhapdulieu',isLoggedIn, function(req, res, next) {
 
 });
 
+router.post('/nhapdulieuExcel',isLoggedIn, function(req, res, next) {
+
+  console.log(req);
+  upload(req,res,function(err){
+    if(err){
+         res.json({error_code:1,err_desc:err});
+         return;
+    }
+    /** Multer gives us file info in req.file object */
+    if(!req.file){
+        res.json({error_code:1,err_desc:"No file passed"});
+        return;
+    }
+		var workbook = XLSX.readFile(req.file.path);
+
+		var sheet_name_list = workbook.SheetNames;
+		sheet_name_list.forEach(function(y) {
+		    var worksheet = workbook.Sheets[y];
+		    var headers = {};
+		    var data = [];
+		    for(z in worksheet) {
+		        if(z[0] === '!') continue;
+		        //parse out the column, row, and value
+		        var tt = 0;
+		        for (var i = 0; i < z.length; i++) {
+		            if (!isNaN(z[i])) {
+		                tt = i;
+		                break;
+		            }
+		        };
+		        var col = z.substring(0,tt);
+		        var row = parseInt(z.substring(tt));
+		        var value = worksheet[z].v;
+
+		        //store header names
+		        if(row == 1 && value) {
+		            headers[col] = value;
+		            continue;
+		        }
+
+		        if(!data[row]) data[row]={};
+		        data[row][headers[col]] = value;
+		    }
+		    //drop those first two rows which are empty
+		    data.shift();
+		    data.shift();
+
+        // hien thi html
+        gv.find({},function(err,result){
+          if(err) throw err;
+          if(result){
+            data=result;
+            res.render('nhapdulieu',{
+              gv:data,
+              user:emailGlobal,
+              message1:req.flash('loginMessage'),
+              message2:req.flash('signupMessage'),
+              login:login
+            });
+          }
+        })
+      });
+  })
+});
+
 router.get('/xemlich',isLoggedIn, function(req, res, next) {
   gv.findOne({'email':emailGlobal.local.email},function(err,result){
     if(err) throw err;
@@ -230,6 +304,7 @@ router.get('/xemlich',isLoggedIn, function(req, res, next) {
     }
   });
 });
+
 router.get('/dangkylich',isLoggedIn, function(req, res, next) {
   gv.findOne({'email':emailGlobal.local.email},function(err,result){
     if(err) throw err;
@@ -256,10 +331,3 @@ function isLoggedIn(req,res,next){
   }
   res.redirect('/');
 }
-
-// function isLoggedInAdmin(req,res,next){
-//   if(req.isAuthenticated()){
-//     return next();
-//   }
-//   res.redirect('/users/admin');
-// }
