@@ -1,0 +1,48 @@
+.md-button {
+  text-transform: none;
+}
+.form{
+  width: 60%;
+  margin: 0 auto;
+  background: #f5f0f5;
+  border-radius: 10px;
+  margin-bottom: 80px;
+}
+h1{
+  background: #958e8e
+  border-radius: 10px 10px 0px 0px;
+  font-size: 330%;
+  text-align: center;
+  padding: 15px;
+}
+.div1, .div2{
+  width: 30%;
+}.div1{
+  margin-right: 70px;
+  margin-left: 148px;
+}
+.row1{
+  margin-top: 30px;
+}
+.row2, .row3{
+  width: 67.5%;
+  margin: 0 auto;
+  margin-left: 146px;
+}
+.submit{
+  margin-left: 280px;
+  margin-right: 20px;
+  padding: 10px;
+  width: 90px;
+}
+.reset{
+  width: 90px;
+  padding: 10px;
+}
+.logo{
+  margin-left: 30px;
+  margin-top: 15px;
+}
+img{
+  width: 80%;
+}
