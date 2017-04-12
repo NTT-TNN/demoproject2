@@ -101,6 +101,20 @@ router.get('/nhapdulieu',isLoggedIn, function(req, res, next) {
     login:login});
 });
 
+router.get('/nhapdulieuExcel',isLoggedIn, function(req, res, next) {
+  gv.find({},function(err,result){
+    if(err) throw err;
+    if(result){
+      data=result;
+    }
+  })
+  res.render('nhapdulieu',{
+    gv:data,
+    user:emailGlobal,
+    message1:req.flash('loginMessage'),
+    message2:req.flash('signupMessage'),
+    login:login});
+});
 router.post('/nhapdulieu',isLoggedIn, function(req, res, next) {
 
   gv.findOne({'email':req.body.email},function(err,giangVien){
@@ -225,8 +239,6 @@ router.post('/nhapdulieu',isLoggedIn, function(req, res, next) {
 });
 
 router.post('/nhapdulieuExcel',isLoggedIn, function(req, res, next) {
-
-  console.log(req);
   upload(req,res,function(err){
     if(err){
          res.json({error_code:1,err_desc:err});
@@ -243,7 +255,7 @@ router.post('/nhapdulieuExcel',isLoggedIn, function(req, res, next) {
 		sheet_name_list.forEach(function(y) {
 		    var worksheet = workbook.Sheets[y];
 		    var headers = {};
-		    var data = [];
+		    var dataExcel = [];
 		    for(z in worksheet) {
 		        if(z[0] === '!') continue;
 		        //parse out the column, row, and value
@@ -264,20 +276,20 @@ router.post('/nhapdulieuExcel',isLoggedIn, function(req, res, next) {
 		            continue;
 		        }
 
-		        if(!data[row]) data[row]={};
-		        data[row][headers[col]] = value;
+		        if(!dataExcel[row]) dataExcel[row]={};
+		        dataExcel[row][headers[col]] = value;
 		    }
 		    //drop those first two rows which are empty
-		    data.shift();
-		    data.shift();
+		    dataExcel.shift();
+		    dataExcel.shift();
 
         // hien thi html
         gv.find({},function(err,result){
           if(err) throw err;
           if(result){
             data=result;
-            res.render('nhapdulieu',{
-              gv:data,
+            res.render('nhapdulieuExcel',{
+              gv:dataExcel,
               user:emailGlobal,
               message1:req.flash('loginMessage'),
               message2:req.flash('signupMessage'),

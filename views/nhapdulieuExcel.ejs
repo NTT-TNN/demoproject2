@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Project 2 </title>
+
+    <link rel="stylesheet" href="https://project2-nguyentienthao96.c9users.io/stylesheet/home.css">
+
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+
+    <script src="https://use.fontawesome.com/fd85e357aa.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+     <!-- <link rel="stylesheet" type="text/css" href="http://localhost:8000/stylesheet/nhap_du_lieu.css"> -->
+    <style>
+      .md-button {
+        text-transform: none;
+      }
+
+      .form{
+        width: 60%;
+        margin: 0 auto;
+        background: #f5f0f5;
+        border-radius: 10px;
+        margin-bottom: 80px;
+      }
+      h1{
+        background: #958e8e
+        border-radius: 10px 10px 0px 0px;
+        font-size: 330%;
+        text-align: center;
+        padding: 15px;
+      }
+      .div1, .div2{
+        width: 30%;
+      }.div1{
+        margin-right: 70px;
+        margin-left: 148px;
+      }
+
+      .row1{
+        margin-top: 30px;
+      }
+      .row2, .row3{
+        width: 67.5%;
+        margin: 0 auto;
+        margin-left: 146px;
+      }
+      .submit{
+        margin-left: 280px;
+        margin-right: 20px;
+        padding: 10px;
+        width: 90px;
+      }
+      .reset{
+        width: 90px;
+        padding: 10px;
+      }
+      /*h1{
+        text-align: center;
+        padding-bottom: 15px;
+        padding-top: 20px;
+      }*/
+      .logo{
+        margin-left: 30px;
+        margin-top: 15px;
+      }
+      img{
+        width: 80%;
+      }
+
+    </style>
+  </head>
+  <body ng-app="myApp" ng-controller="AppCtrl" ng-cloak>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 logo">
+
+          <a href="#">
+            <img src="https://ctt-daotao.hust.edu.vn/Images/logo-cttdt.png" alt="logo">
+          </a>
+        </div>
+
+        <div class="col-md-offset-10">
+
+        <% if(login==false){ %>
+            <md-button class="md-raised md-primary" ng-click="showLogin($event)">Sign in</md-button>
+
+        <% } else {%>
+            <md-button class="md-raised md-warn" href="/users/logout">Sign Out</md-button>
+
+        <% } %>
+        </div>
+      </div>
+    </div>
+
+    <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
+      <md-nav-item md-nav-href="/" name="trangchu">
+        Trang Chủ
+      </md-nav-item>
+      <md-nav-item md-nav-href="/tintuc" name="tintuc">
+        Tin Tức
+      </md-nav-item>
+      <% if(user){ %>
+        <md-nav-item md-nav-href="/users/xemlich" name="xemlich">
+          Xem Lịch Giảng Dạy
+        </md-nav-item>
+
+        <md-nav-item md-nav-href="/users/dangkylich" name="dangkylich">
+          Đăng Ký Lịch Dạy
+        </md-nav-item>
+      <% } %>
+      <% if(user){ %>
+        <% if(user.local.email=='nguyentienthao96@gmail.com'){ %>
+          <md-nav-item md-nav-href="/users/nhapdulieu" name="nhapdulieu">
+            Nhập Dữ liệu
+          </md-nav-item>
+          <md-nav-item md-nav-href="#" ng-click="showSignup($event)" name="taotaikhoan">
+            Tạo tài khoản giảng viên
+          </md-nav-item>
+        <% } %>
+      <% } %>
+    </md-nav-bar>
+
+    <% if (message1.length > 0 && message1!='Login success') { %>
+        <div class="alert alert-danger"><%= message1 %></div>
+    <% } %>
+        <% if (message2.length > 0) { %>
+        <div class="alert alert-danger"><%= message2 %></div>
+    <% } %>
+
+
+    <h2>Danh sách các lớp trong kỳ này là</h2>
+
+    <table class="table table-condensed table-striped">
+      <tr class="">
+        <td class="">
+          Tên giáo viên
+        </td>
+        <td class="">
+          Email
+        </td>
+        <td class="">
+          Tên lớp
+        </td>
+        <td class="">
+          Mã lớp
+        </td>
+        <td class="">
+          Mã lớp học
+        </td>
+        <td class="">
+          Số lượng SV
+        </td>
+        <td class="">
+          Khóa
+        </td>
+        <td class="">
+          Số tín chỉ
+        </td>
+        <td class="">
+          Ghi chú
+        </td>
+
+      </tr>
+      <% for(i=0;i<gv.length;i++){ %>
+          <tr class="">
+            <td class="">
+              <%= gv[i].STT %>
+            </td>
+            <td class="">
+              <%= gv[i].Tiết %>
+            </td>
+            <td class="">
+              <%= gv[i].Thứ %>
+            </td>
+            <td class="">
+              <%= gv[i].Khóa %>
+            </td>
+          </tr>
+      <% } %>
+    </table>
+  
+
+    <!-- Đoạn script show ra khi nhấn nút login -->
+    <script type="text/ng-template" id="login.html">
+      <div ng-app="MyApp" ng-controller="AppCtrl" layout="column" layout-align="center center" layout-fill="layout-fill">
+        <form action="/users/login" method="post">
+          <div layout="column" class="loginBox md-whiteframe-z1">
+            <md-toolbar>
+              <h2 class="md-toolbar-tools"><span>Sign in</span></h2>
+            </md-toolbar>
+            <md-content layout="column" class="md-padding">
+              <md-input-container>
+                <label>EmailAddress</label>
+                <input type="email" name="email"/>
+              </md-input-container>
+              <md-input-container>
+                <label>Password</label>
+                <input type="password" name="password"/>
+              </md-input-container>
+              <div layout="row" layout-align="center center" style="padding-top:20px;">
+                <md-button class="md-raised md-primary" type="submit">Sign in</md-button>
+                <div flex="flex"></div>
+
+              </div>
+            </md-content>
+          </div>
+        </form>
+      </div>
+    </script>
+
+    <!-- Đoạn script show ra khi nhấn nút signup -->
+    <script type="text/ng-template" id="signup.html">
+      <div ng-app="MyApp" ng-controller="AppCtrl" layout="column" layout-align="center center" layout-fill="layout-fill">
+        <form action="/users/signup" method="post">
+          <div layout="column" class="loginBox md-whiteframe-z1">
+            <md-toolbar>
+              <h2 class="md-toolbar-tools"><span>Tạo tài khoản cho giáo viên</span></h2>
+            </md-toolbar>
+            <md-content layout="column" class="md-padding">
+              <md-input-container>
+                <label>EmailAddress</label>
+                <input type="email" name="email" required>
+              </md-input-container>
+              <md-input-container>
+                <label>Password</label>
+                <input type="password" name="password" required>
+              </md-input-container>
+              <div layout="row" layout-align="center center" style="padding-top:20px;">
+                <md-button class="md-raised md-primary" type="submit">Sign up</md-button>
+                <div flex="flex"></div>
+              </div>
+            </md-content>
+          </div>
+        </form>
+      </div>
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+    <script>
+      angular
+        .module('myApp',['ngMaterial'])
+        .config(function($mdThemingProvider) {
+
+          // Configure a dark theme with primary foreground yellow
+
+          $mdThemingProvider.theme('docs-dark', 'default')
+            .primaryPalette('blue')
+            // .dark();
+            .accentPalette('green');
+
+        })
+        .run(function(){
+          console.log("My app is active");
+        })
+        .controller('AppCtrl', AppCtrl);
+        function AppCtrl($scope,$mdDialog) {
+          $scope.showlogin=false;
+          $scope.currentNavItem = 'nhapdulieu';
+          $scope.showLogin = function(ev) {
+              $mdDialog.show({
+                controller: DialogController,
+                templateUrl: 'login.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose:true,
+                fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+              })
+              .then(function(answer) {
+                $scope.status = 'You said the information was "' + answer + '".';
+              }, function() {
+                $scope.status = 'You cancelled the dialog.';
+              });
+            };
+            $scope.showSignup = function(ev) {
+              $mdDialog.show({
+                controller: DialogController,
+                templateUrl: 'signup.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose:true,
+                fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+              })
+              .then(function(answer) {
+                $scope.status = 'You said the information was "' + answer + '".';
+              }, function() {
+                $scope.status = 'You cancelled the dialog.';
+              });
+            };
+        function DialogController($scope, $mdDialog) {
+            $scope.hide = function() {
+              $mdDialog.hide();
+            };
+
+            $scope.cancel = function() {
+              $mdDialog.cancel();
+            };
+
+            $scope.answer = function(answer) {
+              $mdDialog.hide(answer);
+            };
+          }
+        }
+
+    </script>
+  </body>
+
+
+</html>
