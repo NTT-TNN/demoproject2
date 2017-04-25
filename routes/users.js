@@ -115,8 +115,8 @@ router.get('/nhapdulieuExcel',isLoggedIn, function(req, res, next) {
     message2:req.flash('signupMessage'),
     login:login});
 });
-router.post('/nhapdulieu',isLoggedIn, function(req, res, next) {
 
+router.post('/nhapdulieu',isLoggedIn, function(req, res, next) {
   gv.findOne({'email':req.body.email},function(err,giangVien){
     if(err) return done(err);
     if(giangVien){
@@ -267,21 +267,25 @@ router.post('/nhapdulieuExcel',isLoggedIn, function(req, res, next) {
 		            }
 		        };
 		        var col = z.substring(0,tt);
+
 		        var row = parseInt(z.substring(tt));
+
 		        var value = worksheet[z].v;
 
 		        //store header names
 		        if(row == 1 && value) {
+                value=value.replace(/ /g,'');
+                value=value.replace('\n','');
 		            headers[col] = value;
 		            continue;
 		        }
-
 		        if(!dataExcel[row]) dataExcel[row]={};
 		        dataExcel[row][headers[col]] = value;
 		    }
 		    //drop those first two rows which are empty
 		    dataExcel.shift();
 		    dataExcel.shift();
+
 
         // hien thi html
         gv.find({},function(err,result){

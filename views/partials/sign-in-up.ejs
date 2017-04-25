@@ -1,0 +1,55 @@
+
+<!-- Đoạn script show ra khi nhấn nút login -->
+  <script type="text/ng-template" id="login.html">
+    <div ng-app="MyApp" ng-controller="AppCtrl" layout="column" layout-align="center center" layout-fill="layout-fill">
+      <form action="/users/login" method="post">
+        <div layout="column" class="loginBox md-whiteframe-z1">
+          <md-toolbar>
+            <h2 class="md-toolbar-tools"><span>Đăng nhập vào hệ thống</span></h2>
+          </md-toolbar>
+          <md-content layout="column" class="md-padding">
+            <md-input-container>
+              <label>EmailAddress</label>
+              <input type="email" name="email"/>
+            </md-input-container>
+            <md-input-container>
+              <label>Password</label>
+              <input type="password" name="password"/>
+            </md-input-container>
+            <div layout="row" layout-align="center center" style="padding-top:20px;">
+              <md-button class="md-raised md-primary" type="submit">Sign in</md-button>
+              <div flex="flex"></div>
+
+            </div>
+          </md-content>
+        </div>
+      </form>
+    </div>
+  </script>
+
+  <!-- Đoạn script show ra khi nhấn nút signup -->
+  <script type="text/ng-template" id="signup.html">
+    <div ng-app="MyApp" ng-controller="AppCtrl" layout="column" layout-align="center center" layout-fill="layout-fill">
+      <form action="/users/signup" method="post">
+        <div layout="column" class="loginBox md-whiteframe-z1">
+          <md-toolbar>
+            <h2 class="md-toolbar-tools"><span>Tạo tài khoản cho giáo viên</span></h2>
+          </md-toolbar>
+          <md-content layout="column" class="md-padding">
+            <md-input-container>
+              <label>EmailAddress</label>
+              <input type="email" name="email" required>
+            </md-input-container>
+            <md-input-container>
+              <label>Password</label>
+              <input type="password" name="password" required>
+            </md-input-container>
+            <div layout="row" layout-align="center center" style="padding-top:20px;">
+              <md-button class="md-raised md-primary" type="submit">Sign up</md-button>
+              <div flex="flex"></div>
+            </div>
+          </md-content>
+        </div>
+      </form>
+    </div>
+  </script>
