@@ -3,12 +3,42 @@ var bcrypt=require('bcrypt-nodejs');
 
 var userSchema=mongoose.Schema({
   local:{
-    email:String,
+    email:String,//số điện thoại
     password:String,
     Tên:String,
     Tuổi:Number,
     Cơquancôngtác:String,
-    Điệnthoại:String
+    Điệnthoại:String// không sử dụng
+  },
+  batDauHocKy:Date,
+  ketThucHocKy:Date,
+  thoiGianTrong:{
+    sang:[{
+      batDau:Date,
+      ketThuc:Date,
+    }],
+    chieu:[{
+      batDau:Date,
+      ketThuc:Date,
+    }],
+    toi:[{
+      batDau:Date,
+      ketThuc:Date,
+    }],
+  },
+  thoiGianFull:{
+    sang:[{
+      batDau:Date,
+      ketThuc:Date,
+    }],
+    chieu:[{
+      batDau:Date,
+      ketThuc:Date,
+    }],
+    toi:[{
+      batDau:Date,
+      ketThuc:Date,
+    }],
   },
   type:{
     admin:Boolean

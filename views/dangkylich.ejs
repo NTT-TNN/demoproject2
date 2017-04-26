@@ -70,13 +70,31 @@
           <%= data[i].tenlop %>
         </td>
         <td class="">
-          <md-button class="md-raised md-primary" ng-click="showChonThoiGian($event)">Chọn thời gian</md-button>
+          <md-button class="md-raised md-primary" ng-click="showChonThoiGian($event)" onclick="ifunction('<%= data[i].tenlop %>')">Chọn thời gian</md-button>
         </td>
       </tr>
     <% } %>
     </table>
+    <!-- Đoạn script show ra khi nhấn nút ChonThoiGian -->
+    <div id="chonthoigian" ng-model="html">
+      {{html}}
+    </div>
+      <!-- <script type="text/ng-template" id="ChonThoiGian.html">
+        <div layout="column" layout-align="center center" layout-fill="layout-fill">
+          <h1>{{thoigian}} </h1>
+          <h1>Thao</h1>
+        </div>
+      </script> -->
 
+    <!-- script lấy lớp chọn lịch -->
+    <script>
+      function ifunction(a) {
+        i=a;
+      }
+      var sdt=<%= user.local.email %>
+    </script>
     <% include partials/sign-in-up.ejs %>
+    <% include partials/chonthoigian.ejs %>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
@@ -99,7 +117,7 @@
           console.log("My app is active");
         })
         .controller('AppCtrl', AppCtrl);
-        function AppCtrl($scope,$mdDialog) {
+        function AppCtrl($scope,$mdDialog,$http,$window) {
           $scope.showlogin=false;
           $scope.currentNavItem = 'dangkylich';
           $scope.showLogin = function(ev) {
@@ -117,6 +135,7 @@
                 $scope.status = 'You cancelled the dialog.';
               });
             };
+
             $scope.showSignup = function(ev) {
               $mdDialog.show({
                 controller: DialogController,
@@ -133,19 +152,46 @@
               });
             };
             $scope.showChonThoiGian = function(ev) {
-                $mdDialog.show({
-                  controller: DialogController,
-                  templateUrl: 'ChonThoiGian.html',
-                  parent: angular.element(document.body),
-                  targetEvent: ev,
-                  clickOutsideToClose:true,
-                  fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-                })
-                .then(function(answer) {
-                  $scope.status = 'You said the information was "' + answer + '".';
-                }, function() {
-                  $scope.status = 'You cancelled the dialog.';
+              $scope.i=window.i;
+              $scope.sdt=window.sdt;
+              $http({
+                method: 'POST',
+                url: '/users/goiYLich',
+                headers: {
+                   'Content-Type': 'application/json'
+                 },
+                 data: {
+                   khoa: $scope.i,
+                   sdt:  $scope.sdt
+                  }
+              }).then(function successCallback(response) {
+                  $scope.thoigian=response.data;
+                  console.log("thoiGianTrong",$scope.thoigian);
+                  $scope.html='<script type="text/ng-template" id="ChonThoiGian.html">\
+                    <div layout="column" layout-align="center center" layout-fill="layout-fill">\
+                      <h1>'+$scope.thoigian+' </h1>\
+                      <h1>Thao</h1>\
+                    </div>\
+                  ' ;
+
+                  $mdDialog.show({
+                    controller: DialogController,
+                    templateUrl: 'ChonThoiGian.html',
+                    parent: angular.element(document.body),
+                    targetEvent: ev,
+                    clickOutsideToClose:true,
+                    fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+                  })
+                  .then(function(answer) {
+                    $scope.status = 'You said the information was "' + answer + '".';
+                  }, function() {
+                    $scope.status = 'You cancelled the dialog.';
+                  });
+                }, function errorCallback(response) {
+                  // called asynchronously if an error occurs
+                  // or server returns response with an error status.
                 });
+
               };
         function DialogController($scope, $mdDialog) {
             $scope.hide = function() {

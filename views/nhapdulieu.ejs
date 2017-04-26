@@ -5,6 +5,22 @@
       <input type="submit" value="Upload" name="submit">
     </form>
 
+    <form id="formThoiGian" action="/users/nhapthoigian" method="post">
+      <div class="form-group row">
+          <label >Ngày bắt đầu</label>
+          <div>
+              <input type="date" name="batDauHocKy" required>
+          </div>
+      </div>
+
+      <div class="form-group row">
+          <label >Ngày kết thúc</label>
+          <div>
+              <input type="date" name="ketThucHocKy" required>
+          </div>
+      </div>
+      <button class="btn- btn-info "type="submit" name="submit"></button>
+    </form>
 <!-- form nhap du lieu -->
     <div id="content">
         <form action="/users/nhapdulieu" method="post" class="form">

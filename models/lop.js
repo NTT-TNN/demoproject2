@@ -2,6 +2,36 @@ var mongoose=require('mongoose');
 
 var lopSchema=mongoose.Schema({
   tenlop:String,
+  batDauHocKy:String,
+  ketThucHocKy:String,
+  thoiGianTrong:{
+    sang:{
+      batDau:String,
+      ketThuc:String,
+    },
+    chieu:{
+      batDau:String,
+      ketThuc:String,
+    },
+    toi:{
+      batDau:String,
+      ketThuc:String,
+    },
+  },
+  thoiGianFull:{
+    sang:{
+      batDau:String,
+      ketThuc:String,
+    },
+    chieu:{
+      batDau:String,
+      ketThuc:String,
+    },
+    toi:{
+      batDau:String,
+      ketThuc:String,
+    },
+  },
   // malop:String,
   hoc:[{
     tenlop:String,
@@ -17,8 +47,8 @@ var lopSchema=mongoose.Schema({
     Điệnthoạiliênhệ:String,
     thu:String, //thứ
     tiet:String,
-    thoiGianBatDau:Date,
-    thoiGianKetThuc:Date,
+    thoiGianBatDau:String,
+    thoiGianKetThuc:String,
     ghiChu:String
   }]
 });

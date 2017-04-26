@@ -2,6 +2,8 @@ var express = require('express');
 var passport=require('passport');
 var gv = require('../models/giangvien');
 var lop = require('../models/lop');
+var user = require('../models/user');
+
 var bodyParser = require('body-parser');
 var multer = require('multer');
 var XLSX = require('xlsx');
@@ -335,6 +337,14 @@ router.post('/nhapdulieuExcel',isLoggedIn, function(req, res, next) {
             }else{
               var newLop= new lop();
               newLop.tenlop=dataExcel[i].Khóa;
+              newLop.batDauHocKy=Date.now();
+              newLop.ketThucHocKy=Date.now();
+              newLop.thoiGianTrong.sang.batDau=Date.now();
+              newLop.thoiGianTrong.sang.ketThuc=Date.now();
+              newLop.thoiGianTrong.chieu.batDau=Date.now();
+              newLop.thoiGianTrong.chieu.ketThuc=Date.now();
+              newLop.thoiGianTrong.toi.batDau=Date.now();
+              newLop.thoiGianTrong.toi.ketThuc=Date.now();
               newLop.hoc.push(lopTemp);
               newLop.save(function(err) {
                 if (err)throw err;
@@ -404,7 +414,6 @@ router.get('/xemlich',isLoggedIn, function(req, res, next) {
     }
     sync=false;
   }
-  console.log(dslop);
   while(sync) {require('deasync').sleep(100);}
   res.render('xemlich',{
     data:dslop,
@@ -415,6 +424,108 @@ router.get('/xemlich',isLoggedIn, function(req, res, next) {
   });
 
 });
+
+router.post('/goiYLich',isLoggedIn, function(req, res, next) {
+  var sync1=true,sync2=true,lopTrong,gvTrong;
+  lop.findOne({'tenlop':req.body.khoa},function(err,result){
+    if(err) throw err;
+    if(result){
+      lopTrong=result.thoiGianTrong;
+      sync1=false;
+    }
+  });
+
+
+  user.findOne({'local.email':req.body.sdt},function(err,result){
+    if(err) throw err;
+    if(result){
+      gvTrong=result.thoiGianTrong;
+      console.log(gvTrong);
+      sync2=false;
+    }
+  });
+
+  while(sync1||sync2) {require('deasync').sleep(100);}
+  console.log('2',sync2);console.log('1',sync1);
+  console.log("lopTrong",lopTrong);
+  console.log('gvTrong',gvTrong);
+  res.json({
+    'gvTrong':gvTrong,
+    'lopTrong':lopTrong
+  })
+});
+
+router.post('/nhapthoigian',isLoggedIn,function(req,res,next){
+  var sync=true;
+  var batDau=new Date(req.body.batDauHocKy);
+  var ketThuc=new Date(req.body.ketThucHocKy);
+
+    user.update(
+      {},
+      {
+        batDauHocKy:batDau,
+        ketThucHocKy:ketThuc,
+        thoiGianTrong:{
+          sang:{
+            batDau:batDau,
+            ketThuc:ketThuc
+          },
+          chieu:{
+            batDau:batDau,
+            ketThuc:ketThuc
+          },
+          toi:{
+            batDau:batDau,
+            ketThuc:ketThuc
+          }
+        }
+      },
+      {multi:true},
+      function(err,result){
+        if(err) throw err;
+        if(result){
+          console.log("Cap nhat thoi gian hoc ky thanh cong cho user");
+        }
+      }
+  );
+
+    lop.update(
+      {},
+      {
+        batDauHocKy:batDau,
+        ketThucHocKy:ketThuc,
+        thoiGianTrong:{
+          sang:{
+            batDau:batDau,
+            ketThuc:ketThuc
+          },
+          chieu:{
+            batDau:batDau,
+            ketThuc:ketThuc
+          },
+          toi:{
+            batDau:batDau,
+            ketThuc:ketThuc
+          }
+        }
+      },
+      {multi:true},
+      function(err,result){
+        if(err) throw err;
+        if(result){
+          console.log("Cap nhat thoi gian hoc ky thanh cong cho lop ");
+          res.render('nhapdulieu',{
+            gv:data,
+            user:emailGlobal,
+            message1:req.flash('loginMessage'),
+            message2:req.flash('signupMessage'),
+            login:login
+          });
+        }
+      }
+  );
+});
+
 
 router.get('/dangkylich',isLoggedIn, function(req, res, next) {
   var lopAll,dslop=[];
@@ -436,7 +547,6 @@ router.get('/dangkylich',isLoggedIn, function(req, res, next) {
     }
     sync=false;
   }
-  console.log(dslop);
   while(sync) {require('deasync').sleep(100);}
   res.render('dangkylich',{
     data:dslop,
