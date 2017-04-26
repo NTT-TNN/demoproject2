@@ -4,7 +4,11 @@ var bcrypt=require('bcrypt-nodejs');
 var userSchema=mongoose.Schema({
   local:{
     email:String,
-    password:String
+    password:String,
+    Tên:String,
+    Tuổi:Number,
+    Cơquancôngtác:String,
+    Điệnthoại:String
   },
   type:{
     admin:Boolean

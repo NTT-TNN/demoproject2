@@ -4,127 +4,80 @@
     <table class="table table-bordered table-striped">
       <tr class="">
         <td class="">
-          Tên giáo viên
+          STT
         </td>
         <td class="">
-          Email
+          Mã học phần
         </td>
         <td class="">
-          Tên lớp
+          Tên lớp học phần
         </td>
         <td class="">
-          Mã lớp
+          Số lượng
         </td>
         <td class="">
-          Mã lớp học
+          Số TC
         </td>
         <td class="">
-          Số lượng SV
+          Phòng học
+        </td>
+        <td class="">
+          Giảng Viên
+        </td>
+        <td class="">
+          Cơ quan công tác
+        </td>
+        <td class="">
+          Điện thoại liên hệ
         </td>
         <td class="">
           Khóa
         </td>
         <td class="">
-          Số tín chỉ
-        </td>
-        <td class="">
-          Ghi chú
-        </td>
-        <td class="">
           Thời gian
         </td>
       </tr>
 
-    <% for(i=0;i<data.day.length;i++){ %>
-      <tr class="">
-        <td class="">
-          <%= data.day[i].tenGv %>
-        </td>
-        <td class="">
-          <%= data.day[i].email %>
-        </td>
-        <td class="">
-          <%= data.day[i].tenlop %>
-        </td>
-        <td class="">
-          <%= data.day[i].malop %>
-        </td>
-        <td class="">
-          <%= data.day[i].malopHoc %>
-        </td>
-        <td class="">
-          <%= data.day[i].soLuongSV %>
-        </td>
-        <td class="">
-          <%= data.day[i].khoa %>
-        </td>
-        <td class="">
-          <%= data.day[i].soTinChi %>
-        </td>
-        <td class="">
-          <%= data.day[i].ghiChu %>
-        </td>
-        <td class="">
-          Thời gian
-        </td>
-      </tr>
-    <% } %>
+      <% for(i=0;i<data.length;i++){ %>
+        <tr class="">
+          <td class="">
+            <%= i+1 %>
+          </td>
+          <td class="">
+            <%= data[i].maHP %>
+          </td>
+          <td class="">
+            <%= data[i].Tênlớphọcphần %>
+          </td>
+          <td class="">
+            <%= data[i].Sốlượng %>
+          </td>
+          <td class="">
+            <%= data[i].SốTC %>
+          </td>
+          <td class="">
+            <%= data[i].Phònghọc %>
+          </td>
+          <td class="">
+            <%= data[i].Giảngviên %>
+          </td>
+          <td class="">
+            <%= data[i].Cơquancôngtác %>
+          </td>
+          <td class="">
+            <%= data[i].Điệnthoạiliênhệ %>
+          </td>
+          <td class="">
+            <%= data[i].tenlop %>
+          </td>
+          <td class="">
+            Thời Gian
+          </td>
+        </tr>
+      <% } %>
   </table>
 
-    <!-- Đoạn script show ra khi nhấn nút login -->
-    <script type="text/ng-template" id="login.html">
-      <div ng-app="MyApp" ng-controller="AppCtrl" layout="column" layout-align="center center" layout-fill="layout-fill">
-        <form action="/users/login" method="post">
-          <div layout="column" class="loginBox md-whiteframe-z1">
-            <md-toolbar>
-              <h2 class="md-toolbar-tools"><span>Đăng nhập vào hệ thống</span></h2>
-            </md-toolbar>
-            <md-content layout="column" class="md-padding">
-              <md-input-container>
-                <label>EmailAddress</label>
-                <input type="email" name="email" required>
-              </md-input-container>
-              <md-input-container>
-                <label>Password</label>
-                <input type="password" name="password" required>
-              </md-input-container>
-              <div layout="row" layout-align="center center" style="padding-top:20px;">
-                <md-button class="md-raised md-primary" type="submit">Sign in</md-button>
-                <div flex="flex"></div>
-
-              </div>
-            </md-content>
-          </div>
-        </form>
-      </div>
-    </script>
-
-    <!-- Đoạn script show ra khi nhấn nút signup -->
-    <script type="text/ng-template" id="signup.html">
-      <div ng-app="MyApp" ng-controller="AppCtrl" layout="column" layout-align="center center" layout-fill="layout-fill">
-        <form action="/users/signup" method="post">
-          <div layout="column" class="loginBox md-whiteframe-z1">
-            <md-toolbar>
-              <h2 class="md-toolbar-tools"><span>Tạo tài khoản cho giáo viên</span></h2>
-            </md-toolbar>
-            <md-content layout="column" class="md-padding">
-              <md-input-container>
-                <label>EmailAddress</label>
-                <input type="email" name="email" required>
-              </md-input-container>
-              <md-input-container>
-                <label>Password</label>
-                <input type="password" name="password" required>
-              </md-input-container>
-              <div layout="row" layout-align="center center" style="padding-top:20px;">
-                <md-button class="md-raised md-primary" type="submit">Sign up</md-button>
-                <div flex="flex"></div>
-              </div>
-            </md-content>
-          </div>
-        </form>
-      </div>
-    </script>
+    <% include partials/sign-in-up.ejs %>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>

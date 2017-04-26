@@ -68,6 +68,22 @@ router.get('/signup',isLoggedIn,function(req,res){
   });
 });
 
+router.get('/login',isLoggedIn,function(req,res,next){
+  res.render('login.ejs',{
+    user:emailGlobal,
+    message1:req.flash('loginMessage'),
+    message2:req.flash('signupMessage')
+  });
+});
+
+router.get('/profile',isLoggedIn,function(req,res){
+  res.render('profile.ejs',{
+    user:emailGlobal,
+    message1:req.flash('loginMessage'),
+    message2:req.flash('signupMessage')
+  });
+});
+
 router.get('/logout',isLoggedIn,function(req,res){
   req.logout();
   login=false;
@@ -81,7 +97,7 @@ router.post('/login',passport.authenticate('local-login',{
 }))
 
 router.post('/signup',passport.authenticate('local-signup',{
-  successRedirect:'/users/',
+  successRedirect:'/',
   failureRedirect:'/',
   failureFlash:true,
 }));
@@ -169,8 +185,7 @@ router.post('/nhapdulieu',isLoggedIn, function(req, res, next) {
       };
       newGv.day.push(temp);
       newGv.save(function(err) {
-        if (err)
-          throw err;
+        if (err)throw err;
         console.log('đã thêm giảng viên mới',newGv.tenGv);
       });
     }
@@ -286,12 +301,51 @@ router.post('/nhapdulieuExcel',isLoggedIn, function(req, res, next) {
 		    dataExcel.shift();
 		    dataExcel.shift();
 
+        //save to database
+        for(i=0;i<dataExcel.length;++i){
+          var lopTemp={
+            tenlop:dataExcel[i].Khóa,
+            maHP:dataExcel[i].Mãhọcphần,
+            Tênlớphọcphần:dataExcel[i].Tênlớphọcphần,
+            Sốlượng:dataExcel[i].Sốlượng,
+            SốTC:dataExcel[i].SốTC,
+            Phònghọc:dataExcel[i].Phònghọc,
+            Giảngviên:dataExcel[i].Giảngviên,
+            Cơquancôngtác:dataExcel[i].Cơquancôngtác,
+            Điệnthoạiliênhệ:dataExcel[i].Điệnthoạiliênhệ,
+            thu:null,
+            tiet:null,
+            thoiGianBatDau:null,
+            thoiGianKetThuc:null,
+            ghiChu:dataExcel[i].ghiChu
+          }
+          var sync=true;
+          lop.findOne({tenlop:dataExcel[i].Khóa},function(err,result){
+            if(err) {
+              throw err;
+              sync=false;
+            }
+            if(result){
+              result.hoc.push(lopTemp);
+              result.save(function(err) {
+                if (err)throw err;
+                console.log("đã tồn tại lớp", result.tenlop, "và đã thêm lớp học : ",lopTemp.Tênlớphọcphần);
+                sync=false;
+              });
+            }else{
+              var newLop= new lop();
+              newLop.tenlop=dataExcel[i].Khóa;
+              newLop.hoc.push(lopTemp);
+              newLop.save(function(err) {
+                if (err)throw err;
+                console.log('đã thêm lớp mới',newLop.tenlop);
+                sync=false;
+              });
+            }
 
-        // hien thi html
-        gv.find({},function(err,result){
-          if(err) throw err;
-          if(result){
-            data=result;
+          })
+          while(sync) {require('deasync').sleep(100);}
+          if(i===dataExcel.length-1){
             res.render('nhapdulieuExcel',{
               gv:dataExcel,
               user:emailGlobal,
@@ -300,39 +354,102 @@ router.post('/nhapdulieuExcel',isLoggedIn, function(req, res, next) {
               login:login
             });
           }
+        }
+
+        // hien thi html
+        gv.find({},function(err,result){
+          if(err) throw err;
+          if(result){
+            data=result;
+
+          }
         })
       });
   })
 });
 
 router.get('/xemlich',isLoggedIn, function(req, res, next) {
-  gv.findOne({'email':emailGlobal.local.email},function(err,result){
+
+  // gv.findOne({'email':emailGlobal.local.email},function(err,result){
+  //   if(err) throw err;
+  //   if(result){
+  //     var temp=result;
+  //     res.render('xemlich',{
+  //       data:temp,
+  //       user:emailGlobal,
+  //       message1:req.flash('loginMessage'),
+  //       message2:req.flash('signupMessage'),
+  //       login:login
+  //     });
+  //   }
+  // });
+
+  var lopAll,dslop=[];
+  var sync=true;
+  lop.find({},function(err,result){
     if(err) throw err;
     if(result){
-      var temp=result;
-      res.render('xemlich',{
-        data:temp,
-        user:emailGlobal,
-        message1:req.flash('loginMessage'),
-        message2:req.flash('signupMessage'),
-        login:login
-      });
+      lopAll=result;
+      sync=false;
     }
+  })
+  while(sync) {require('deasync').sleep(100);}
+  var sync=true;
+  console.log(emailGlobal.local);
+  for(i=0;i<lopAll.length;++i){
+    for(j=0;j<lopAll[i].hoc.length;++j){
+      if(lopAll[i].hoc[j].Điệnthoạiliênhệ==emailGlobal.local.email){
+        dslop.push(lopAll[i].hoc[j]);
+      }
+    }
+    sync=false;
+  }
+  console.log(dslop);
+  while(sync) {require('deasync').sleep(100);}
+  res.render('xemlich',{
+    data:dslop,
+    user:emailGlobal,
+    message1:req.flash('loginMessage'),
+    message2:req.flash('signupMessage'),
+    login:login
   });
+
 });
 
 router.get('/dangkylich',isLoggedIn, function(req, res, next) {
-  gv.findOne({'email':emailGlobal.local.email},function(err,result){
+  var lopAll,dslop=[];
+  var sync=true;
+  lop.find({},function(err,result){
+    if(err) throw err;
+    if(result){
+      lopAll=result;
+      sync=false;
+    }
+  })
+  while(sync) {require('deasync').sleep(100);}
+  var sync=true;
+  for(i=0;i<lopAll.length;++i){
+    for(j=0;j<lopAll[i].hoc.length;++j){
+      if(lopAll[i].hoc[j].Điệnthoạiliênhệ==emailGlobal.local.email){
+        dslop.push(lopAll[i].hoc[j]);
+      }
+    }
+    sync=false;
+  }
+  console.log(dslop);
+  while(sync) {require('deasync').sleep(100);}
+  res.render('dangkylich',{
+    data:dslop,
+    user:emailGlobal,
+    message1:req.flash('loginMessage'),
+    message2:req.flash('signupMessage'),
+    login:login
+  });
+  lop.find({'email':emailGlobal.local.email},function(err,result){
     if(err) throw err;
     if(result){
       var temp=result;
-      res.render('dangkylich',{
-        data:temp,
-        user:emailGlobal,
-        message1:req.flash('loginMessage'),
-        message2:req.flash('signupMessage'),
-        login:login
-      });
+
     }
   })
 

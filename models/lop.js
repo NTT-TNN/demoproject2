@@ -2,14 +2,19 @@ var mongoose=require('mongoose');
 
 var lopSchema=mongoose.Schema({
   tenlop:String,
-  malop:String,
+  // malop:String,
   hoc:[{
-    malopHoc:String,
-    soLuongSV:Number,
+    tenlop:String,
+    Mãhọcphần:String,
+    Tênlớphọcphần:String,
+    Sốlượng:Number,
     maHP:String,
-    soTinChi:Number,
-    khoa:String,
-    phong:String,
+    SốTC:Number,
+    Phònghọc:String,
+    Giảngviên:String,
+    email:String,
+    Cơquancôngtác:String,
+    Điệnthoạiliênhệ:String,
     thu:String, //thứ
     tiet:String,
     thoiGianBatDau:Date,

@@ -29,7 +29,10 @@ function(req, email, password, done) {
         var newUser = new User();
         newUser.local.email = email;
         newUser.local.password = newUser.generateHash(password);
-        // newUser.type.admin=false;
+        newUser.local.Tên=req.body.Tên;
+        newUser.local.Tuổi=req.body.Tuổi;
+        newUser.local.Cơquancôngtác=req.body.Cơquancôngtác;
+        newUser.local.Sốđiệnthoại=req.body.Sốđiệnthoại;
         newUser.save(function(err) {
           if (err)
             throw err;

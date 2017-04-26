@@ -9,15 +9,15 @@
           </md-toolbar>
           <md-content layout="column" class="md-padding">
             <md-input-container>
-              <label>EmailAddress</label>
-              <input type="email" name="email"/>
+              <label>Số Điện Thoại</label>
+              <input name="email"/>
             </md-input-container>
             <md-input-container>
               <label>Password</label>
               <input type="password" name="password"/>
             </md-input-container>
             <div layout="row" layout-align="center center" style="padding-top:20px;">
-              <md-button class="md-raised md-primary" type="submit">Sign in</md-button>
+              <md-button class="md-raised md-primary" type="submit">Đăng nhập</md-button>
               <div flex="flex"></div>
 
             </div>
@@ -31,21 +31,35 @@
   <script type="text/ng-template" id="signup.html">
     <div ng-app="MyApp" ng-controller="AppCtrl" layout="column" layout-align="center center" layout-fill="layout-fill">
       <form action="/users/signup" method="post">
-        <div layout="column" class="loginBox md-whiteframe-z1">
+        <div layout="column" class="signupBox md-whiteframe-z1">
           <md-toolbar>
             <h2 class="md-toolbar-tools"><span>Tạo tài khoản cho giáo viên</span></h2>
           </md-toolbar>
-          <md-content layout="column" class="md-padding">
+          <md-content class="md-padding">
             <md-input-container>
-              <label>EmailAddress</label>
-              <input type="email" name="email" required>
+              <label>Số Điện Thoại</label>
+              <input name="email"/>
             </md-input-container>
             <md-input-container>
               <label>Password</label>
-              <input type="password" name="password" required>
+              <input type="password" name="password"/>
             </md-input-container>
-            <div layout="row" layout-align="center center" style="padding-top:20px;">
-              <md-button class="md-raised md-primary" type="submit">Sign up</md-button>
+            <md-input-container>
+              <label>Tên</label>
+              <input  name="Tên"/>
+            </md-input-container>
+            <br>
+            <md-input-container>
+              <label>Tuổi</label>
+              <input  name="Tuổi"/>
+            </md-input-container>
+            <md-input-container>
+              <label>Cơ quan công tác</label>
+              <input  name="Cơquancôngtác"/>
+            </md-input-container>
+            
+            <div layout="col" layout-align="center center" style="padding-top:20px;padding-left:36%;">
+              <md-button class="md-raised md-primary" type="submit">Tạo tài khoản</md-button>
               <div flex="flex"></div>
             </div>
           </md-content>

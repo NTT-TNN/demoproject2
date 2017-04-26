@@ -4,64 +4,70 @@
     <table class="table table-bordered table-striped">
       <tr class="">
         <td class="">
-          Tên giáo viên
+          STT
         </td>
         <td class="">
-          Email
+          Mã học phần
         </td>
         <td class="">
-          Tên lớp
+          Tên lớp học phần
         </td>
         <td class="">
-          Mã lớp
+          Số lượng
         </td>
         <td class="">
-          Mã lớp học
+          Số TC
         </td>
         <td class="">
-          Số lượng SV
+          Phòng học
+        </td>
+        <td class="">
+          Giảng Viên
+        </td>
+        <td class="">
+          Cơ quan công tác
+        </td>
+        <td class="">
+          Điện thoại liên hệ
         </td>
         <td class="">
           Khóa
         </td>
         <td class="">
-          Số tín chỉ
-        </td>
-        <td class="">
-          Ghi chú
-        </td>
-        <td class="">
           Thời gian
         </td>
       </tr>
-    <% for(i=0;i<data.day.length;i++){ %>
+    <% for(i=0;i<data.length;i++){ %>
       <tr class="">
         <td class="">
-          <%= data.day[i].tenGv %>
+          <%= i+1 %>
         </td>
         <td class="">
-          <%= data.day[i].email %>
+          <%= data[i].maHP %>
         </td>
         <td class="">
-          <%= data.day[i].tenlop %>
+          <%= data[i].Tênlớphọcphần %>
         </td>
         <td class="">
-          <%= data.day[i].malop %>
+          <%= data[i].Sốlượng %>
         </td>
         <td class="">
-          <%= data.day[i].malopHoc %>
+          <%= data[i].SốTC %>
         </td>
         <td class="">
-          <%= data.day[i].soLuongSV %>
+          <%= data[i].Phònghọc %>
         </td>
         <td class="">
-          <%= data.day[i].khoa %>
+          <%= data[i].Giảngviên %>
         </td>
         <td class="">
-          <%= data.day[i].soTinChi %>
+          <%= data[i].Cơquancôngtác %>
         </td>
         <td class="">
-          <%= data.day[i].ghiChu %>
+          <%= data[i].Điệnthoạiliênhệ %>
+        </td>
+        <td class="">
+          <%= data[i].tenlop %>
         </td>
         <td class="">
           <md-button class="md-raised md-primary" ng-click="showChonThoiGian($event)">Chọn thời gian</md-button>

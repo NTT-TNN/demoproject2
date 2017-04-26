@@ -26,15 +26,16 @@
   <body ng-app="myApp" ng-controller="AppCtrl" ng-cloak>
     <div class="">
       <div class="row">
-        <div class="col-md-10 logo">
+        <div class="col-md-9 logo">
           <a href="#">
             <img src="https://ctt-daotao.hust.edu.vn/Images/logo-cttdt.png" alt="logo">
           </a>
         </div>
-        <div class="col-md-offset-10">
+        <div class="col-md-offset-8">
         <% if(login==false){ %>
             <md-button class="md-raised md-primary" ng-click="showLogin($event)">Sign in</md-button>
         <% } else {%>
+          <a href="/users/profile"> <%= user.local.Tên %> </a>
             <md-button class="md-raised md-warn" href="/users/logout">Sign Out</md-button>
         <% } %>
         </div>
@@ -44,6 +45,9 @@
     <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
       <md-nav-item md-nav-href="/" name="trangchu">
         Trang Chủ
+      </md-nav-item>
+      <md-nav-item md-nav-href="/users/profile" name="users/profile">
+        Thông tin cá nhân
       </md-nav-item>
       <md-nav-item md-nav-href="/tintuc" name="tintuc">
         Tin Tức
@@ -58,7 +62,7 @@
         </md-nav-item>
       <% } %>
       <% if(user){ %>
-        <% if(user.local.email=='nguyentienthao96@gmail.com'){ %>
+        <% if(user.local.email=='0983451175'){ %>
           <md-nav-item md-nav-href="/users/nhapdulieu" name="nhapdulieu">
             Nhập Dữ liệu
           </md-nav-item>
