@@ -16,14 +16,6 @@ var router = express.Router();
 login=false;
 var emailGlobal,data;
 
-// tìm tất cả các giáo viên có trong database
-gv.find({},function(err,result){
-  if(err) throw err;
-  if(result){
-    data=result;
-  }
-})
-
 router.use(bodyParser.json());
 
 var storage = multer.diskStorage({ //multers disk storage settings
@@ -129,12 +121,7 @@ router.get('/nhapdulieu',isLoggedIn, function(req, res, next) {
 });
 
 router.get('/nhapdulieuExcel',isLoggedIn, function(req, res, next) {
-  gv.find({},function(err,result){
-    if(err) throw err;
-    if(result){
-      data=result;
-    }
-  })
+
   res.render('nhapdulieu',{
     gv:data,
     user:emailGlobal,
@@ -266,6 +253,7 @@ router.post('/nhapdulieu',isLoggedIn, function(req, res, next) {
 });
 
 router.post('/nhapdulieuExcel',isLoggedIn, function(req, res, next) {
+
   upload(req,res,function(err){
     if(err){
          res.json({error_code:1,err_desc:err});
@@ -347,14 +335,20 @@ router.post('/nhapdulieuExcel',isLoggedIn, function(req, res, next) {
             }else{
               var newLop= new lop();
               newLop.tenlop=dataExcel[i].Khóa;
-              newLop.batDauHocKy=Date.now();
-              newLop.ketThucHocKy=Date.now();
-              newLop.thoiGianTrong.sang.batDau=Date.now();
-              newLop.thoiGianTrong.sang.ketThuc=Date.now();
-              newLop.thoiGianTrong.chieu.batDau=Date.now();
-              newLop.thoiGianTrong.chieu.ketThuc=Date.now();
-              newLop.thoiGianTrong.toi.batDau=Date.now();
-              newLop.thoiGianTrong.toi.ketThuc=Date.now();
+              // newLop.batDauHocKy=Date.now();
+              // newLop.ketThucHocKy=Date.now();
+              // newLop.thoiGianTrongt7.sang.batDau=Date.now();
+              // newLop.thoiGianTrongt7.sang.ketThuc=Date.now();
+              // newLop.thoiGianTrongt7.chieu.batDau=Date.now();
+              // newLop.thoiGianTrongt7.chieu.ketThuc=Date.now();
+              // newLop.thoiGianTrongt7.toi.batDau=Date.now();
+              // newLop.thoiGianTrongt7.toi.ketThuc=Date.now();
+              // newLop.thoiGianTrongCn.sang.batDau=Date.now();
+              // newLop.thoiGianTrongCn.sang.ketThuc=Date.now();
+              // newLop.thoiGianTrongCn.chieu.batDau=Date.now();
+              // newLop.thoiGianTrongCn.chieu.ketThuc=Date.now();
+              // newLop.thoiGianTrongCn.toi.batDau=Date.now();
+              // newLop.thoiGianTrongCn.toi.ketThuc=Date.now();
               newLop.hoc.push(lopTemp);
               newLop.save(function(err) {
                 if (err)throw err;
@@ -375,15 +369,6 @@ router.post('/nhapdulieuExcel',isLoggedIn, function(req, res, next) {
             });
           }
         }
-
-        // hien thi html
-        gv.find({},function(err,result){
-          if(err) throw err;
-          if(result){
-            data=result;
-
-          }
-        })
       });
   })
 });
@@ -435,8 +420,9 @@ router.get('/xemlich',isLoggedIn, function(req, res, next) {
 });
 
 router.post('/goiYLich',isLoggedIn, function(req, res, next) {
-  console.log("goiYLich",req.body);
-  var sync1=true,sync2=true,lopTrong,gvTrong;
+  console.log("req goiYLich",req.body);
+  var sync1=true,sync2=true,lopTrong,gvTrong,soTiet=req.body.sotc*45;
+  var goiY={};
   lop.findOne({'tenlop':req.body.khoa},function(err,result){
     if(err) throw err;
     if(result){
@@ -460,7 +446,25 @@ router.post('/goiYLich',isLoggedIn, function(req, res, next) {
   });
 
   while(sync1||sync2) {require('deasync').sleep(100);}
-  
+
+  //handle thoi gian trong cua ca hai va dua ra goi y.
+
+  var rangeGv=moment.range(gvTrong.thoiGianTrongt7.sang[0].batDau,gvTrong.thoiGianTrongt7.sang[0].ketThuc);
+  var rangeLop=moment.range(lopTrong.thoiGianTrongt7.sang[0].batDau,lopTrong.thoiGianTrongt7.sang[0].ketThuc);
+  var giao=rangeGv.intersect(rangeLop);
+
+  soTuan6tiet=ceil(sotiet/6);
+  soTuan4tieu=ceil(sotiet/4);
+  soTuanCaNgay=ceil(sotiet/)
+  //hàm chuyển từ số tuần sang tháng để cộng vào giao.start
+  function tuanToDate(tuan){
+    //chỉ có tháng và ngày do một kỳ chỉ có 4 tháng
+  }
+  // chi sang hoăc chieu thu 7 hoac chu nhat thi thoi gian se la giao.start+tuanToDate(soTuan6tiet)
+
+  // Ca ngay thu bay hoac ca ngay chu nhat thi thoi gian se la giao.start+ tuantoDate
+
+
   res.json({
     'gvTrong':gvTrong,
     'lopTrong':lopTrong
@@ -572,7 +576,6 @@ router.post('/nhapthoigian',isLoggedIn,function(req,res,next){
     }
   })
 });
-
 
 router.get('/dangkylich',isLoggedIn, function(req, res, next) {
   var lopAll,dslop=[];

@@ -5,46 +5,46 @@ var lopSchema=mongoose.Schema({
   batDauHocKy:String,
   ketThucHocKy:String,
   thoiGianTrongt7:{
-    sang:{
-      batDau:String,
-      ketThuc:String,
-    },
-    chieu:{
-      batDau:String,
-      ketThuc:String,
-    },
-    toi:{
-      batDau:String,
-      ketThuc:String,
-    },
+    sang:[{
+      batDau:Date,
+      ketThuc:Date,
+    }],
+    chieu:[{
+      batDau:Date,
+      ketThuc:Date,
+    }],
+    toi:[{
+      batDau:Date,
+      ketThuc:Date,
+    }],
   },
   thoiGianTrongCn:{
-    sang:{
-      batDau:String,
-      ketThuc:String,
-    },
-    chieu:{
-      batDau:String,
-      ketThuc:String,
-    },
-    toi:{
-      batDau:String,
-      ketThuc:String,
-    },
+    sang:[{
+      batDau:Date,
+      ketThuc:Date,
+    }],
+    chieu:[{
+      batDau:Date,
+      ketThuc:Date,
+    }],
+    toi:[{
+      batDau:Date,
+      ketThuc:Date,
+    }],
   },
   thoiGianFull:{
-    sang:{
-      batDau:String,
-      ketThuc:String,
-    },
-    chieu:{
-      batDau:String,
-      ketThuc:String,
-    },
-    toi:{
-      batDau:String,
-      ketThuc:String,
-    },
+    sang:[{
+      batDau:Date,
+      ketThuc:Date,
+    }],
+    chieu:[{
+      batDau:Date,
+      ketThuc:Date,
+    }],
+    toi:[{
+      batDau:Date,
+      ketThuc:Date,
+    }],
   },
   // malop:String,
   hoc:[{
