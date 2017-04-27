@@ -70,26 +70,27 @@
           <%= data[i].tenlop %>
         </td>
         <td class="">
-          <md-button class="md-raised md-primary" ng-click="showChonThoiGian($event)" onclick="ifunction('<%= data[i].tenlop %>')">Chọn thời gian</md-button>
+          <md-button class="md-raised md-primary" data-toggle="modal" data-target=".bs-example-modal-lg"  ng-click="showChonThoiGian($event)"
+          onclick="ifunction('<%= data[i].tenlop %>','<%= data[i].SốTC %>')">Chọn thời gian</md-button>
         </td>
       </tr>
     <% } %>
     </table>
     <!-- Đoạn script show ra khi nhấn nút ChonThoiGian -->
-    <div id="chonthoigian" ng-model="html">
-      {{html}}
-    </div>
-      <!-- <script type="text/ng-template" id="ChonThoiGian.html">
-        <div layout="column" layout-align="center center" layout-fill="layout-fill">
-          <h1>{{thoigian}} </h1>
-          <h1>Thao</h1>
-        </div>
-      </script> -->
+    <div id="chonthoigian" ng-model="thoigian">
 
-    <!-- script lấy lớp chọn lịch -->
+    </div>
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          {{thoigian}}
+        </div>
+      </div>
+    </div>
     <script>
-      function ifunction(a) {
-        i=a;
+      function ifunction(lop,sotc) {
+        lop1=lop;
+        sotc1=sotc;
       }
       var sdt=<%= user.local.email %>
     </script>
@@ -152,7 +153,8 @@
               });
             };
             $scope.showChonThoiGian = function(ev) {
-              $scope.i=window.i;
+              $scope.lop=window.lop1;
+              $scope.sotc=window.sotc1;
               $scope.sdt=window.sdt;
               $http({
                 method: 'POST',
@@ -161,35 +163,15 @@
                    'Content-Type': 'application/json'
                  },
                  data: {
-                   khoa: $scope.i,
-                   sdt:  $scope.sdt
+                   khoa: $scope.lop,
+                   sdt:  $scope.sdt,
+                   sotc: $scope.sotc
                   }
               }).then(function successCallback(response) {
                   $scope.thoigian=response.data;
-                  console.log("thoiGianTrong",$scope.thoigian);
-                  $scope.html='<script type="text/ng-template" id="ChonThoiGian.html">\
-                    <div layout="column" layout-align="center center" layout-fill="layout-fill">\
-                      <h1>'+$scope.thoigian+' </h1>\
-                      <h1>Thao</h1>\
-                    </div>\
-                  ' ;
 
-                  $mdDialog.show({
-                    controller: DialogController,
-                    templateUrl: 'ChonThoiGian.html',
-                    parent: angular.element(document.body),
-                    targetEvent: ev,
-                    clickOutsideToClose:true,
-                    fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-                  })
-                  .then(function(answer) {
-                    $scope.status = 'You said the information was "' + answer + '".';
-                  }, function() {
-                    $scope.status = 'You cancelled the dialog.';
-                  });
                 }, function errorCallback(response) {
-                  // called asynchronously if an error occurs
-                  // or server returns response with an error status.
+
                 });
 
               };

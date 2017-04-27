@@ -17,6 +17,8 @@
     "express-session": "^1.14.2",
     "jade": "~1.11.0",
     "merge": "^1.2.0",
+    "moment": "^2.18.1",
+    "moment-range": "^3.0.3",
     "mongoose": "^4.6.5",
     "morgan": "~1.7.0",
     "node-yelp-api": "^1.1.0",

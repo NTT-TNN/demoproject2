@@ -133,71 +133,81 @@
     </div>
     <h2>Danh sách các lớp trong kỳ này là là</h2>
 
-    <table class="table table-condensed table-striped">
+    <table class="table table-bordered table-striped">
       <tr class="">
         <td class="">
-          Tên giáo viên
+          STT
         </td>
         <td class="">
-          Email
+          Mã học phần
         </td>
         <td class="">
-          Tên lớp
+          Tên lớp học phần
         </td>
         <td class="">
-          Mã lớp
+          Số lượng
         </td>
         <td class="">
-          Mã lớp học
+          Số TC
         </td>
         <td class="">
-          Số lượng SV
+          Phòng học
+        </td>
+        <td class="">
+          Giảng Viên
+        </td>
+        <td class="">
+          Cơ quan công tác
+        </td>
+        <td class="">
+          Điện thoại liên hệ
         </td>
         <td class="">
           Khóa
         </td>
         <td class="">
-          Số tín chỉ
+          Thời gian
         </td>
-        <td class="">
-          Ghi chú
-        </td>
-
       </tr>
-      <% for(i=0;i<gv.length;i++){ %>
-        <% for(j=0;j<gv[i].day.length;++j) {%>
-          <tr class="">
-            <td class="">
-              <%= gv[i].day[j].tenGv %>
-            </td>
-            <td class="">
-              <%= gv[i].day[j].email %>
-            </td>
-            <td class="">
-              <%= gv[i].day[j].tenlop %>
-            </td>
-            <td class="">
-              <%= gv[i].day[j].malop %>
-            </td>
-            <td class="">
-              <%= gv[i].day[j].malopHoc %>
-            </td>
-            <td class="">
-              <%= gv[i].day[j].soLuongSV %>
-            </td>
-            <td class="">
-              <%= gv[i].day[j].khoa %>
-            </td>
-            <td class="">
-              <%= gv[i].day[j].soTinChi %>
-            </td>
-            <td class="">
-              <%= gv[i].day[j].ghiChu %>
-            </td>
-          </tr>
-        <% } %>
+
+      <% for(i=0;i<data.length;i++){ %>
+        <tr class="">
+          <td class="">
+            <%= i+1 %>
+          </td>
+          <td class="">
+            <%= data[i].maHP %>
+          </td>
+          <td class="">
+            <%= data[i].Tênlớphọcphần %>
+          </td>
+          <td class="">
+            <%= data[i].Sốlượng %>
+          </td>
+          <td class="">
+            <%= data[i].SốTC %>
+          </td>
+          <td class="">
+            <%= data[i].Phònghọc %>
+          </td>
+          <td class="">
+            <%= data[i].Giảngviên %>
+          </td>
+          <td class="">
+            <%= data[i].Cơquancôngtác %>
+          </td>
+          <td class="">
+            <%= data[i].Điệnthoạiliênhệ %>
+          </td>
+          <td class="">
+            <%= data[i].tenlop %>
+          </td>
+          <td class="">
+            Thời Gian
+          </td>
+        </tr>
       <% } %>
-    </table>
+  </table>
 
     <% include partials/sign-in-up.ejs %>
 

@@ -7,6 +7,9 @@ var user = require('../models/user');
 var bodyParser = require('body-parser');
 var multer = require('multer');
 var XLSX = require('xlsx');
+const Moment = require('moment');
+const MomentRange = require('moment-range');
+const moment = MomentRange.extendMoment(Moment);
 
 var router = express.Router();
 
@@ -42,7 +45,6 @@ var upload = multer({ //multer settings
         callback(null, true);
     }
 }).single('file');
-
 
 router.get('/',isLoggedIn, function(req, res, next) {
   emailGlobal=req.user;
@@ -105,18 +107,25 @@ router.post('/signup',passport.authenticate('local-signup',{
 }));
 
 router.get('/nhapdulieu',isLoggedIn, function(req, res, next) {
-  gv.find({},function(err,result){
+  var dslop=[],lopAll;
+  lop.find({},function(err,result){
     if(err) throw err;
     if(result){
-      data=result;
+      var lopAll=result;
+      for(i=0;i<lopAll.length;++i){
+        for(j=0;j<lopAll[i].hoc.length;++j){
+            dslop.push(lopAll[i].hoc[j]);
+        }
+      }
+      res.render('nhapdulieu',{
+        data:dslop,
+        user:emailGlobal,
+        message1:req.flash('loginMessage'),
+        message2:req.flash('signupMessage'),
+        login:login
+      });
     }
   })
-  res.render('nhapdulieu',{
-    gv:data,
-    user:emailGlobal,
-    message1:req.flash('loginMessage'),
-    message2:req.flash('signupMessage'),
-    login:login});
 });
 
 router.get('/nhapdulieuExcel',isLoggedIn, function(req, res, next) {
@@ -239,12 +248,13 @@ router.post('/nhapdulieu',isLoggedIn, function(req, res, next) {
       });
     }
   })
-  gv.find({},function(err,result){
+
+  lop.find({},function(err,result){
     if(err) throw err;
     if(result){
       data=result;
       res.render('nhapdulieu',{
-        gv:data,
+        data:data,
         user:emailGlobal,
         message1:req.flash('loginMessage'),
         message2:req.flash('signupMessage'),
@@ -412,7 +422,6 @@ router.get('/xemlich',isLoggedIn, function(req, res, next) {
         dslop.push(lopAll[i].hoc[j]);
       }
     }
-    sync=false;
   }
   while(sync) {require('deasync').sleep(100);}
   res.render('xemlich',{
@@ -426,29 +435,32 @@ router.get('/xemlich',isLoggedIn, function(req, res, next) {
 });
 
 router.post('/goiYLich',isLoggedIn, function(req, res, next) {
+  console.log("goiYLich",req.body);
   var sync1=true,sync2=true,lopTrong,gvTrong;
   lop.findOne({'tenlop':req.body.khoa},function(err,result){
     if(err) throw err;
     if(result){
-      lopTrong=result.thoiGianTrong;
+      lopTrong={
+        thoiGianTrongt7:result.thoiGianTrongt7,
+        thoiGianTrongCn:result.thoiGianTrongCn
+      };
       sync1=false;
     }
   });
 
-
   user.findOne({'local.email':req.body.sdt},function(err,result){
     if(err) throw err;
     if(result){
-      gvTrong=result.thoiGianTrong;
-      console.log(gvTrong);
+      gvTrong={
+        thoiGianTrongt7:result.thoiGianTrongt7,
+        thoiGianTrongCn:result.thoiGianTrongCn
+      };
       sync2=false;
     }
   });
 
   while(sync1||sync2) {require('deasync').sleep(100);}
-  console.log('2',sync2);console.log('1',sync1);
-  console.log("lopTrong",lopTrong);
-  console.log('gvTrong',gvTrong);
+  
   res.json({
     'gvTrong':gvTrong,
     'lopTrong':lopTrong
@@ -465,7 +477,21 @@ router.post('/nhapthoigian',isLoggedIn,function(req,res,next){
       {
         batDauHocKy:batDau,
         ketThucHocKy:ketThuc,
-        thoiGianTrong:{
+        thoiGianTrongt7:{
+          sang:{
+            batDau:batDau,
+            ketThuc:ketThuc
+          },
+          chieu:{
+            batDau:batDau,
+            ketThuc:ketThuc
+          },
+          toi:{
+            batDau:batDau,
+            ketThuc:ketThuc
+          }
+        },
+        thoiGianTrongCn:{
           sang:{
             batDau:batDau,
             ketThuc:ketThuc
@@ -487,14 +513,28 @@ router.post('/nhapthoigian',isLoggedIn,function(req,res,next){
           console.log("Cap nhat thoi gian hoc ky thanh cong cho user");
         }
       }
-  );
+    );
 
     lop.update(
       {},
       {
         batDauHocKy:batDau,
         ketThucHocKy:ketThuc,
-        thoiGianTrong:{
+        thoiGianTrongt7:{
+          sang:{
+            batDau:batDau,
+            ketThuc:ketThuc
+          },
+          chieu:{
+            batDau:batDau,
+            ketThuc:ketThuc
+          },
+          toi:{
+            batDau:batDau,
+            ketThuc:ketThuc
+          }
+        },
+        thoiGianTrongCn:{
           sang:{
             batDau:batDau,
             ketThuc:ketThuc
@@ -514,16 +554,23 @@ router.post('/nhapthoigian',isLoggedIn,function(req,res,next){
         if(err) throw err;
         if(result){
           console.log("Cap nhat thoi gian hoc ky thanh cong cho lop ");
-          res.render('nhapdulieu',{
-            gv:data,
-            user:emailGlobal,
-            message1:req.flash('loginMessage'),
-            message2:req.flash('signupMessage'),
-            login:login
-          });
         }
       }
   );
+
+  lop.find({},function(err,result){
+    if(err) throw err;
+    if(result){
+      data=result;
+      res.render('nhapdulieu',{
+        data:data,
+        user:emailGlobal,
+        message1:req.flash('loginMessage'),
+        message2:req.flash('signupMessage'),
+        login:login
+      });
+    }
+  })
 });
 
 

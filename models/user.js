@@ -12,7 +12,21 @@ var userSchema=mongoose.Schema({
   },
   batDauHocKy:Date,
   ketThucHocKy:Date,
-  thoiGianTrong:{
+  thoiGianTrongt7:{
+    sang:[{
+      batDau:Date,
+      ketThuc:Date,
+    }],
+    chieu:[{
+      batDau:Date,
+      ketThuc:Date,
+    }],
+    toi:[{
+      batDau:Date,
+      ketThuc:Date,
+    }],
+  },
+  thoiGianTrongCn:{
     sang:[{
       batDau:Date,
       ketThuc:Date,

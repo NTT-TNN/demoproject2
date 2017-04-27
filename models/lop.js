@@ -4,7 +4,21 @@ var lopSchema=mongoose.Schema({
   tenlop:String,
   batDauHocKy:String,
   ketThucHocKy:String,
-  thoiGianTrong:{
+  thoiGianTrongt7:{
+    sang:{
+      batDau:String,
+      ketThuc:String,
+    },
+    chieu:{
+      batDau:String,
+      ketThuc:String,
+    },
+    toi:{
+      batDau:String,
+      ketThuc:String,
+    },
+  },
+  thoiGianTrongCn:{
     sang:{
       batDau:String,
       ketThuc:String,
