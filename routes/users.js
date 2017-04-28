@@ -335,20 +335,6 @@ router.post('/nhapdulieuExcel',isLoggedIn, function(req, res, next) {
             }else{
               var newLop= new lop();
               newLop.tenlop=dataExcel[i].Khóa;
-              // newLop.batDauHocKy=Date.now();
-              // newLop.ketThucHocKy=Date.now();
-              // newLop.thoiGianTrongt7.sang.batDau=Date.now();
-              // newLop.thoiGianTrongt7.sang.ketThuc=Date.now();
-              // newLop.thoiGianTrongt7.chieu.batDau=Date.now();
-              // newLop.thoiGianTrongt7.chieu.ketThuc=Date.now();
-              // newLop.thoiGianTrongt7.toi.batDau=Date.now();
-              // newLop.thoiGianTrongt7.toi.ketThuc=Date.now();
-              // newLop.thoiGianTrongCn.sang.batDau=Date.now();
-              // newLop.thoiGianTrongCn.sang.ketThuc=Date.now();
-              // newLop.thoiGianTrongCn.chieu.batDau=Date.now();
-              // newLop.thoiGianTrongCn.chieu.ketThuc=Date.now();
-              // newLop.thoiGianTrongCn.toi.batDau=Date.now();
-              // newLop.thoiGianTrongCn.toi.ketThuc=Date.now();
               newLop.hoc.push(lopTemp);
               newLop.save(function(err) {
                 if (err)throw err;
@@ -374,20 +360,6 @@ router.post('/nhapdulieuExcel',isLoggedIn, function(req, res, next) {
 });
 
 router.get('/xemlich',isLoggedIn, function(req, res, next) {
-
-  // gv.findOne({'email':emailGlobal.local.email},function(err,result){
-  //   if(err) throw err;
-  //   if(result){
-  //     var temp=result;
-  //     res.render('xemlich',{
-  //       data:temp,
-  //       user:emailGlobal,
-  //       message1:req.flash('loginMessage'),
-  //       message2:req.flash('signupMessage'),
-  //       login:login
-  //     });
-  //   }
-  // });
 
   var lopAll,dslop=[];
   var sync=true;
@@ -421,7 +393,8 @@ router.get('/xemlich',isLoggedIn, function(req, res, next) {
 
 router.post('/goiYLich',isLoggedIn, function(req, res, next) {
   console.log("req goiYLich",req.body);
-  var sync1=true,sync2=true,lopTrong,gvTrong,soTiet=req.body.sotc*45;
+  var sync1=true,sync2=true,lopTrong,gvTrong;
+  sotiet=req.body.sotc*45;
   var goiY={};
   lop.findOne({'tenlop':req.body.khoa},function(err,result){
     if(err) throw err;
@@ -448,27 +421,106 @@ router.post('/goiYLich',isLoggedIn, function(req, res, next) {
   while(sync1||sync2) {require('deasync').sleep(100);}
 
   //handle thoi gian trong cua ca hai va dua ra goi y.
+  days6=(sotiet/6)*7;//so ngay ma neu hoc 1 buoi 6 tiet phai hoc cho mon do
+  days4=(sotiet/4)*7;//so ngay ma neu hoc 1 buoi 4 tiet phai hoc cho mon do
+  daysnCaNgay=(sotiet/16)*7;//so ngay ma neu hoc ca ngay phai hoc cho mon do
 
-  var rangeGv=moment.range(gvTrong.thoiGianTrongt7.sang[0].batDau,gvTrong.thoiGianTrongt7.sang[0].ketThuc);
-  var rangeLop=moment.range(lopTrong.thoiGianTrongt7.sang[0].batDau,lopTrong.thoiGianTrongt7.sang[0].ketThuc);
-  var giao=rangeGv.intersect(rangeLop);
-
-  soTuan6tiet=ceil(sotiet/6);
-  soTuan4tieu=ceil(sotiet/4);
-  soTuanCaNgay=ceil(sotiet/)
-  //hàm chuyển từ số tuần sang tháng để cộng vào giao.start
-  function tuanToDate(tuan){
-    //chỉ có tháng và ngày do một kỳ chỉ có 4 tháng
+  //xet hoc sang t7
+  var rangeGvSangt7=moment.range(gvTrong.thoiGianTrongt7.sang[0].batDau,gvTrong.thoiGianTrongt7.sang[0].ketThuc);
+  var rangeLopSangt7=moment.range(lopTrong.thoiGianTrongt7.sang[0].batDau,lopTrong.thoiGianTrongt7.sang[0].ketThuc);
+  var giaoSangt7=rangeGvSangt7.intersect(rangeLopSangt7);// thoi gian trong cua ca giao vien va lop
+  var sangt7KetThuc=moment(giaoSangt7.start,"DD-MM-YYYY").add(days6,'days');
+  sangt7={
+    'sangt7BatDau':giaoSangt7.start,
+    'sangt7KetThuc':sangt7KetThuc,
   }
+
+  // xet hoc chieu t7
+  var rangeGvChieut7=moment.range(gvTrong.thoiGianTrongt7.chieu[0].batDau,gvTrong.thoiGianTrongt7.chieu[0].ketThuc);
+  var rangeLopChieut7=moment.range(lopTrong.thoiGianTrongt7.chieu[0].batDau,lopTrong.thoiGianTrongt7.chieu[0].ketThuc);
+  var giaoChieut7=rangeGvChieut7.intersect(rangeLopChieut7);// thoi gian trong cua ca giao vien va lop
+  var Chieut7KetThuc=moment(giaoChieut7.start,"DD-MM-YYYY").add(days6,'days');
+  chieut7={
+    'Chieut7BatDau':giaoChieut7.start,
+    'Chieut7KetThuc':Chieut7KetThuc,
+  }
+
+  //xet học toi t7
+  var rangeGvToit7=moment.range(gvTrong.thoiGianTrongt7.chieu[0].batDau,gvTrong.thoiGianTrongt7.chieu[0].ketThuc);
+  var rangeLopToit7=moment.range(lopTrong.thoiGianTrongt7.chieu[0].batDau,lopTrong.thoiGianTrongt7.chieu[0].ketThuc);
+  var giaoToit7=rangeGvToit7.intersect(rangeLopToit7);// thoi gian trong cua ca giao vien va lop
+  var Toit7KetThuc=moment(giaoToit7.start,"DD-MM-YYYY").add(days6,'days');
+  toit7={
+    'Toit7BatDau':giaoToit7.start,
+    'Toit7KetThuc':Toit7KetThuc,
+  }
+
+  //xet hoc sang Cn
+var rangeGvSangCn=moment.range(gvTrong.thoiGianTrongCn.sang[0].batDau,gvTrong.thoiGianTrongCn.sang[0].ketThuc);
+var rangeLopSangCn=moment.range(lopTrong.thoiGianTrongCn.sang[0].batDau,lopTrong.thoiGianTrongCn.sang[0].ketThuc);
+var giaoSangCn=rangeGvSangCn.intersect(rangeLopSangCn);// thoi gian trong cua ca giao vien va lop
+var sangCnKetThuc=moment(giaoSangCn.start,"DD-MM-YYYY").add(days6,'days');
+sangCn={
+  'sangCnBatDau':giaoSangCn.start,
+  'sangCnKetThuc':sangCnKetThuc,
+}
+
+// xet hoc chieu Cn
+var rangeGvChieuCn=moment.range(gvTrong.thoiGianTrongCn.chieu[0].batDau,gvTrong.thoiGianTrongCn.chieu[0].ketThuc);
+var rangeLopChieuCn=moment.range(lopTrong.thoiGianTrongCn.chieu[0].batDau,lopTrong.thoiGianTrongCn.chieu[0].ketThuc);
+var giaoChieuCn=rangeGvChieuCn.intersect(rangeLopChieuCn);// thoi gian trong cua ca giao vien va lop
+var ChieuCnKetThuc=moment(giaoChieuCn.start,"DD-MM-YYYY").add(days6,'days');
+chieuCn={
+  'ChieuCnBatDau':giaoChieuCn.start,
+  'ChieuCnKetThuc':ChieuCnKetThuc,
+}
+
+//xet học toi Cn
+var rangeGvToiCn=moment.range(gvTrong.thoiGianTrongCn.chieu[0].batDau,gvTrong.thoiGianTrongCn.chieu[0].ketThuc);
+var rangeLopToiCn=moment.range(lopTrong.thoiGianTrongCn.chieu[0].batDau,lopTrong.thoiGianTrongCn.chieu[0].ketThuc);
+var giaoToiCn=rangeGvToiCn.intersect(rangeLopToiCn);// thoi gian trong cua ca giao vien va lop
+var ToiCnKetThuc=moment(giaoToiCn.start,"DD-MM-YYYY").add(days6,'days');
+toiCn={
+  'ToiCnBatDau':giaoToiCn.start,
+  'ToiCnKetThuc':ToiCnKetThuc,
+}
+
+
+  // sangt7=moment(giaoSangt7.start,"DD-MM-YYYY").add(days6,'days');
+  // // truong hop chi hoc chieu t7
+  // chieut7 =moment(gvTrong.thoiGianTrongt7.chieu[0].batDau,"DD-MM-YYYY").add(days6,'days');
+  // //truong hop chi hoc sang chu nhat
+  // sangCn=moment(gvTrong.thoiGianTrongCn.sang[0].batDau,"DD-MM-YYYY").add(days6,'days');
+  // // truong hop chi hoc chieu chu nhat
+  // chieuCn=moment(gvTrong.thoiGianTrongCn.chieu[0].batDau,"DD-MM-YYYY").add(days6,'days');
+  //truong hop chi hoc toi thu bay
+  // console.log(gvTrong.thoiGianTrongT7.toi[0].batDau);
+  // toit7=moment(gvTrong.thoiGianTrongT7.toi[0].batDau,"DD-MM-YYYY").add(days4,'days');
+  //truong hop chi hoc toi chu nhat
+  // toiCn=moment(gvTrong.thoiGianTrongCn.toi[0].batDau,"DD-MM-YYYY").add(days4,'days');
+
+  // //truong hop hoc ca ngay thu bay
+  // var caNgayt7=moment(gvTrong.thoiGianTrongt7.sang[0].batDau,"DD-MM-YYYY").add(days6,'days');
+  // var caNgayt7=moment(gvTrong.thoiGianTrongt7.sang[0].batDau,"DD-MM-YYYY").add(days6,'days');
+  // var caNgayt7=moment(gvTrong.thoiGianTrongt7.sang[0].batDau,"DD-MM-YYYY").add(days6,'days');
+
   // chi sang hoăc chieu thu 7 hoac chu nhat thi thoi gian se la giao.start+tuanToDate(soTuan6tiet)
 
-  // Ca ngay thu bay hoac ca ngay chu nhat thi thoi gian se la giao.start+ tuantoDate
+  // Ca ngay thu bay hoac ca ngay chu nhat thi thoi gian se la giao.start+ tuantoDate'
 
-
-  res.json({
-    'gvTrong':gvTrong,
-    'lopTrong':lopTrong
-  })
+  goiY={
+    'sangt7':sangt7,
+    'chieut7':chieut7,
+    'sangCn':sangCn,
+    'chieuCn':chieuCn,
+    'toit7':toit7,
+    'toiCn':toiCn,
+  }
+  res.json(goiY);
+  // res.json({
+  //   'gvTrong':gvTrong,
+  //   'lopTrong':lopTrong
+  // })
 });
 
 router.post('/nhapthoigian',isLoggedIn,function(req,res,next){

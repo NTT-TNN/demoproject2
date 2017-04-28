@@ -46,13 +46,14 @@
       <md-nav-item md-nav-href="/" name="trangchu">
         Trang Chủ
       </md-nav-item>
-      <md-nav-item md-nav-href="/users/profile" name="users/profile">
-        Thông tin cá nhân
-      </md-nav-item>
+
       <md-nav-item md-nav-href="/tintuc" name="tintuc">
         Tin Tức
       </md-nav-item>
       <% if(user){ %>
+        <md-nav-item md-nav-href="/users/profile" name="users/profile">
+          Thông tin cá nhân
+        </md-nav-item>
         <md-nav-item md-nav-href="/users/xemlich" name="xemlich">
           Xem Lịch Giảng Dạy
         </md-nav-item>

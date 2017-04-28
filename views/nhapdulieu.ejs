@@ -1,11 +1,16 @@
 <% include partials/head %>
 
-    <form id="uploadForm" enctype="multipart/form-data" action="/users/nhapdulieuExcel" method="post">
-      <input type="file" name="file" />Upload
-      <input type="submit" value="Upload" name="submit">
-    </form>
 
-    <form id="formThoiGian" action="/users/nhapthoigian" method="post">
+  <br>
+    <center><form id="uploadForm" enctype="multipart/form-data" action="/users/nhapdulieuExcel" method="post">
+      <input type="file" name="file" id="file-2" class="inputfile inputfile-2" />
+					<label for="file-2"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg>
+          <span>Choose a file&hellip;</span></label>
+          <button class="btn btn-info" type="submit" value="Upload" name="submit"> Upload</button>
+    </form>
+  </center>
+  <br><br>
+    <center><form id="" action="/users/nhapthoigian" method="post">
       <div class="form-group row">
           <label >Ngày bắt đầu</label>
           <div>
@@ -19,117 +24,8 @@
               <input type="date" name="ketThucHocKy" required>
           </div>
       </div>
-      <button class="btn- btn-info "type="submit" name="submit"></button>
-    </form>
-<!-- form nhap du lieu -->
-    <div id="content">
-        <form action="/users/nhapdulieu" method="post" class="form">
-            <h1>Nhập dữ liệu</h1>
-            <div class="row row1">
-                <div class="col-md-5 col-md-offset-1 div1">
-                    <!-- email -->
-                    <div class="form-group row">
-                        <label for="example-email-input" class="col-form-label">Email</label>
-                        <div>
-                            <input class="form-control" type="email" name="email" required >
-                        </div>
-                    </div>
-                    <!-- giang vien -->
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-form-label">Giảng viên</label>
-                        <div>
-                            <input class="form-control" type="text" name="giang_vien" required>
-                        </div>
-                    </div>
-                    <!-- dien thoai -->
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-form-label">Điện thoại</label>
-                        <div>
-                            <input class="form-control" type="text" name="dien_thoai" required>
-                        </div>
-                    </div>
-                    <!-- ten lop -->
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-form-label">Tên lớp</label>
-                        <div>
-                            <input class="form-control" type="text" name="ten_lop" required>
-                        </div>
-                    </div>
-                    <!-- ma lop -->
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-form-label">Mã lớp</label>
-                        <div>
-                            <input class="form-control" type="text" name="ma_lop" required>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-5 col-md-ofset-1 div2">
-                    <!-- ma lop hoc -->
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-form-label">Mã lớp học</label>
-                        <div>
-                            <input class="form-control" type="text" name="ma_lop_hoc" required>
-                        </div>
-                    </div>
-                    <!-- so luong sinh vien -->
-                    <div class="form-group row">
-                        <label for="example-number-input" class="col-form-label">Số lượng sinh viên</label>
-                        <div>
-                            <input class="form-control" type="number" value="42" name="so_luong_sv" required>
-                        </div>
-                    </div>
-                    <!-- ma hoc phan -->
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-form-label">Mã học phần</label>
-                        <div>
-                            <input class="form-control" type="text" name="ma_HP" required>
-                        </div>
-                    </div>
-                    <!-- khoa -->
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-form-label">Khoa</label>
-                        <div>
-                            <input class="form-control" type="text" name="khoa" required>
-                        </div>
-                    </div>
-                    <!-- so tin chi -->
-                    <div class="form-group row">
-                        <label for="example-number-input" class="col-form-label">Số tín chỉ</label>
-                        <div>
-                            <input class="form-control" type="number" value="2" name="so_tin_chi" required>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row row2">
-                <!-- phong -->
-                <div class="form-group row">
-                    <label for="example-text-input" class="col-form-label">Phòng</label>
-                    <div>
-                        <input class="form-control" type="text" name="phong" required>
-                    </div>
-                </div>
-            </div>
-            <div class="row row3">
-                <!-- ghi chu -->
-                <div class="form-group row">
-                    <label class="col-form-label">Ghi chú</label>
-                    <div>
-                        <textarea class="form-control ghiChu" placeholder="Nhap ghi chu ... " name="ghi_chu"></textarea>
-                    </div>
-                </div>
-            </div>
-            <!-- submit - reset -->
-            <div class="form-group">
-                <div class="controls col-md-8 ">
-                    <input type="submit" name="submit" value="Submit" class="btn btn-primary btn btn-info submit" />
-                </div>
-            </div>
-            <br>
-            <br>
-            <br>
-
-        </form>
+      <button class="btn btn-info "type="submit" name="submit">Submit</button>
+    </form></center>
     </div>
     <h2>Danh sách các lớp trong kỳ này là là</h2>
 
@@ -208,6 +104,115 @@
         </tr>
       <% } %>
   </table>
+  <!-- form nhap du lieu -->
+      <div id="content">
+          <form action="/users/nhapdulieu" method="post" class="form">
+              <h1>Nhập dữ liệu</h1>
+              <div class="row row1">
+                  <div class="col-md-5 col-md-offset-1 div1">
+                      <!-- email -->
+                      <div class="form-group row">
+                          <label for="example-email-input" class="col-form-label">Email</label>
+                          <div>
+                              <input class="form-control" type="email" name="email" required >
+                          </div>
+                      </div>
+                      <!-- giang vien -->
+                      <div class="form-group row">
+                          <label for="example-text-input" class="col-form-label">Giảng viên</label>
+                          <div>
+                              <input class="form-control" type="text" name="giang_vien" required>
+                          </div>
+                      </div>
+                      <!-- dien thoai -->
+                      <div class="form-group row">
+                          <label for="example-text-input" class="col-form-label">Điện thoại</label>
+                          <div>
+                              <input class="form-control" type="text" name="dien_thoai" required>
+                          </div>
+                      </div>
+                      <!-- ten lop -->
+                      <div class="form-group row">
+                          <label for="example-text-input" class="col-form-label">Tên lớp</label>
+                          <div>
+                              <input class="form-control" type="text" name="ten_lop" required>
+                          </div>
+                      </div>
+                      <!-- ma lop -->
+                      <div class="form-group row">
+                          <label for="example-text-input" class="col-form-label">Mã lớp</label>
+                          <div>
+                              <input class="form-control" type="text" name="ma_lop" required>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-5 col-md-ofset-1 div2">
+                      <!-- ma lop hoc -->
+                      <div class="form-group row">
+                          <label for="example-text-input" class="col-form-label">Mã lớp học</label>
+                          <div>
+                              <input class="form-control" type="text" name="ma_lop_hoc" required>
+                          </div>
+                      </div>
+                      <!-- so luong sinh vien -->
+                      <div class="form-group row">
+                          <label for="example-number-input" class="col-form-label">Số lượng sinh viên</label>
+                          <div>
+                              <input class="form-control" type="number" value="42" name="so_luong_sv" required>
+                          </div>
+                      </div>
+                      <!-- ma hoc phan -->
+                      <div class="form-group row">
+                          <label for="example-text-input" class="col-form-label">Mã học phần</label>
+                          <div>
+                              <input class="form-control" type="text" name="ma_HP" required>
+                          </div>
+                      </div>
+                      <!-- khoa -->
+                      <div class="form-group row">
+                          <label for="example-text-input" class="col-form-label">Khoa</label>
+                          <div>
+                              <input class="form-control" type="text" name="khoa" required>
+                          </div>
+                      </div>
+                      <!-- so tin chi -->
+                      <div class="form-group row">
+                          <label for="example-number-input" class="col-form-label">Số tín chỉ</label>
+                          <div>
+                              <input class="form-control" type="number" value="2" name="so_tin_chi" required>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="row row2">
+                  <!-- phong -->
+                  <div class="form-group row">
+                      <label for="example-text-input" class="col-form-label">Phòng</label>
+                      <div>
+                          <input class="form-control" type="text" name="phong" required>
+                      </div>
+                  </div>
+              </div>
+              <div class="row row3">
+                  <!-- ghi chu -->
+                  <div class="form-group row">
+                      <label class="col-form-label">Ghi chú</label>
+                      <div>
+                          <textarea class="form-control ghiChu" placeholder="Nhap ghi chu ... " name="ghi_chu"></textarea>
+                      </div>
+                  </div>
+              </div>
+              <!-- submit - reset -->
+              <div class="form-group">
+                  <div class="controls col-md-8 ">
+                      <input type="submit" name="submit" value="Submit" class="btn btn-primary btn btn-info submit" />
+                  </div>
+              </div>
+              <br>
+              <br>
+              <br>
+
+          </form>
 
     <% include partials/sign-in-up.ejs %>
 

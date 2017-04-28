@@ -78,12 +78,32 @@
     </table>
     <!-- Đoạn script show ra khi nhấn nút ChonThoiGian -->
     <div id="chonthoigian" ng-model="thoigian">
-
     </div>
     <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-          {{thoigian}}
+          <h1>Danh sách các lớp gợi ý phù hợp với thời khóa biểu của lớp và giảng viên:</h1>
+
+          <table class="table table-bordered">
+            <tr>
+              <td>Buổi</td>
+              <td>Thời gian bắt đầu</td>
+              <td>Thời gian kết thúc</td>
+            </tr>
+            <div id="goiY">
+
+            </div>
+            <tr>
+              <td>Sáng thứ bảy</td>
+              <td id='sangt7bd'></td>
+              <td id='sangt7kt'></td>
+            </tr>
+            <tr>
+              <td>Chiều thứ bảy</td>
+              <td id='chieut7bd'></td>
+              <td id='chieut7kt'></td>
+            </tr>
+          </table>
         </div>
       </div>
     </div>
@@ -169,12 +189,29 @@
                   }
               }).then(function successCallback(response) {
                   $scope.thoigian=response.data;
+                  console.log($scope.thoigian);
+                  var target = angular.element('#goiY');
+                  var sangt7bd = angular.element('#sangt7bd');
+                  var sangt7kt = angular.element('#sangt7kt');
+                  var chieut7bd = angular.element('#chieut7bd');
+                  var chieut7kt = angular.element('#chieut7kt');
+                  var keys = Object.keys($scope.thoigian);// dung de lay length object
 
+                  for(var i=0;i<keys.length;++i){
+                    // target.append($scope.thoigian.sangt7.sangt7BatDau);
+                  }
+                  var date = new Date($scope.thoigian.sangt7.sangt7BatDau);
+                  console.log((date.getMonth()));
+                  sangt7bd.append($scope.thoigian.sangt7.sangt7BatDau.substring(0,10));
+                  sangt7kt.append($scope.thoigian.sangt7.sangt7KetThuc.substring(0,10));
+                  chieut7bd.append($scope.thoigian.chieut7.Chieut7BatDau.substring(0,10));
+                  chieut7kt.append($scope.thoigian.chieut7.Chieut7KetThuc.substring(0,10));
                 }, function errorCallback(response) {
 
                 });
 
               };
+
         function DialogController($scope, $mdDialog) {
             $scope.hide = function() {
               $mdDialog.hide();
