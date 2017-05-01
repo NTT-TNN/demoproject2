@@ -444,10 +444,10 @@ router.post('/goiYLich',isLoggedIn, function(req, res, next) {
 
   //tuong tu buoi sang ta xet voi buoi chieu
   chieut7=[];
-  for(var i=0;i<gvTrong.thoiGianTrongt7.sang.length;++i){
-    var tempGv=moment.range(gvTrong.thoiGianTrongt7.sang[i].batDau,gvTrong.thoiGianTrongt7.sang[i].ketThuc);
-    for(var j=0;j<lopTrong.thoiGianTrongt7.sang.length;++j){
-      var tempLop=moment.range(lopTrong.thoiGianTrongt7.sang[j].batDau,lopTrong.thoiGianTrongt7.sang[j].ketThuc);
+  for(var i=0;i<gvTrong.thoiGianTrongt7.toi.length;++i){
+    var tempGv=moment.range(gvTrong.thoiGianTrongt7.toi[i].batDau,gvTrong.thoiGianTrongt7.toi[i].ketThuc);
+    for(var j=0;j<lopTrong.thoiGianTrongt7.toi.length;++j){
+      var tempLop=moment.range(lopTrong.thoiGianTrongt7.toi[j].batDau,lopTrong.thoiGianTrongt7.toi[j].ketThuc);
       var tempGiao=tempGv.intersect(tempLop);// thoi gian trong cua ca giao vien va lop
       if(moment(tempGiao.start,"DD-MM-YYYY").add(days6,'days').isSameOrBefore(tempGiao.end)){
         chieut7.push(tempGiao);
@@ -458,10 +458,28 @@ router.post('/goiYLich',isLoggedIn, function(req, res, next) {
       }
     }
   }
-  
+
+  //tuong tu voi toi t7
+  toit7=[];
+  for(var i=0;i<gvTrong.thoiGianTrongt7.toi.length;++i){
+    var tempGv=moment.range(gvTrong.thoiGianTrongt7.toi[i].batDau,gvTrong.thoiGianTrongt7.toi[i].ketThuc);
+    for(var j=0;j<lopTrong.thoiGianTrongt7.toi.length;++j){
+      var tempLop=moment.range(lopTrong.thoiGianTrongt7.toi[j].batDau,lopTrong.thoiGianTrongt7.toi[j].ketThuc);
+      var tempGiao=tempGv.intersect(tempLop);// thoi gian trong cua ca giao vien va lop
+      if(moment(tempGiao.start,"DD-MM-YYYY").add(days6,'days').isSameOrBefore(tempGiao.end)){
+        toit7.push(tempGiao);
+        //phan tu chan la gia tri co the cua lop do gia tri phan tu le la gia tri goi y hien tai
+        tempGiao=moment.range(tempGiao.start,moment(tempGiao.start,"DD-MM-YYYY").add(days6,'days'));
+
+        toit7.push(tempGiao);
+      }
+    }
+  }
   goiY={
+    'sotc':req.body.sotc,
     'sangt7':sangt7,
     'chieut7':chieut7,
+    'toit7':toit7,
   }
   // console.log(goiY);
   res.json(goiY);
