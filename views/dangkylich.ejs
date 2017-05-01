@@ -84,25 +84,16 @@
         <div class="modal-content">
           <h1>Danh sách các lớp gợi ý phù hợp với thời khóa biểu của lớp và giảng viên:</h1>
 
-          <table class="table table-bordered">
+          <table class="table table-bordered" >
             <tr>
               <td>Buổi</td>
               <td>Thời gian bắt đầu</td>
               <td>Thời gian kết thúc</td>
+              <td>Xác nhận</td>
             </tr>
-            <div id="goiY">
+            <tr id="goiy">
+            </tr>
 
-            </div>
-            <tr>
-              <td>Sáng thứ bảy</td>
-              <td id='sangt7bd'></td>
-              <td id='sangt7kt'></td>
-            </tr>
-            <tr>
-              <td>Chiều thứ bảy</td>
-              <td id='chieut7bd'></td>
-              <td id='chieut7kt'></td>
-            </tr>
           </table>
         </div>
       </div>
@@ -111,6 +102,9 @@
       function ifunction(lop,sotc) {
         lop1=lop;
         sotc1=sotc;
+      }
+      function submit(){
+        console.log("submit thanhcong");
       }
       var sdt=<%= user.local.email %>
     </script>
@@ -138,10 +132,10 @@
           console.log("My app is active");
         })
         .controller('AppCtrl', AppCtrl);
-        function AppCtrl($scope,$mdDialog,$http,$window) {
+        function AppCtrl($scope,$mdDialog,$http,$window,$compile) {
           $scope.showlogin=false;
           $scope.currentNavItem = 'dangkylich';
-          $scope.showLogin = function(ev) {
+            $scope.showLogin = function(ev) {
               $mdDialog.show({
                 controller: DialogController,
                 templateUrl: 'login.html',
@@ -172,6 +166,8 @@
                 $scope.status = 'You cancelled the dialog.';
               });
             };
+
+            // hien thi ra dialog cho nguoi dung chon thoi gian giang day va gui thoi gian do ve server
             $scope.showChonThoiGian = function(ev) {
               $scope.lop=window.lop1;
               $scope.sotc=window.sotc1;
@@ -188,30 +184,77 @@
                    sotc: $scope.sotc
                   }
               }).then(function successCallback(response) {
-                  $scope.thoigian=response.data;
-                  console.log($scope.thoigian);
                   var target = angular.element('#goiY');
-                  var sangt7bd = angular.element('#sangt7bd');
-                  var sangt7kt = angular.element('#sangt7kt');
-                  var chieut7bd = angular.element('#chieut7bd');
-                  var chieut7kt = angular.element('#chieut7kt');
-                  var keys = Object.keys($scope.thoigian);// dung de lay length object
+                  var goiY = angular.element('#goiy');
+                  // var keys = Object.keys($scope.thoigian);// dung de lay length object
+                  html="";
+                  $scope.t1='"sangt7"';
+                  $scope.sangt7BatDau1='"'+response.data.sangt7[0].start.substring(0,10)+'"';
+                  $scope.sangt7KetThuc='"'+response.data.sangt7[0].end.substring(0,10)+'"';
+                  console.log(response.data.sangt7.length);
+                  html+= "<tr><td rowspan='"+response.data.sangt7.length+"'> Sáng thứ 7</td>"+
+                        "<td><input type='date' ng-model='sangt7BatDau1' value='"+response.data.sangt7[0].start.substring(0,10)+"'</td>"+
+                        "<td><input type='date'  ng-model='sangt7KetThuc' value='"+response.data.sangt7[0].end.substring(0,10)+"'</td>"+
+                        "<td><button ng-click='submit(t1,sangt7BatDau1,sangt7KetThuc)'>Submit</button>"+
+                        "</tr>";
 
-                  for(var i=0;i<keys.length;++i){
-                    // target.append($scope.thoigian.sangt7.sangt7BatDau);
+                  for(var i=1;i<response.data.sangt7.length;++i){
+                    $scope.t1='"sangt7"';
+                    $scope.t2='"'+response.data.sangt7[i].start.substring(0,10)+'"';
+                    $scope.t3='"'+response.data.sangt7[i].end.substring(0,10)+'"';
+                    html+="<tr>"+
+                    "<td><input type='date' ng-model='sangt7BatDau1' value='"+response.data.sangt7[i].start.substring(0,10)+"'</td>"+
+                    "<td><input type='date' value='"+response.data.sangt7[i].end.substring(0,10)+"'</td>"+
+                    "<td><button ng-click='submit("+$scope.t1+","+$scope.t2+","+$scope.t3+")'>Submit</button></tr>";
                   }
-                  var date = new Date($scope.thoigian.sangt7.sangt7BatDau);
-                  console.log((date.getMonth()));
-                  sangt7bd.append($scope.thoigian.sangt7.sangt7BatDau.substring(0,10));
-                  sangt7kt.append($scope.thoigian.sangt7.sangt7KetThuc.substring(0,10));
-                  chieut7bd.append($scope.thoigian.chieut7.Chieut7BatDau.substring(0,10));
-                  chieut7kt.append($scope.thoigian.chieut7.Chieut7KetThuc.substring(0,10));
+                  // console.log(html);
+                  html+="<hr>";
+                  html+= "<tr><td rowspan='"+response.data.chieut7.length+"'> Chiều thứ 7</td>"+
+                        "<td><input type='date'  value='"+response.data.chieut7[0].start.substring(0,10)+"'</td>"+
+                        "<td><input type='date'  value='"+response.data.chieut7[0].end.substring(0,10)+"'</td></tr>";
+                  for(var i=1;i<response.data.chieut7.length;++i){
+                    html+="<tr>"+
+                    "<td><input type='date'  value='"+response.data.chieut7[i].start.substring(0,10)+"'</td>"+
+                    "<td><input type='date'  value='"+response.data.chieut7[i].end.substring(0,10)+"'</td></tr>";
+                  }
+                  goiY.append("");
+                  goiY.replaceWith($compile(html)($scope));
+
+                  // for(var i=0;i<keys.length;++i){
+                  //   // target.append($scope.thoigian.sangt7.sangt7BatDau);
+                  // }
+                  // var date = new Date($scope.thoigian.sangt7.sangt7BatDau);
+
+                  // sangt7bd.append($scope.thoigian.sangt7.sangt7BatDau.substring(0,10));
+                  // sangt7kt.append($scope.thoigian.sangt7.sangt7KetThuc.substring(0,10));
+                  // chieut7bd.append($scope.thoigian.chieut7.Chieut7BatDau.substring(0,10));
+                  // chieut7kt.append($scope.thoigian.chieut7.Chieut7KetThuc.substring(0,10));
                 }, function errorCallback(response) {
 
                 });
 
               };
 
+            $scope.submit=function(buoi,batdau,ketThuc){
+              $http({
+                method: 'POST',
+                url: '/users/submitLich',
+                headers: {
+                   'Content-Type': 'application/json'
+                 },
+                 data: {
+                   khoa: $scope.lop,
+                   sdt:  $scope.sdt,
+                   'buoi':buoi,
+                   'batDau':  batdau,
+                   'ketThuc': ketThuc
+                  }
+              }).then(function successCallback(response) {
+
+                }, function errorCallback(response) {
+
+                });
+            }
         function DialogController($scope, $mdDialog) {
             $scope.hide = function() {
               $mdDialog.hide();
