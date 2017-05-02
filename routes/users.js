@@ -408,6 +408,7 @@ router.post('/goiYLich',isLoggedIn, function(req, res, next) {
         thoiGianTrongCn:result.thoiGianTrongCn
       };
       sync1=false;
+
     }
   });
   // tim thoi gian trong cua giao vien
@@ -428,58 +429,69 @@ router.post('/goiYLich',isLoggedIn, function(req, res, next) {
   sangt7=[];
   //lay tat ca cac thoi gian trong buoi sang thu bay(ca cua lop va giao vien neu khoang
   // thoi gian d o du cho mon hoc do thi day vao mang sangt7 gui lai client cho nguoi dung chon
+
   for(var i=0;i<gvTrong.thoiGianTrongt7.sang.length;++i){
-    var tempGv=moment.range(gvTrong.thoiGianTrongt7.sang[i].batDau,gvTrong.thoiGianTrongt7.sang[i].ketThuc);
+
+     tempGv=moment.range(gvTrong.thoiGianTrongt7.sang[i].batDau,gvTrong.thoiGianTrongt7.sang[i].ketThuc);
+    //Lỗi ở vòng for ....
     for(var j=0;j<lopTrong.thoiGianTrongt7.sang.length;++j){
       var tempLop=moment.range(lopTrong.thoiGianTrongt7.sang[j].batDau,lopTrong.thoiGianTrongt7.sang[j].ketThuc);
-      var tempGiao=tempGv.intersect(tempLop);// thoi gian trong cua ca giao vien va lop
+       tempGiao=tempGv.intersect(tempLop);// thoi gian trong cua ca giao vien va lop
+       console.log(lopTrong.thoiGianTrongt7.sang.length);
       if(moment(tempGiao.start,"DD-MM-YYYY").add(days6,'days').isSameOrBefore(tempGiao.end)){
         sangt7.push(tempGiao);
+
         //phan tu chan la gia tri co the cua lop do gia tri phan tu le la gia tri goi y hien tai
         tempGiao=moment.range(tempGiao.start,moment(tempGiao.start,"DD-MM-YYYY").add(days6,'days'));
+
         sangt7.push(tempGiao);
+        console.log("tempGiao",sangt7);
       }
     }
   }
-
+// console.log("1");
   //tuong tu buoi sang ta xet voi buoi chieu
-  chieut7=[];
-  for(var i=0;i<gvTrong.thoiGianTrongt7.toi.length;++i){
-    var tempGv=moment.range(gvTrong.thoiGianTrongt7.toi[i].batDau,gvTrong.thoiGianTrongt7.toi[i].ketThuc);
-    for(var j=0;j<lopTrong.thoiGianTrongt7.toi.length;++j){
-      var tempLop=moment.range(lopTrong.thoiGianTrongt7.toi[j].batDau,lopTrong.thoiGianTrongt7.toi[j].ketThuc);
-      var tempGiao=tempGv.intersect(tempLop);// thoi gian trong cua ca giao vien va lop
-      if(moment(tempGiao.start,"DD-MM-YYYY").add(days6,'days').isSameOrBefore(tempGiao.end)){
-        chieut7.push(tempGiao);
-        //phan tu chan la gia tri co the cua lop do gia tri phan tu le la gia tri goi y hien tai
-        tempGiao=moment.range(tempGiao.start,moment(tempGiao.start,"DD-MM-YYYY").add(days6,'days'));
-
-        chieut7.push(tempGiao);
-      }
-    }
-  }
-
-  //tuong tu voi toi t7
-  toit7=[];
-  for(var i=0;i<gvTrong.thoiGianTrongt7.toi.length;++i){
-    var tempGv=moment.range(gvTrong.thoiGianTrongt7.toi[i].batDau,gvTrong.thoiGianTrongt7.toi[i].ketThuc);
-    for(var j=0;j<lopTrong.thoiGianTrongt7.toi.length;++j){
-      var tempLop=moment.range(lopTrong.thoiGianTrongt7.toi[j].batDau,lopTrong.thoiGianTrongt7.toi[j].ketThuc);
-      var tempGiao=tempGv.intersect(tempLop);// thoi gian trong cua ca giao vien va lop
-      if(moment(tempGiao.start,"DD-MM-YYYY").add(days6,'days').isSameOrBefore(tempGiao.end)){
-        toit7.push(tempGiao);
-        //phan tu chan la gia tri co the cua lop do gia tri phan tu le la gia tri goi y hien tai
-        tempGiao=moment.range(tempGiao.start,moment(tempGiao.start,"DD-MM-YYYY").add(days6,'days'));
-
-        toit7.push(tempGiao);
-      }
-    }
-  }
+  // chieut7=[];
+  // for(var i=0;i<gvTrong.thoiGianTrongt7.toi.length;++i){
+  //   var tempGv=moment.range(gvTrong.thoiGianTrongt7.toi[i].batDau,gvTrong.thoiGianTrongt7.toi[i].ketThuc);
+  //   for(var j=0;j<lopTrong.thoiGianTrongt7.toi.length;++j){
+  //     var tempLop=moment.range(lopTrong.thoiGianTrongt7.toi[j].batDau,lopTrong.thoiGianTrongt7.toi[j].ketThuc);
+  //     var tempGiao=tempGv.intersect(tempLop);// thoi gian trong cua ca giao vien va lop
+  //     if(moment(tempGiao.start,"DD-MM-YYYY").add(days6,'days').isSameOrBefore(tempGiao.end)){
+  //       chieut7.push(tempGiao);
+  //       //phan tu chan la gia tri co the cua lop do gia tri phan tu le la gia tri goi y hien tai
+  //       tempGiao=moment.range(tempGiao.start,moment(tempGiao.start,"DD-MM-YYYY").add(days6,'days'));
+  //
+  //       chieut7.push(tempGiao);
+  //     }
+  //   }
+  // }
+  //
+  // //tuong tu voi toi t7
+  // toit7=[];
+  // for(var i=0;i<gvTrong.thoiGianTrongt7.toi.length;++i){
+  //   var tempGv=moment.range(gvTrong.thoiGianTrongt7.toi[i].batDau,gvTrong.thoiGianTrongt7.toi[i].ketThuc);
+  //   for(var j=0;j<lopTrong.thoiGianTrongt7.toi.length;++j){
+  //     var tempLop=moment.range(lopTrong.thoiGianTrongt7.toi[j].batDau,lopTrong.thoiGianTrongt7.toi[j].ketThuc);
+  //     var tempGiao=tempGv.intersect(tempLop);// thoi gian trong cua ca giao vien va lop
+  //     if(moment(tempGiao.start,"DD-MM-YYYY").add(days6,'days').isSameOrBefore(tempGiao.end)){
+  //       toit7.push(tempGiao);
+  //       //phan tu chan la gia tri co the cua lop do gia tri phan tu le la gia tri goi y hien tai
+  //       tempGiao=moment.range(tempGiao.start,moment(tempGiao.start,"DD-MM-YYYY").add(days6,'days'));
+  //
+  //       toit7.push(tempGiao);
+  //     }
+  //   }
+  // }
+  console.log("sangt7",sangt7);
+  // console.log("chieut7",chieut7);
+  // console.log("toit7",toit7);
+  // console.log("goiY",goiY);
   goiY={
     'sotc':req.body.sotc,
     'sangt7':sangt7,
-    'chieut7':chieut7,
-    'toit7':toit7,
+    // 'chieut7':chieut7,
+    // 'toit7':toit7,
   }
   // console.log(goiY);
   res.json(goiY);
@@ -487,15 +499,32 @@ router.post('/goiYLich',isLoggedIn, function(req, res, next) {
 });
 
 router.post('/submitLich',isLoggedIn,function(req,res,next){
-
+  console.log("replace",req.body);
   var sync1=sync2=true;
   lop.findOne({'tenlop':req.body.khoa},function(err,result){
     if(err) throw err;
     if(result){
-      lopTrong={
-        thoiGianTrongt7:result.thoiGianTrongt7,
-        thoiGianTrongCn:result.thoiGianTrongCn
-      };
+
+
+      if(req.body.buoi=='"sangt7"'){
+        var range1=moment.range(moment(req.body.batDau, 'YYYY-MM-DD'),moment(req.body.ketThuc,'YYYY-MM-DD'));
+        for(i=0;i<result.thoiGianTrongt7.sang.length;++i){
+          var range2=moment.range(moment(result.thoiGianTrongt7.sang[i].batDau, 'YYYY-MM-DD'),moment(result.thoiGianTrongt7.sang[i].ketThuc, 'YYYY-MM-DD'));
+          if(range1.intersect(range2)!=null){
+            var temp={
+              batDau:req.body.ketThuc,
+              ketThuc:result.thoiGianTrongt7.sang[i].ketThuc,
+            };
+            result.thoiGianTrongt7.sang[i].ketThuc=req.body.batDau;
+            result.thoiGianTrongt7.sang.push(temp);
+            result.save(function(err){
+              if(err) throw err;
+              console.log("Cập nhật thời gian thành công co lớp",req.body.khoa);
+            })
+
+          };
+        }
+      }
       sync1=false;
     }
   });
@@ -503,42 +532,57 @@ router.post('/submitLich',isLoggedIn,function(req,res,next){
   user.findOne({'local.email':req.body.sdt},function(err,result){
     if(err) throw err;
     if(result){
-      gvTrong={
-        thoiGianTrongt7:result.thoiGianTrongt7,
-        thoiGianTrongCn:result.thoiGianTrongCn
-      };
+      if(req.body.buoi=='"sangt7"'){
+        var range1=moment.range(moment(req.body.batDau, 'YYYY-MM-DD'),moment(req.body.ketThuc,'YYYY-MM-DD'));
+        for(i=0;i<result.thoiGianTrongt7.sang.length;++i){
+          var range2=moment.range(moment(result.thoiGianTrongt7.sang[i].batDau, 'YYYY-MM-DD'),moment(result.thoiGianTrongt7.sang[i].ketThuc, 'YYYY-MM-DD'));
+          if(range1.intersect(range2)!=null){
+            var temp={
+              batDau:req.body.ketThuc,
+              ketThuc:result.thoiGianTrongt7.sang[i].ketThuc,
+            };
+            result.thoiGianTrongt7.sang[i].ketThuc=req.body.batDau;
+            result.thoiGianTrongt7.sang.push(temp);
+            result.save(function(err){
+              if(err) throw err;
+              console.log("Cập nhật thời gian thành công cho giang viên",req.body.sdt);
+            })
+
+          };
+        }
+      }
       sync2=false;
     }
   });
   while(sync1||sync2) {require('deasync').sleep(100);}
-  if(req.body.buoi=='"sangt7"'){
-    var range1=moment.range(moment(req.body.batDau, 'YYYY-MM-DD'),moment(req.body.ketThuc,'YYYY-MM-DD'));
-    for(i=0;i<lopTrong.thoiGianTrongt7.sang.length;++i){
-      var range2=moment.range(moment(lopTrong.thoiGianTrongt7.sang[i].batDau, 'YYYY-MM-DD'),moment(lopTrong.thoiGianTrongt7.sang[i].ketThuc, 'YYYY-MM-DD'));
-      if(range1.intersect(range2)!=null){
-        var temp={
-          batDau:req.body.ketThuc,
-          ketThuc:lopTrong.thoiGianTrongt7.sang[i].ketThuc,
-        };
-        lopTrong.thoiGianTrongt7.sang[i].ketThuc=req.body.batDau;
-        lopTrong.thoiGianTrongt7.sang.push(temp);
-        lop.update(
-          {tenlop:req.body.khoa},
-          {thoiGianTrongt7:{
-            sang:lopTrong.thoiGianTrongt7.sang
-            }
-          },
-          function(err,result){
-            if(err) throw err;
-            if(result){
-              console.log("Cap nhat thoi gian trong thanh cong cho lop",req.body.khoa);
-            }
-          }
-        )
-      };
-
-    }
-  }
+  // if(req.body.buoi=='"sangt7"'){
+  //   var range1=moment.range(moment(req.body.batDau, 'YYYY-MM-DD'),moment(req.body.ketThuc,'YYYY-MM-DD'));
+  //   for(i=0;i<lopTrong.thoiGianTrongt7.sang.length;++i){
+  //     var range2=moment.range(moment(lopTrong.thoiGianTrongt7.sang[i].batDau, 'YYYY-MM-DD'),moment(lopTrong.thoiGianTrongt7.sang[i].ketThuc, 'YYYY-MM-DD'));
+  //     if(range1.intersect(range2)!=null){
+  //       var temp={
+  //         batDau:req.body.ketThuc,
+  //         ketThuc:gvTrong.thoiGianTrongt7.sang[i].ketThuc,
+  //       };
+  //       lopTrong.thoiGianTrongt7.sang[i].ketThuc=req.body.batDau;
+  //       lopTrong.thoiGianTrongt7.sang.push(temp);
+  //       lop.update(
+  //         {tenlop:req.body.khoa},
+  //         {thoiGianTrongt7:{
+  //           sang:lopTrong.thoiGianTrongt7.sang
+  //           }
+  //         },
+  //         function(err,result){
+  //           if(err) throw err;
+  //           if(result){
+  //             console.log("Cap nhat thoi gian trong thanh cong cho lop",req.body.khoa);
+  //           }
+  //         }
+  //       )
+  //
+  //     };
+  //   }
+  // }
 
   console.log('batDau',req.body.batDau);
   console.log('ketThuc',req.body.ketThuc);
