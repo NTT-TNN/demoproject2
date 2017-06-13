@@ -54,9 +54,50 @@ var userSchema=mongoose.Schema({
       ketThuc:Date,
     }],
   },
+  trongTuan:{
+    thu2:[{
+      batDau:Date,
+      ketThuc:Date,
+    }],
+    thu3:[{
+      batDau:Date,
+      ketThuc:Date,
+    }],
+    thu4:[{
+      batDau:Date,
+      ketThuc:Date,
+    }],
+    thu5:[{
+      batDau:Date,
+      ketThuc:Date,
+    }],
+    thu6:[{
+      batDau:Date,
+      ketThuc:Date,
+    }],
+  },
   type:{
     admin:Boolean
-  }
+  },
+  day:[{
+    tenGv:String,
+    email:String,
+    dienThoai:String,
+    tenlop:String,
+    malop:String,
+    malopHoc:String,
+    soLuongSV:Number,
+    maHP:String,
+    soTinChi:Number,
+    khoa:String,
+    phong:String,
+    thu:String, //thứ
+    tiet:String,
+    buoi:String,
+    thoiGianBatDau:Date,
+    thoiGianKetThuc:Date,
+    ghiChu:String
+  }]
 });
 
 userSchema.methods.generateHash=function(password){

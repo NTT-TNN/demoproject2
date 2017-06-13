@@ -47,6 +47,28 @@ var lopSchema=mongoose.Schema({
     }],
   },
   // malop:String,
+  trongTuan:{
+    thu2:[{
+      batDau:Date,
+      ketThuc:Date,
+    }],
+    thu3:[{
+      batDau:Date,
+      ketThuc:Date,
+    }],
+    thu4:[{
+      batDau:Date,
+      ketThuc:Date,
+    }],
+    thu5:[{
+      batDau:Date,
+      ketThuc:Date,
+    }],
+    thu6:[{
+      batDau:Date,
+      ketThuc:Date,
+    }],
+  },
   hoc:[{
     tenlop:String,
     Mãhọcphần:String,
